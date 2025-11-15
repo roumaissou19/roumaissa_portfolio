@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roumaissa's OS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Cairo+Mono:wght@400;700&family=Droid+Arabic+Naskh:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom CSS to match the retro design */
+        /* Load local Flamante Cairo fonts */
+        @font-face {
+            font-family: 'Flamante Cairo';
+            src: url('./flamante_cairo/Flamante-Cairo.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Flamante Cairo';
+            src: url('./flamante_cairo/Flamante-Cairo-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg-color: #FFEFD5;
+            --text-dark: #231F20;
+            --border-dark: #231F20;
+            --window-blue: #00A2E8;
+            --dialog-orange: #F99D1C;
+            --level-locked: #FFFFFF;
+            --level-unlocked: #F99D1C;
+            --level-locked-text: #A0A0A0;
+            --level-unlocked-text: #231F20;
+            --progress-bar-bg: #FFFFFF;
+            --progress-bar-fill: #00A2E8;
+        }
+
+        .dark:root {
+            --bg-color: #231F20;
+            --text-dark: #FFEFD5;
+            --border-dark: #FFEFD5;
+            --window-blue: #005A8E;
+            --dialog-orange: #B56D00;
+            --level-locked: #333333;
+            --level-unlocked: #F99D1C;
+            --level-locked-text: #777;
+            --level-unlocked-text: #231F20;
+            --progress-bar-bg: #555;
+            --progress-bar-fill: #00A2E8;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Cairo', 'Cairo Mono', sans-serif;
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .font-title {
+            font-family: 'Cairo', 'Cairo Mono', sans-serif;
+            font-weight: 700;
+            /* Use bold for titles */
+        }
+
+        .font-arabic {
+            font-family: 'Cairo', 'Flamante Cairo', sans-serif !important;
+            font-weight: 700;
+        }
+
+        /* Arabic text throughout uses Cairo family */
+        [lang="ar"],
+        [dir="rtl"] {
+            font-family: 'Cairo', 'Flamante Cairo', sans-serif !important;
+        }
+
+        /* Base window styling */
+        .window-frame {
+            border: 4px solid var(--border-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 8px 8px 0px var(--border-dark);
+            transition: all 0.3s ease;
+        }
+
+
+        .title-bar {
+            background-color: var(--window-blue);
+            border-bottom: 4px solid var(--border-dark);
+            /* responsive padding */
+            padding: clamp(6px, 1.4vw, 12px) clamp(10px, 3vw, 20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .title-bar-text {
+            color: var(--text-dark);
+            /* responsive font size: min 14px, preferred based on viewport, max 20px */
+            font-size: clamp(14px, 1.6vw + 10px, 20px);
+            letter-spacing: 1.2px;
+            text-shadow: 1px 1px rgba(0, 0, 0, 0.12);
+            display: block;
+            flex: 1 1 auto;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 8px;
+            /* breathing room so controls don't touch text */
+        }
+
+        /* Ensure control blocks don't shrink and keep space for title centering */
+        .title-bar>.flex:first-child,
+        .title-bar .window-controls {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Small-screen tweak: slightly reduce letter spacing so title fits */
+        @media (max-width: 480px) {
+            .title-bar-text {
+                letter-spacing: 0.6px;
+                font-size: clamp(13px, 3.6vw, 18px);
+            }
+        }
+
+        /* Dark-mode title bar refinements */
+        .dark .title-bar {
+            background: linear-gradient(180deg, #009fe6, #003f66);
+            border-bottom-color: rgba(255, 239, 181, 0.85);
+            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .dark .title-bar-text {
+            text-shadow: 1px 1px rgba(0, 0, 0, 0.55);
+            color: var(--text-dark);
+        }
+
+        .window-controls button,
+        .title-bar-btn {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border-dark);
+            background-color: var(--bg-color);
+            /* Uses theme variable */
+            color: var(--text-dark);
+            /* ADDED: This makes the SVG icon change color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cairo Mono', monospace;
+            font-size: 14px;
+            box-shadow: 3px 3px 0px var(--border-dark);
+            margin-left: 6px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .window-controls button:active,
+        .title-bar-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
+
+        /* Dropdown select styling */
+        #lang-toggle-btn {
+            width: auto;
+            min-width: 60px;
+            padding: 0 8px;
+            padding-right: 24px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 6px center;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            border: 3px solid var(--border-dark);
+            border-radius: 0;
+            box-shadow: 3px 3px 0px var(--border-dark);
+            cursor: pointer;
+            font-family: 'Cairo Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.1s ease;
+        }
+
+        #lang-toggle-btn:hover {
+            background-color: var(--bg-hover, var(--bg-color));
+        }
+
+        #lang-toggle-btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
+
+        /* Dropdown option styling */
+        #lang-toggle-btn option {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding: 4px 8px;
+            font-family: 'Cairo Mono', monospace;
+        }
+
+        .dark #lang-toggle-btn {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23e8d7c8' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+        }
+
+        .dark #lang-toggle-btn option {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
+
+        .window-content {
+            background-color: var(--bg-color);
+            padding: 24px;
+        }
+
+        /* Dialog box inside the window */
+        .dialog-box {
+            border: 4px solid var(--border-dark);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 6px 6px 0px var(--border-dark);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .dialog-title-bar {
+            background-color: var(--dialog-orange);
+            border-bottom: 4px solid var(--border-dark);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dialog-controls button {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            /* CHANGED: Was 'white' */
+            color: var(--text-dark);
+            /* This will color the SVG */
+            /* REMOVED font-family and font-size, added flex properties */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px var(--border-dark);
+            margin-left: 4px;
+            cursor: pointer;
+        }
+
+        .dialog-content {
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+
+        /* Retro button styling */
+        .btn-retro {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 3px solid var(--border-dark);
+            background-color: #F99D1C;
+            color: var(--text-dark);
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            /* Use bold for buttons */
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 5px 5px 0px var(--border-dark);
+            transition:
+                all 0.1s ease;
+            cursor: pointer;
+        }
+
+        .btn-retro:hover {
+            background-color: #e08e1a;
+        }
+
+        .btn-retro:active {
+            transform: translate(5px, 5px);
+            box-shadow: none;
+        }
+
+        #classic-view-btn {
+            background-color: white;
+            color: #231F20;
+        }
+
+        #classic-view-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dark #classic-view-btn {
+            background-color: #333333;
+            color: #FFEFD5;
+        }
+
+        .dark #classic-view-btn:hover {
+            background-color: #444444;
+        }
+
+        .dark #start-mission-btn {
+            color: #000000;
+        }
+
+        /* Level card styling */
+        .level-card {
+            border: 4px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 6px 6px 0px var(--border-dark);
+            transition: all 0.2s ease;
+        }
+
+        .level-card.locked {
+            background-color: var(--level-locked);
+            border-color: var(--border-dark);
+            color: var(--level-locked-text);
+            cursor: not-allowed;
+        }
+
+        .level-card.unlocked {
+            background-color: var(--level-locked);
+            /* White background for both */
+            border-color: var(--level-unlocked);
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        .level-card.unlocked:hover {
+            transform: scale(1.02);
+            box-shadow: 8px 8px 0px var(--border-dark);
+        }
+
+        .level-status {
+            font-size: 16px;
+        }
+
+        .level-status.unlocked {
+            color: #00A2E8;
+            /* Using blue for 'unlocked' status text */
+        }
+
+        .level-status.locked {
+            color: var(--level-locked-text);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .progress-bar-segment {
+            width: 60px;
+            height: 30px;
+            background-color: var(--progress-bar-bg);
+            border: 3px solid var(--border-dark);
+            border-radius: 4px;
+        }
+
+        .progress-bar-segment.filled {
+            background-color: var(--progress-bar-fill);
+        }
+
+        /* Tip */
+        .tip {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        /* Logo Area - Placeholder */
+        .logo-placeholder {
+            width: 300px;
+            height: 300px;
+            border: 4px dashed var(--border-dark);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .logo-placeholder .font-arabic {
+            font-size: 40px;
+        }
+
+        /* RTL-specific styles */
+        [dir="rtl"] body {
+            text-align: right;
+        }
+
+        [dir="rtl"] .logo-placeholder,
+        [dir="rtl"] .tip,
+        [dir="rtl"] .btn-retro {
+            text-align: center;
+            /* Keep these centered */
+        }
+
+        [dir="rtl"] .window-controls button,
+        [dir="rtl"] .title-bar-btn {
+            margin-left: 0;
+            margin-right: 6px;
+        }
+
+        [dir="rtl"] .dialog-controls button {
+            margin-left: 0;
+            margin-right: 4px;
+        }
+
+        [dir="rtl"] .dialog-content,
+        [dir="rtl"] .level-card {
+            text-align: right;
+        }
+
+        [dir="rtl"] header.flex {
+            /* Ensure header elements align correctly in RTL */
+            text-align: right;
+        }
+
+        /* Home icon color: use currentColor on SVG; set in dark mode */
+        #home-btn {
+            color: var(--text-dark);
+        }
+
+        .dark #home-btn {
+            color: #FFE4BF;
+        }
+
+        /* Ensure SVG inside home button scales nicely and centers */
+        #home-btn svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            #home-btn svg {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        /* Terminal Styling */
+        .terminal-container {
+            background-color: #111111;
+            border: 3px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 6px 6px 0px var(--border-dark);
+            padding: 20px;
+            font-family: 'Courier New', 'Cairo Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            min-height: 400px;
+            max-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            color: #EAEAEA;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .terminal-output::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-output::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .terminal-output::-webkit-scrollbar-thumb {
+            background: #444;
+            border-radius: 4px;
+        }
+
+        .terminal-output::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+        }
+
+        .terminal-prompt {
+            color: #F98A2A;
+            font-weight: bold;
+        }
+
+        .terminal-command {
+            color: #F98A2A;
+            font-weight: bold;
+        }
+
+        .terminal-text {
+            color: #EAEAEA;
+        }
+
+        .terminal-link {
+            color: #00AEEF;
+            text-decoration: none;
+        }
+
+        .terminal-link:hover {
+            text-decoration: underline;
+        }
+
+        .terminal-error {
+            color: #FF6B6B;
+        }
+
+        .terminal-success {
+            color: #51CF66;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #EAEAEA;
+            font-family: 'Courier New', 'Cairo Mono', monospace;
+            font-size: 14px;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .terminal-input::placeholder {
+            color: #555;
+        }
+
+        .terminal-cursor {
+            color: #EAEAEA;
+            animation: blink 1s infinite;
+            margin-left: 4px;
+        }
+
+        @keyframes blink {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .terminal-input:focus~.terminal-cursor {
+            animation: blink 0.7s infinite;
+        }
+
+        /* Dark mode terminal adjustments */
+        .dark .terminal-container {
+            background-color: #0a0a0a;
+        }
+
+        .dark .terminal-output {
+            color: #E0E0E0;
+        }
+
+        .dark .terminal-input {
+            color: #E0E0E0;
+        }
+
+        .dark .terminal-cursor {
+            color: #E0E0E0;
+        }
+
+        #home-btn-origin {
+            color: var(--text-dark);
+        }
+
+        .dark #home-btn-origin {
+            color: #FFE4BF;
+        }
+
+        #home-btn-origin svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            #home-btn-origin svg {
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        /* Origin page title styling */
+        #page-origin h2 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        #page-origin .font-light {
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        #origin-page-title {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-8 min-h-screen flex flex-col items-center justify-center transition-colors duration-300">
+
+    <!-- Main Window Container -->
+    <main class="window-frame w-full max-w-5xl mx-auto">
+
+        <!-- Window Title Bar -->
+        <header class="title-bar">
+            <div class="flex items-center">
+                <select id="lang-toggle-btn" class="title-bar-btn !font-title !text-sm px-2 py-1 cursor-pointer">
+                    <option value="en">EN</option>
+                    <option value="fr">FR</option>
+                    <option value="it">IT</option>
+                    <option value="ar">ع</option>
+
+                </select>
+                <button id="theme-toggle" class="title-bar-btn">
+                    <!-- Sun Icon SVG (New, cleaner version) -->
+                    <svg id="icon-sun" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                            d="M12 12m-5 0a5 5 0 1 0 10 0a5 5 0 1 0-10 0" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                    <!-- Moon Icon SVG -->
+                    <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <span id="window-title-text" class="title-bar-text font-title"></span>
+            <div class="window-controls flex">
+                <button aria-label="Minimize" title="Minimize" data-translate-key="window.minimize"
+                    data-translate-key-attr="title">
+                    <!-- Minimize (Minus) Icon SVG -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path>
+                    </svg>
+                </button>
+                <button aria-label="Close" title="Close" data-translate-key="window.close"
+                    data-translate-key-attr="title">
+                    <!-- Close (X) Icon SVG -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Window Content Area -->
+        <div class="window-content">
+
+            <!-- PAGE 1: Welcome Screen -->
+            <section id="page-welcome" class="">
+                <div class="flex flex-col md:flex-row items-center justify-center md:justify-around gap-12 p-4 md:p-8">
+
+                    <!-- Left Side: Logo -->
+                    <div class="flex-shrink-0">
+                        <img src="logo.png" alt="Roumaissa's Logo"
+                            style="max-width: 300px; max-height: 300px; width: auto; height: auto;">
+                    </div>
+
+                    <!-- Right Side: Welcome.exe Dialog -->
+                    <div class="dialog-box">
+                        <header class="dialog-title-bar">
+                            <span class="font-title text-sm"
+                                data-translate-key="welcome.dialog.title">Welcome.exe</span>
+                            <div class="dialog-controls flex">
+                                <!-- Replaced text with SVG -->
+                                <button aria-label="Minimize" title="Minimize" data-translate-key="window.minimize"
+                                    data-translate-key-attr="title">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                            d="M20 12H4"></path>
+                                    </svg>
+                                </button>
+                                <!-- Replaced text with SVG -->
+                                <button aria-label="Close" title="Close" data-translate-key="window.close"
+                                    data-translate-key-attr="title">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                            d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </header>
+                        <div class="dialog-content space-y-5">
+                            <h1 class="font-title text-2xl" data-translate-key="welcome.dialog.h1">Here is Roumaissa's
+                                zone</h1>
+                            <p data-translate-key="welcome.dialog.p1">Oh look, another typical designer portfolio.. but
+                                trust me, this one actually has personality</p>
+                            <p class="font-bold text-lg" data-translate-key="welcome.dialog.p2">System booting ...</p>
+                            <p data-translate-key="welcome.dialog.p3">welcome to Roumaissa's OS- 99% creativity, 1%
+                                caffeine</p>
+
+                            <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                                <button id="start-mission-btn" class="btn-retro btn-primary w-full sm:w-auto"
+                                    data-translate-key="welcome.dialog.btn.start">Start mission</button>
+                                <button id="classic-view-btn" class="btn-retro w-full sm:w-auto"
+                                    data-translate-key="welcome.dialog.btn.classic">Classic view</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PAGE 2: Mission Control Screen -->
+            <section id="page-missions" class="hidden">
+                <div class="flex flex-col gap-8 p-4 md:p-8">
+
+                    <!-- Header -->
+                    <header class="flex items-center gap-4">
+                        <!-- Home Icon SVG -->
+                        <button id="home-btn"
+                            class="p-2 border-2 border-transparent hover:border-textDark rounded-lg transition-all"
+                            title="Back to Welcome">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                        </button>
+                        <h1 class="font-title text-xl md:text-3xl" data-translate-key="missions.title">Mission Control —
+                            Ready for Deployment ...</h1>
+                    </header>
+
+                    <!-- System Sync -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <span class="font-title text-lg flex-shrink-0" data-translate-key="missions.sync.text">System
+                            Sync: 20% completed</span>
+                        <div class="progress-bar">
+                            <div class="progress-bar-segment filled"></div>
+                            <div class="progress-bar-segment"></div>
+                            <div class="progress-bar-segment"></div>
+                            <div class="progress-bar-segment"></div>
+                        </div>
+                    </div>
+
+                    <!-- Level Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+                        <!-- Level 01: Unlocked -->
+                        <a href="#" id="level-1-card" class="level-card unlocked">
+                            <h2 class="font-title text-lg" data-translate-key="missions.level1.title">level 01: the
+                                origin</h2>
+                            <p class="mt-2" data-translate-key="missions.level1.desc">Every story starts somewhere.</p>
+                            <span class="level-status unlocked font-title text-sm mt-4 block"
+                                data-translate-key="missions.level.status.unlocked">Status: unlocked</span>
+                        </a>
+
+                        <!-- Level 02: Locked -->
+                        <div id="level-2-card" class="level-card locked">
+                            <h2 class="font-title text-lg" data-translate-key="missions.level2.title">level 02: the
+                                Playground</h2>
+                            <p class="mt-2" data-translate-key="missions.level2.desc">Where ideas turn into visuals</p>
+                            <span class="level-status locked font-title text-sm mt-4 block"
+                                data-translate-key="missions.level.status.locked">Status: locked</span>
+                        </div>
+
+                        <!-- Level 03: Locked -->
+                        <div class="level-card locked">
+                            <h2 class="font-title text-lg" data-translate-key="missions.level3.title">level 03: the
+                                Toolkit</h2>
+                            <p class="mt-2" data-translate-key="missions.level3.desc">Discover my creative arsenal</p>
+                            <span class="level-status locked font-title text-sm mt-4 block"
+                                data-translate-key="missions.level.status.locked">Status: locked</span>
+                        </div>
+
+                        <!-- Level 04: Locked -->
+                        <div class="level-card locked">
+                            <h2 class="font-title text-lg" data-translate-key="missions.level4.title">level 04: the
+                                Final Portal</h2>
+                            <p class="mt-2" data-translate-key="missions.level4.desc">Let's connect and create together
+                            </p>
+                            <span class="level-status locked font-title text-sm mt-4 block"
+                                data-translate-key="missions.level.status.locked">Status: locked</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Tip -->
+                    <div class="tip text-center mt-4" data-translate-key="missions.tip">
+                        &gt;&gt; Tip: Complete all levels to unlock the secret ending_
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PAGE 3: The Origin Terminal -->
+            <section id="page-origin" class="hidden">
+                <div class="flex flex-col gap-8 p-4 md:p-8">
+
+                    <!-- Header -->
+                    <header class="flex items-center gap-4">
+                        <!-- Home Icon SVG -->
+                        <button id="home-btn-origin"
+                            class="p-2 border-2 border-transparent hover:border-textDark rounded-lg transition-all"
+                            title="Back to Welcome">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <!-- Title and Subtitle -->
+                        <div class="flex-grow">
+                            <h2 class="font-title text-xl sm:text-2xl md:text-3xl font-bold"
+                                data-translate-key="origin.title">Level 01: The Origin</h2>
+                            <p class="text-sm sm:text-base font-light mt-1" data-translate-key="origin.subtitle">Every
+                                story starts somewhere, and mine starts in Sétif</p>
+                        </div>
+                    </header>
+
+                    <!-- Terminal Window -->
+                    <div id="terminal-window" class="terminal-container">
+                        <div id="terminal-output" class="terminal-output">
+                            <!-- Content will be generated by JavaScript -->
+                        </div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">>> </span>
+                            <input id="terminal-input" type="text" class="terminal-input" placeholder=""
+                                autocomplete="off">
+                            <span id="terminal-cursor" class="terminal-cursor">▌</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center p-4 mt-6 text-sm" data-translate-key="footer.text">
+        © 2025 Roumaissa Koussa – story mode edition
+    </footer>
+
+    <script>
+        // === Translations Data ===
+        const translations = {
+            'en': {
+                'lang.toggle.text': 'EN',
+                'window.minimize': '-',
+                'window.close': 'x',
+                'window.title.welcome': '',
+                'window.title.missions': 'mission_selector.exe',
+                'welcome.logo.p1': 'Replace this with your logo graphic',
+                'welcome.logo.p2': 'Roumaissa',
+                'welcome.logo.p3': '(From my-portfolio-design1.png)',
+                'welcome.dialog.title': 'Welcome.exe',
+                'welcome.dialog.h1': "Here is Roumaissa's zone",
+                'welcome.dialog.p1': 'Oh look, another typical designer portfolio.. but trust me, this one actually has personality',
+                'welcome.dialog.p2': 'System booting ...',
+                'welcome.dialog.p3': "welcome to Roumaissa's OS- 99% creativity, 1% caffeine",
+                'welcome.dialog.btn.start': 'Start mission',
+                'welcome.dialog.btn.classic': 'Classic view',
+                'missions.title': 'Mission Control — Ready for Deployment ...',
+                'missions.sync.text': 'System Sync: {percent}% completed',
+                'missions.level1.title': 'level 01: the origin',
+                'missions.level1.desc': 'Every story starts somewhere.',
+                'missions.level2.title': 'level 02: the Playground',
+                'missions.level2.desc': 'Where ideas turn into visuals',
+                'missions.level3.title': 'level 03: the Toolkit',
+                'missions.level3.desc': 'Discover my creative arsenal',
+                'missions.level4.title': 'level 04: the Final Portal',
+                'missions.level4.desc': "Let's connect and create together",
+                'missions.level.status.unlocked': 'Status: unlocked',
+                'missions.level.status.locked': 'Status: locked',
+                'missions.tip': '>> Tip: Complete all levels to unlock the secret ending_',
+                'origin.title': 'Level 01: The Origin',
+                'origin.subtitle': 'Every story starts somewhere, and mine starts in Sétif',
+                'origin.boot.line1': 'Booting Roumaisa OS v1.0 ...',
+                'origin.boot.line2': 'Loading childhood memories...',
+                'origin.boot.line3': 'Loading creativity modules...',
+                'origin.boot.line4': 'System ready.',
+                'origin.welcome': "Welcome, traveler. You've entered a creative system built with imagination and caffeine ☕",
+                'origin.help.prompt': 'Type \'help\' to begin your exploration_',
+                'origin.help.title': 'Available commands:',
+                'origin.help.whoami': '[1] whoami      → Learn who\'s behind the system',
+                'origin.help.origin': '[2] origin      → Discover where it all began',
+                'origin.help.spark': '[3] spark       → The moment creativity ignited',
+                'origin.help.skills': '[4] skills      → What powers my design process',
+                'origin.help.toolkit': '[5] toolkit     → My creative weapons of choice',
+                'origin.help.contact': '[6] contact     → Connect with me',
+                'origin.help.exit': '[7] exit        → Return to Mission Control',
+                'origin.help.clear': '[8] clear       → Clear the terminal screen',
+                'origin.whoami': "I'm Roumaisa — a designer who translates ideas into emotions,\nand emotions into visuals.\nPowered by curiosity, color, and a hint of organized chaos ✨",
+                'origin.origin': "Every story starts somewhere… mine began in Sétif, Algeria 🇩🇿\nFrom doodling on notebooks to designing full brand identities —\nmy journey was never planned, just passionately crafted.",
+                'origin.spark': "The spark?\nProbably the first time I realized design could make people *feel*.\nSince then, I\'ve been chasing that feeling — one pixel at a time.",
+                'origin.skills.title': 'Skills detected:',
+                'origin.skills.list': '- Branding & Visual Identity\n- Social Media Design\n- Concept Art & Illustration\n- Storytelling through visuals\n- AI-enhanced design exploration 🤖',
+                'origin.toolkit.title': 'Toolkit initialized:',
+                'origin.toolkit.list': '- Adobe Illustrator\n- Photoshop\n- Figma\n- After Effects\n- ChatGPT + Midjourney (my AI sidekicks ⚡)',
+                'origin.contact': "Let's connect and create something unforgettable 💫\nEmail: roumaissaks1997@gmail.com\nLinktree: linktr.ee/roumaissou19",
+                'origin.exit': 'Returning to Mission Control...\nSystem Sync: 25% completed.',
+                'origin.error': 'Command not found.\nEven my creativity module couldn\'t process that.\nTry \'help\' before I start guessing 🤔',
+                'origin.easter.coffee': '☕ Brewing creativity... Done. +15% inspiration.',
+                'footer.text': '© 2025 Roumaissa Koussa – story mode edition'
+            },
+            'fr': {
+                'lang.toggle.text': 'FR',
+                'window.minimize': '-',
+                'window.close': 'x',
+                'window.title.welcome': '',
+                'window.title.missions': 'selecteur_mission.exe',
+                'welcome.logo.p1': 'Remplacez ceci par votre logo',
+                'welcome.logo.p2': 'Roumaissa',
+                'welcome.logo.p3': '(Depuis my-portfolio-design1.png)',
+                'welcome.dialog.title': 'Bienvenue.exe',
+                'welcome.dialog.h1': "Voici la zone de Roumaissa",
+                'welcome.dialog.p1': 'Oh, encore un portfolio de designer typique... mais croyez-moi, celui-ci a de la personnalité',
+                'welcome.dialog.p2': 'Démarrage du système ...',
+                'welcome.dialog.p3': "bienvenue sur Roumaissa OS- 99% créativité, 1% caféine",
+                'welcome.dialog.btn.start': 'Commencer la mission',
+                'welcome.dialog.btn.classic': 'Vue classique',
+                'missions.title': 'Contrôle de mission — Prêt pour le déploiement ...',
+                'missions.sync.text': 'Synchro système : {percent}% terminée',
+                'missions.level1.title': 'niveau 01 : l\'origine',
+                'missions.level1.desc': 'Chaque histoire commence quelque part.',
+                'missions.level2.title': 'niveau 02 : le Terrain de jeu',
+                'missions.level2.desc': 'Où les idées deviennent visuels',
+                'missions.level3.title': 'niveau 03 : la Boîte à outils',
+                'missions.level3.desc': 'Découvrez mon arsenal créatif',
+                'missions.level4.title': 'niveau 04 : le Portail Final',
+                'missions.level4.desc': 'Connectons-nous et créons ensemble',
+                'missions.level.status.unlocked': 'Statut : déverrouillé',
+                'missions.level.status.locked': 'Statut : verrouillé',
+                'missions.tip': '>> Astuce : Terminez tous les niveaux pour débloquer la fin secrète_',
+                'origin.title': 'Niveau 01 : L\'Origine',
+                'origin.subtitle': 'Chaque histoire commence quelque part, et la mienne commence à Sétif',
+                'origin.boot.line1': 'Démarrage du système d\'exploitation Roumaisa v1.0 ...',
+                'origin.boot.line2': 'Chargement des souvenirs d\'enfance...',
+                'origin.boot.line3': 'Chargement des modules de créativité...',
+                'origin.boot.line4': 'Système prêt.',
+                'origin.welcome': "Bienvenue, voyageur. Vous êtes entré dans un système créatif construit avec imagination et caféine ☕",
+                'origin.help.prompt': 'Tapez \'help\' pour commencer votre exploration_',
+                'origin.help.title': 'Commandes disponibles:',
+                'origin.help.whoami': '[1] whoami      → Apprenez qui se cache derrière le système',
+                'origin.help.origin': '[2] origin      → Découvrez où tout a commencé',
+                'origin.help.spark': '[3] spark       → Le moment où la créativité s\'est allumée',
+                'origin.help.skills': '[4] skills      → Ce qui alimente mon processus de conception',
+                'origin.help.toolkit': '[5] toolkit     → Mes armes créatives préférées',
+                'origin.help.contact': '[6] contact     → Connectez-vous avec moi',
+                'origin.help.exit': '[7] exit        → Retour au Centre de Contrôle',
+                'origin.help.clear': '[8] clear       → Effacer l\'écran du terminal',
+                'origin.whoami': "Je suis Roumaisa — une designer qui traduit les idées en émotions,\net les émotions en visuels.\nAlimentée par la curiosité, la couleur et un brin de chaos organisé ✨",
+                'origin.origin': "Chaque histoire commence quelque part… la mienne a commencé à Sétif, Algérie 🇩🇿\nDu griffonnage sur des cahiers à la conception d\'identités de marque complètes —\nmon voyage n\'a jamais été planifié, juste passionnément créé.",
+                'origin.spark': "L\'étincelle?\nProbablement le moment où j\'ai réalisé que le design pouvait faire *ressentir* aux gens.\nDepuis, je chasse ce sentiment — un pixel à la fois.",
+                'origin.skills.title': 'Compétences détectées:',
+                'origin.skills.list': '- Branding et Identité Visuelle\n- Design de Médias Sociaux\n- Concept Art & Illustration\n- Storytelling par les visuels\n- Exploration de design améliorée par l\'IA 🤖',
+                'origin.toolkit.title': 'Boîte à outils initialisée:',
+                'origin.toolkit.list': '- Adobe Illustrator\n- Photoshop\n- Figma\n- After Effects\n- ChatGPT + Midjourney (mes compagnons IA ⚡)',
+                'origin.contact': "Connectons-nous et créons quelque chose d\'inoubliable 💫\nEmail: roumaissaks1997@gmail.com\nLinktree: linktr.ee/roumaissou19",
+                'origin.exit': 'Retour au Centre de Contrôle...\nSynchronisation du système : 25% terminée.',
+                'origin.error': 'Commande non trouvée.\nMême mon module de créativité n\'a pas pu traiter cela.\nEssayez \'help\' avant que je commence à deviner 🤔',
+                'origin.easter.coffee': '☕ Infusion de créativité... Fait. +15% d\'inspiration.',
+                'footer.text': '© 2025 Roumaissa Koussa – édition mode histoire'
+            },
+            'ar': {
+                'lang.toggle.text': 'ع',
+                'window.minimize': '-',
+                'window.close': 'x',
+                'window.title.missions': 'mission_selector.exe',
+                'welcome.logo.p1': 'يُستبدل هذا بشعارك الخاص',
+                'welcome.logo.p2': 'رميسة',
+                'welcome.logo.p3': '(من my-portfolio-design1.png)',
+                'welcome.dialog.title': 'Welcome.exe',
+                'welcome.dialog.h1': 'هنا منطقة رميسة',
+                'welcome.dialog.p1': 'أوه، ملف مصمم نموذجي آخر.. لكن ثق بي، هذا الملف له شخصية مميزة',
+                'welcome.dialog.p2': '...جاري تشغيل النظام',
+                'welcome.dialog.p3': 'مرحبًا بك في نظام رميسة - 99% إبداع، 1% كافيين',
+                'welcome.dialog.btn.start': 'إبدأ المهمة',
+                'welcome.dialog.btn.classic': 'العرض الكلاسيكي',
+                'missions.title': 'مركز التحكم — جاهز لللانطلاق ...',
+                'missions.sync.text': 'مزامنة النظام: {percent}% مكتمل',
+                'missions.level1.title': 'المستوى 01: الأصل',
+                'missions.level1.desc': 'كل قصة تبدأ من مكان ما.',
+                'missions.level2.title': 'المستوى 02: الملعب',
+                'missions.level2.desc': 'أين تتحول الأفكار إلى مرئيات',
+                'missions.level3.title': 'المستوى 03: صندوق الأدوات',
+                'missions.level3.desc': 'اكتشف ترسانتي الإبداعية',
+                'missions.level4.title': 'المستوى 04: البوابة النهائية',
+                'missions.level4.desc': 'لنتواصل ونبدع معًا',
+                'missions.level.status.unlocked': 'الحالة: مفتوح',
+                'missions.level.status.locked': 'الحالة: مقفل',
+                'missions.tip': '>> نصيحة: أكمل جميع المستويات لفتح النهاية السرية_',
+                'origin.title': 'المستوى 01: الأصل',
+                'origin.subtitle': 'كل قصة تبدأ من مكان ما، وقصتي تبدأ من سطيف',
+                'origin.boot.line1': 'تشغيل نظام تشغيل رميسة v1.0 ...',
+                'origin.boot.line2': 'جاري تحميل ذكريات الطفولة...',
+                'origin.boot.line3': 'جاري تحميل وحدات الإبداع...',
+                'origin.boot.line4': 'النظام جاهز.',
+                'origin.welcome': "أهلا وسهلا أيها المسافر. لقد دخلت نظام إبداعي مبني على الخيال والكافيين ☕",
+                'origin.help.prompt': "اكتب 'help' لبدء استكشافك_",
+                'origin.help.title': 'الأوامر المتاحة:',
+                'origin.help.whoami': '[1] whoami      → تعرف على من وراء النظام',
+                'origin.help.origin': '[2] origin      → اكتشف أين بدأت الحكاية',
+                'origin.help.spark': '[3] spark       → لحظة اشتعال الإبداع',
+                'origin.help.skills': '[4] skills      → ما يشغل عملية تصميمي',
+                'origin.help.toolkit': '[5] toolkit     → أدواتي الإبداعية المفضلة',
+                'origin.help.contact': '[6] contact     → تواصل معي',
+                'origin.help.exit': '[7] exit        → العودة إلى غرفة التحكم',
+                'origin.help.clear': '[8] clear       → امسح شاشة الطرفية',
+                'origin.whoami': "أنا رميسة — مصممة أترجم الأفكار إلى مشاعر،\nوالمشاعر إلى رسوميات.\nمدفوعة بالفضول والألوان وبعض الفوضى المنظمة ✨",
+                'origin.origin': "كل قصة تبدأ من مكان ما... قصتي بدأت من سطيف، الجزائر 🇩🇿\nمن الرسم على دفاتري إلى تصميم هويات ماركات كاملة —\nرحلتي لم تكن مخططة أبداً، فقط مبدعة بشغف.",
+                'origin.spark': "الشرارة؟\nربما أول مرة أدركت أن التصميم يمكنه أن يجعل الناس *يشعرون*.\nمنذ ذلك الحين، أنا أطارد هذا الشعور — بكسل واحد في كل مرة.",
+                'origin.skills.title': 'المهارات المكتشفة:',
+                'origin.skills.list': '- الهوية البصرية والتصميم الشامل\n- تصميم وسائل التواصل الاجتماعي\n- الفن المفاهيمي والرسوم التوضيحية\n- سرد القصص من خلال الرسوميات\n- استكشاف التصميم المحسّن بالذكاء الاصطناعي 🤖',
+                'origin.toolkit.title': 'صندوق الأدوات جاهز:',
+                'origin.toolkit.list': '- Adobe Illustrator\n- Photoshop\n- Figma\n- After Effects\n- ChatGPT + Midjourney (رفاقي في الذكاء الاصطناعي ⚡)',
+                'origin.contact': "لنتواصل ونبدع شيئاً لا يُنسى 💫\nالبريد الإلكتروني: roumaissaks1997@gmail.com\nLinktree: linktr.ee/roumaissou19",
+                'origin.exit': 'العودة إلى غرفة التحكم...\nمزامنة النظام: 25% مكتملة.',
+                'origin.error': 'الأمر غير موجود.\nحتى وحدة الإبداع الخاصة بي لم تستطع معالجة ذلك.\nجرب \'help\' قبل أن أبدأ في التخمين 🤔',
+                'origin.easter.coffee': '☕ تخمير الإبداع... تمّ. +15% إلهام.',
+                'footer.text': '© 2025 رميسة كوسة – إصدار طور القصة'
+            },
+            'it': {
+                'lang.toggle.text': 'IT',
+                'window.minimize': '-',
+                'window.close': 'x',
+                'window.title.welcome': '',
+                'window.title.missions': 'mission_selector.exe',
+                'welcome.logo.p1': 'Sostituisci questo con il tuo logo',
+                'welcome.logo.p2': 'Roumaissa',
+                'welcome.logo.p3': '(Da my-portfolio-design1.png)',
+                'welcome.dialog.title': 'Welcome.exe',
+                'welcome.dialog.h1': "Ecco la zona di Roumaissa",
+                'welcome.dialog.p1': 'Oh, un altro portfolio di designer tipico... ma credimi, questo ha davvero personalità',
+                'welcome.dialog.p2': 'Avvio del sistema ...',
+                'welcome.dialog.p3': "Benvenuto nel Sistema Operativo di Roumaissa - 99% creatività, 1% caffeina",
+                'welcome.dialog.btn.start': 'Inizia missione',
+                'welcome.dialog.btn.classic': 'Vista classica',
+                'missions.title': 'Centro di Controllo Missione — Pronto per il Lancio ...',
+                'missions.sync.text': 'Sincronizzazione Sistema: {percent}% completata',
+                'missions.level1.title': 'livello 01: l\'origine',
+                'missions.level1.desc': 'Ogni storia inizia da qualche parte.',
+                'missions.level2.title': 'livello 02: il Parco Giochi',
+                'missions.level2.desc': 'Dove le idee si trasformano in immagini',
+                'missions.level3.title': 'livello 03: la Cassetta degli Attrezzi',
+                'missions.level3.desc': 'Scopri il mio arsenale creativo',
+                'missions.level4.title': 'livello 04: il Portale Finale',
+                'missions.level4.desc': "Connettiamoci e creiamo insieme",
+                'missions.level.status.unlocked': 'Stato: sbloccato',
+                'missions.level.status.locked': 'Stato: bloccato',
+                'missions.tip': '>> Consiglio: Completa tutti i livelli per sbloccare il finale segreto_',
+                'origin.title': 'Livello 01: L\'Origine',
+                'origin.subtitle': 'Ogni storia inizia da qualche parte, e la mia inizia a Sétif',
+                'origin.boot.line1': 'Avvio del sistema operativo Roumaisa v1.0 ...',
+                'origin.boot.line2': 'Caricamento dei ricordi d\'infanzia...',
+                'origin.boot.line3': 'Caricamento dei moduli di creatività...',
+                'origin.boot.line4': 'Sistema pronto.',
+                'origin.welcome': "Benvenuto, viaggiatore. Sei entrato in un sistema creativo costruito con immaginazione e caffeina ☕",
+                'origin.help.prompt': "Digita 'help' per iniziare la tua esplorazione_",
+                'origin.help.title': 'Comandi disponibili:',
+                'origin.help.whoami': 'whoami      → Scopri chi c\'è dietro il sistema',
+                'origin.help.origin': 'origin      → Scopri dove tutto è iniziato',
+                'origin.help.spark': 'spark       → Il momento in cui la creatività si è accesa',
+                'origin.help.skills': 'skills      → Cosa alimenta il mio processo di progettazione',
+                'origin.help.toolkit': 'toolkit     → Le mie armi creative preferite',
+                'origin.help.contact': 'contact     → Contattami',
+                'origin.help.exit': 'exit        → Ritorno al Centro di Controllo Missioni',
+                'origin.help.clear': 'clear       → Cancella lo schermo del terminale',
+                'origin.whoami': "Sono Roumaisa — una designer che traduce le idee in emozioni,\ne le emozioni in grafica.\nAlimentata da curiosità, colore e un pizzico di caos organizzato ✨",
+                'origin.origin': "Ogni storia inizia da qualche parte… la mia è iniziata a Sétif, Algeria 🇩🇿\nDal disegno su quaderni alla progettazione di identità di marca complete —\nil mio viaggio non è mai stato pianificato, solo creato appassionatamente.",
+                'origin.spark': "La scintilla?\nProbabilmente la prima volta che ho capito che il design potrebbe far *sentire* le persone.\nDa allora, sto inseguendo quel sentimento — un pixel alla volta.",
+                'origin.skills.title': 'Competenze rilevate:',
+                'origin.skills.list': '- Branding e Identità Visiva\n- Design dei Social Media\n- Concept Art e Illustrazione\n- Storytelling attraverso la grafica\n- Esplorazione di design potenziata dall\'IA 🤖',
+                'origin.toolkit.title': 'Kit di strumenti inizializzato:',
+                'origin.toolkit.list': '- Adobe Illustrator\n- Photoshop\n- Figma\n- After Effects\n- ChatGPT + Midjourney (i miei compagni IA ⚡)',
+                'origin.contact': "Connettiamoci e creiamo qualcosa di indimenticabile 💫\nEmail: roumaissaks1997@gmail.com\nLinktree: linktr.ee/roumaissou19",
+                'origin.exit': 'Ritorno al Centro di Controllo Missioni...\nSincronizzazione del sistema: 25% completata.',
+                'origin.error': 'Comando non trovato.\nNeanche il mio modulo di creatività ha potuto elaborarlo.\nProva \'help\' prima che cominci a indovinare 🤔',
+                'origin.easter.coffee': '☕ Preparazione della creatività... Fatto. +15% ispirazione.',
+                'footer.text': '© 2025 Roumaissa Koussa – edizione story mode'
+            }
+        };
+
+        const languages = ['en', 'fr', 'ar', 'it'];
+        let currentLang = 'en';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Page Elements
+            const pageWelcome = document.getElementById('page-welcome');
+            const pageMissions = document.getElementById('page-missions');
+            const windowTitleText = document.getElementById('window-title-text');
+
+            // Button Elements
+            const startMissionBtn = document.getElementById('start-mission-btn');
+            const classicViewBtn = document.getElementById('classic-view-btn');
+            const homeBtn = document.getElementById('home-btn');
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const langToggleBtn = document.getElementById('lang-toggle-btn');
+
+            // Icon Elements
+            const iconSun = document.getElementById('icon-sun');
+            const iconMoon = document.getElementById('icon-moon');
+
+            // --- Page Navigation ---
+            function showWelcomePage() {
+                pageMissions.classList.add('hidden');
+                pageWelcome.classList.remove('hidden');
+                windowTitleText.dataset.translateKey = 'window.title.welcome';
+                updateWindowTitle(); // Update title on page change
+            }
+
+            // Update progress bar and sync text based on unlocked levels
+            function updateProgress() {
+                const segments = Array.from(document.querySelectorAll('.progress-bar-segment'));
+                const unlockedCount = document.querySelectorAll('.level-card.unlocked').length;
+                const percent = unlockedCount * 25; // 4 levels -> 25% each
+
+                // Update segments fill
+                segments.forEach((seg, idx) => {
+                    if (idx < unlockedCount) seg.classList.add('filled');
+                    else seg.classList.remove('filled');
+                });
+
+                // Update the sync text using translation template {percent}
+                const el = document.querySelector('[data-translate-key="missions.sync.text"]');
+                if (el) {
+                    const template = (translations[currentLang] && translations[currentLang]['missions.sync.text']) || '';
+                    el.textContent = template.replace('{percent}', percent);
+                }
+            }
+
+            function showMissionsPage() {
+                pageWelcome.classList.add('hidden');
+                pageMissions.classList.remove('hidden');
+                windowTitleText.dataset.translateKey = 'window.title.missions';
+                updateWindowTitle(); // Update title on page change
+                updateProgress();
+            }
+
+            // PAGE 3: Origin Terminal
+            const pageOrigin = document.getElementById('page-origin');
+            const terminalOutput = document.getElementById('terminal-output');
+            const terminalInput = document.getElementById('terminal-input');
+            const homeBtnOrigin = document.getElementById('home-btn-origin');
+
+            function showOriginPage() {
+                pageWelcome.classList.add('hidden');
+                pageMissions.classList.add('hidden');
+                pageOrigin.classList.remove('hidden');
+                windowTitleText.dataset.translateKey = 'window.title.missions'; // Keep same title
+                updateWindowTitle();
+                // Focus on input and start boot sequence
+                setTimeout(() => terminalInput.focus(), 100);
+                if (terminalOutput.textContent.trim() === '') {
+                    startBootSequence();
+                }
+            }
+
+            function showMissionsPageFromOrigin() {
+                pageOrigin.classList.add('hidden');
+                pageMissions.classList.remove('hidden');
+                pageWelcome.classList.add('hidden');
+            }
+
+            // Terminal Boot Sequence
+            function startBootSequence() {
+                terminalOutput.innerHTML = '';
+                const lines = [
+                    { key: 'origin.boot.line1', delay: 0 },
+                    { key: 'origin.boot.line2', delay: 800 },
+                    { key: 'origin.boot.line3', delay: 1600 },
+                    { key: 'origin.boot.line4', delay: 2400 }
+                ];
+
+                lines.forEach(({ key, delay }) => {
+                    setTimeout(() => {
+                        const text = translations[currentLang][key] || '';
+                        addTerminalLine(text);
+                    }, delay);
+                });
+
+                setTimeout(() => {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.welcome'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.prompt'] || '');
+                }, 3200);
+            }
+
+            function addTerminalLine(text, isCommand = false) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                if (isCommand) {
+                    line.innerHTML = `<span class="terminal-prompt">>>> </span><span class="terminal-command">${escapeHtml(text)}</span>`;
+                } else {
+                    line.textContent = text;
+                }
+                terminalOutput.appendChild(line);
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            }
+
+            function escapeHtml(text) {
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.replace(/[&<>"']/g, m => map[m]);
+            }
+
+            // Terminal Command Handler
+            function processCommand(input) {
+                const cmd = input.trim().toLowerCase();
+                addTerminalLine(input, true);
+
+                if (cmd === 'help') {
+                    const helpTitle = translations[currentLang]['origin.help.title'] || '';
+                    addTerminalLine('');
+                    addTerminalLine(helpTitle);
+                    addTerminalLine('----------------------------------------------');
+                    addTerminalLine(translations[currentLang]['origin.help.whoami'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.origin'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.spark'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.skills'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.toolkit'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.contact'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.exit'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.clear'] || '');
+                    addTerminalLine('----------------------------------------------');
+                } else if (cmd === 'whoami') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.whoami'] || '');
+                } else if (cmd === 'origin') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.origin'] || '');
+                } else if (cmd === 'spark') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.spark'] || '');
+                } else if (cmd === 'skills') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.skills.title'] || '');
+                    addTerminalLine(translations[currentLang]['origin.skills.list'] || '');
+                } else if (cmd === 'toolkit') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.toolkit.title'] || '');
+                    addTerminalLine(translations[currentLang]['origin.toolkit.list'] || '');
+                } else if (cmd === 'contact') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.contact'] || '');
+                } else if (cmd === 'clear') {
+                    terminalOutput.innerHTML = '';
+                    addTerminalLine(translations[currentLang]['origin.welcome'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.prompt'] || '');
+                } else if (cmd === 'exit') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.exit'] || '');
+                    // Unlock Level 02 (only once)
+                    setTimeout(() => {
+                        const levelCard2 = document.getElementById('level-2-card');
+                        if (levelCard2 && levelCard2.classList.contains('locked')) {
+                            levelCard2.classList.remove('locked');
+                            levelCard2.classList.add('unlocked');
+                        }
+                        // Update progress to 50%
+                        updateProgress();
+                        showMissionsPageFromOrigin();
+                    }, 1000);
+                } else if (cmd === 'coffee') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.easter.coffee'] || '');
+                } else if (cmd !== '') {
+                    addTerminalLine('');
+                    addTerminalLine(translations[currentLang]['origin.error'] || '');
+                }
+                addTerminalLine('');
+            }
+
+            // Terminal Input Handler
+            terminalInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    processCommand(terminalInput.value);
+                    terminalInput.value = '';
+                }
+            });
+
+            startMissionBtn.addEventListener('click', showMissionsPage);
+            homeBtn.addEventListener('click', showWelcomePage);
+            homeBtnOrigin.addEventListener('click', showMissionsPageFromOrigin);
+
+            // Level 01 Card Click Handler
+            const level1Card = document.getElementById('level-1-card');
+            if (level1Card) {
+                level1Card.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showOriginPage();
+                });
+            }
+
+            classicViewBtn.addEventListener('click', () => {
+                // You can replace this with a link to another page or a modal
+                console.log('Classic View button clicked!');
+                // Example: window.location.href = '/classic-portfolio.html';
+            });
+
+            // --- Theme Toggler ---
+
+            function updateThemeIcons(isDark) {
+                if (isDark) {
+                    iconSun.classList.add('hidden');
+                    iconMoon.classList.remove('hidden');
+                } else {
+                    iconSun.classList.remove('hidden');
+                    iconMoon.classList.add('hidden');
+                }
+            }
+
+            function toggleTheme() {
+                const htmlEl = document.documentElement;
+                const isDark = htmlEl.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeIcons(isDark);
+            }
+
+            function initTheme() {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeIcons(true);
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeIcons(false);
+                }
+            }
+
+            themeToggleBtn.addEventListener('click', toggleTheme);
+
+            // --- Language Toggler ---
+
+            function updateWindowTitle() {
+                const titleKey = windowTitleText.dataset.translateKey;
+                if (titleKey) {
+                    windowTitleText.textContent = translations[currentLang][titleKey] || '';
+                } else {
+                    windowTitleText.textContent = '';
+                }
+            }
+
+            function setLanguage(lang) {
+                if (!languages.includes(lang)) lang = 'en';
+                currentLang = lang;
+
+                // Set HTML lang and dir
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+                // Save preference
+                localStorage.setItem('lang', lang);
+
+                // Update lang toggle dropdown value
+                langToggleBtn.value = lang;
+
+                // Translate all elements with data-translate-key
+                document.querySelectorAll('[data-translate-key]').forEach(el => {
+                    const key = el.dataset.translateKey;
+                    if (translations[lang][key]) {
+                        el.textContent = translations[lang][key];
+                    }
+                });
+
+                // Translate all elements with data-translate-key-attr (for titles/aria-labels)
+                document.querySelectorAll('[data-translate-key-attr]').forEach(el => {
+                    const key = el.dataset.translateKey;
+                    const attr = el.dataset.translateKeyAttr;
+                    if (translations[lang][key]) {
+                        el.setAttribute(attr, translations[lang][key]);
+                    }
+                });
+
+                // Update the dynamic window title
+                updateWindowTitle();
+                // Update progress text/segments (depends on translations/currentLang)
+                if (typeof updateProgress === 'function') updateProgress();
+            }
+
+            function cycleLanguage() {
+                const currentLangIndex = languages.indexOf(currentLang);
+                const nextLangIndex = (currentLangIndex + 1) % languages.length;
+                const nextLang = languages[nextLangIndex];
+                setLanguage(nextLang);
+            }
+
+            function initLang() {
+                const savedLang = localStorage.getItem('lang');
+                setLanguage(savedLang || 'en'); // Default to English
+                // Set dropdown to current language
+                langToggleBtn.value = currentLang;
+            }
+
+            langToggleBtn.addEventListener('change', (e) => {
+                setLanguage(e.target.value);
+            });
+
+            // --- Initial Load ---
+            initLang(); // Initialize language first
+            initTheme();
+            // Show welcome page by default
+            showWelcomePage();
+
+        });
+    </script>
+
+</body>
+
+</html>
