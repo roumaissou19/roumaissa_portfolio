@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roumaissa's OS</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -273,6 +275,30 @@
             padding: 20px;
         }
 
+        .coming-soon-dialog {
+            background-color: var(--bg-color);
+            border: 3px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 8px 8px 0px var(--border-dark);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .coming-soon-dialog .dialog-title-bar {
+            background-color: #0066CC;
+            color: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--border-dark);
+        }
+
+        .coming-soon-dialog .dialog-content {
+            padding: 25px;
+        }
+
         /* Retro button styling */
         .btn-retro {
             display: inline-block;
@@ -335,7 +361,7 @@
             background-color: var(--level-locked);
             border-color: var(--border-dark);
             color: var(--level-locked-text);
-            cursor: not-allowed;
+            cursor: pointer;
         }
 
         .level-card.unlocked {
@@ -347,6 +373,16 @@
         }
 
         .level-card.unlocked:hover {
+            transform: scale(1.02);
+            box-shadow: 8px 8px 0px var(--border-dark);
+        }
+
+        #level-2-card.unlocked:hover {
+            transform: scale(1.02);
+            box-shadow: 8px 8px 0px var(--border-dark);
+        }
+
+        .level-card[data-unlocked="true"]:hover {
             transform: scale(1.02);
             box-shadow: 8px 8px 0px var(--border-dark);
         }
@@ -787,13 +823,13 @@
                     <!-- Level Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-                        <!-- Level 01: Unlocked -->
-                        <a href="#" id="level-1-card" class="level-card unlocked">
+                        <!-- Level 01: Locked initially -->
+                        <a href="#" id="level-1-card" class="level-card locked">
                             <h2 class="font-title text-lg" data-translate-key="missions.level1.title">level 01: the
                                 origin</h2>
                             <p class="mt-2" data-translate-key="missions.level1.desc">Every story starts somewhere.</p>
-                            <span class="level-status unlocked font-title text-sm mt-4 block"
-                                data-translate-key="missions.level.status.unlocked">Status: unlocked</span>
+                            <span class="level-status locked font-title text-sm mt-4 block"
+                                data-translate-key="missions.level.status.locked">Status: locked</span>
                         </a>
 
                         <!-- Level 02: Locked -->
@@ -877,6 +913,33 @@
                 </div>
             </section>
 
+            <!-- Coming Soon Modal -->
+            <div id="coming-soon-modal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="coming-soon-dialog">
+                    <header class="dialog-title-bar">
+                        <span class="font-title text-sm">coming_soon.exe</span>
+                        <div class="dialog-controls flex">
+                            <button id="close-coming-soon-btn" aria-label="Close" title="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="dialog-content space-y-4">
+                        <p class="text-lg font-title" data-translate-key="coming.soon">This level is coming soon! Stay
+                            tuned...</p>
+                        <div class="flex gap-4 mt-6">
+                            <button id="ok-coming-soon-btn" class="btn-retro btn-primary flex-1"
+                                data-translate-key="coming.soon.btn">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -945,6 +1008,8 @@
                 'origin.exit': 'Returning to Mission Control...\nSystem Sync: 25% completed.',
                 'origin.error': 'Command not found.\nEven my creativity module couldn\'t process that.\nTry \'help\' before I start guessing 🤔',
                 'origin.easter.coffee': '☕ Brewing creativity... Done. +15% inspiration.',
+                'coming.soon': 'This level is coming soon! Stay tuned...',
+                'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – story mode edition'
             },
             'fr': {
@@ -1004,6 +1069,8 @@
                 'origin.exit': 'Retour au Centre de Contrôle...\nSynchronisation du système : 25% terminée.',
                 'origin.error': 'Commande non trouvée.\nMême mon module de créativité n\'a pas pu traiter cela.\nEssayez \'help\' avant que je commence à deviner 🤔',
                 'origin.easter.coffee': '☕ Infusion de créativité... Fait. +15% d\'inspiration.',
+                'coming.soon': 'Ce niveau arrive bientôt! Restez à l\'écoute...',
+                'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – édition mode histoire'
             },
             'ar': {
@@ -1062,6 +1129,8 @@
                 'origin.exit': 'العودة إلى غرفة التحكم...\nمزامنة النظام: 25% مكتملة.',
                 'origin.error': 'الأمر غير موجود.\nحتى وحدة الإبداع الخاصة بي لم تستطع معالجة ذلك.\nجرب \'help\' قبل أن أبدأ في التخمين 🤔',
                 'origin.easter.coffee': '☕ تخمير الإبداع... تمّ. +15% إلهام.',
+                'coming.soon': 'هذا المستوى قادم قريباً! ابق متابعاً...',
+                'coming.soon.btn': 'حسناً',
                 'footer.text': '© 2025 رميسة كوسة – إصدار طور القصة'
             },
             'it': {
@@ -1121,6 +1190,8 @@
                 'origin.exit': 'Ritorno al Centro di Controllo Missioni...\nSincronizzazione del sistema: 25% completata.',
                 'origin.error': 'Comando non trovato.\nNeanche il mio modulo di creatività ha potuto elaborarlo.\nProva \'help\' prima che cominci a indovinare 🤔',
                 'origin.easter.coffee': '☕ Preparazione della creatività... Fatto. +15% ispirazione.',
+                'coming.soon': 'Questo livello arriva presto! Rimani sintonizzato...',
+                'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – edizione story mode'
             }
         };
@@ -1156,12 +1227,12 @@
             // Update progress bar and sync text based on unlocked levels
             function updateProgress() {
                 const segments = Array.from(document.querySelectorAll('.progress-bar-segment'));
-                const unlockedCount = document.querySelectorAll('.level-card.unlocked').length;
-                const percent = unlockedCount * 25; // 4 levels -> 25% each
+                const completedCount = document.querySelectorAll('.level-card.completed').length;
+                const percent = completedCount * 25; // 4 levels -> 25% each
 
                 // Update segments fill
                 segments.forEach((seg, idx) => {
-                    if (idx < unlockedCount) seg.classList.add('filled');
+                    if (idx < completedCount) seg.classList.add('filled');
                     else seg.classList.remove('filled');
                 });
 
@@ -1299,14 +1370,31 @@
                 } else if (cmd === 'exit') {
                     addTerminalLine('');
                     addTerminalLine(translations[currentLang]['origin.exit'] || '');
-                    // Unlock Level 02 (only once)
+                    // Mark Level 01 as completed and unlock Level 02
                     setTimeout(() => {
+                        // Mark Level 01 as completed (for progress) and change to unlocked visually
+                        if (level1Card && !level1Card.classList.contains('completed')) {
+                            level1Card.classList.add('completed');
+                        }
+                        // Change Level 01 from locked to unlocked visually
+                        if (level1Card && level1Card.classList.contains('locked')) {
+                            level1Card.classList.remove('locked');
+                            level1Card.classList.add('unlocked');
+                            level1Card.querySelector('.level-status').textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                            level1Card.querySelector('.level-status').classList.remove('locked');
+                            level1Card.querySelector('.level-status').classList.add('unlocked');
+                        }
+                        // Unlock Level 02 (internally) but keep it looking locked
                         const levelCard2 = document.getElementById('level-2-card');
                         if (levelCard2 && levelCard2.classList.contains('locked')) {
-                            levelCard2.classList.remove('locked');
-                            levelCard2.classList.add('unlocked');
+                            // Add a custom attribute to mark it as unlocked internally
+                            levelCard2.setAttribute('data-unlocked', 'true');
+                            // Add click handler to Level 02
+                            levelCard2.addEventListener('click', () => {
+                                showComingSoonModal();
+                            });
                         }
-                        // Update progress to 50%
+                        // Update progress (25% for Level 01 completed)
                         updateProgress();
                         showMissionsPageFromOrigin();
                     }, 1000);
@@ -1332,11 +1420,47 @@
             homeBtn.addEventListener('click', showWelcomePage);
             homeBtnOrigin.addEventListener('click', showMissionsPageFromOrigin);
 
+            // Coming Soon Modal Handler
+            const comingSoonModal = document.getElementById('coming-soon-modal');
+            const closeComingSoonBtn = document.getElementById('close-coming-soon-btn');
+            const okComingSoonBtn = document.getElementById('ok-coming-soon-btn');
+
+            function showComingSoonModal() {
+                comingSoonModal.classList.remove('hidden');
+            }
+
+            function hideComingSoonModal() {
+                comingSoonModal.classList.add('hidden');
+            }
+
+            if (closeComingSoonBtn) {
+                closeComingSoonBtn.addEventListener('click', hideComingSoonModal);
+            }
+
+            if (okComingSoonBtn) {
+                okComingSoonBtn.addEventListener('click', hideComingSoonModal);
+            }
+
+            // Close modal when clicking outside
+            comingSoonModal.addEventListener('click', (e) => {
+                if (e.target === comingSoonModal) {
+                    hideComingSoonModal();
+                }
+            });
+
             // Level 01 Card Click Handler
             const level1Card = document.getElementById('level-1-card');
             if (level1Card) {
                 level1Card.addEventListener('click', (e) => {
                     e.preventDefault();
+                    // Unlock Level 01 when entered
+                    if (level1Card.classList.contains('locked')) {
+                        level1Card.classList.remove('locked');
+                        level1Card.classList.add('unlocked');
+                        level1Card.querySelector('.level-status').textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                        level1Card.querySelector('.level-status').classList.remove('locked');
+                        level1Card.querySelector('.level-status').classList.add('unlocked');
+                    }
                     showOriginPage();
                 });
             }
