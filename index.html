@@ -769,6 +769,18 @@
             background-color: #1F1F1F;
         }
 
+        /* Hide sidebar on mobile devices */
+        @media (max-width: 768px) {
+            .explorer-sidebar {
+                display: none;
+            }
+            
+            .explorer-content {
+                height: auto;
+                min-height: 400px;
+            }
+        }
+
         .sidebar-tree {
             font-family: 'Cairo Mono', monospace;
             font-size: 12px;
