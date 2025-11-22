@@ -51,16 +51,16 @@
         }
 
         .dark:root {
-            --bg-color: #231F20;
+            --bg-color: #050A14;
             --text-dark: #FFEFD5;
             --border-dark: #FFEFD5;
-            --window-blue: #005A8E;
-            --dialog-orange: #B56D00;
-            --level-locked: #333333;
+            --window-blue: #00A2E8;
+            --dialog-orange: #F99D1C;
+            --level-locked: #0D1520;
             --level-unlocked: #F99D1C;
-            --level-locked-text: #777;
+            --level-locked-text: #B0B0B0;
             --level-unlocked-text: #231F20;
-            --progress-bar-bg: #555;
+            --progress-bar-bg: #0D1520;
             --progress-bar-fill: #00A2E8;
         }
 
@@ -145,13 +145,13 @@
 
         /* Dark-mode title bar refinements */
         .dark .title-bar {
-            background: linear-gradient(180deg, #009fe6, #003f66);
-            border-bottom-color: rgba(255, 239, 181, 0.85);
-            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
+            background: var(--window-blue);
+            border-bottom-color: var(--border-dark);
+            box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.15);
         }
 
         .dark .title-bar-text {
-            text-shadow: 1px 1px rgba(0, 0, 0, 0.55);
+            text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
             color: var(--text-dark);
         }
 
@@ -669,6 +669,448 @@
         #origin-page-title {
             text-align: center;
         }
+
+        /* File Explorer Styling */
+        .explorer-window {
+            background-color: var(--bg-color);
+            border: 3px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 6px 6px 0px var(--border-dark);
+            overflow: hidden;
+        }
+
+        .explorer-toolbar {
+            background-color: #E8E8E8;
+            border-bottom: 2px solid var(--border-dark);
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dark .explorer-toolbar {
+            background-color: #2A2A2A;
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 4px;
+        }
+
+        .toolbar-btn {
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 2px 2px 0px var(--border-dark);
+        }
+
+        .toolbar-btn:hover {
+            background-color: #D0D0D0;
+        }
+
+        .dark .toolbar-btn:hover {
+            background-color: #3A3A3A;
+        }
+
+        .toolbar-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        .toolbar-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .address-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .address-input {
+            width: 100%;
+            padding: 6px 12px;
+            border: 2px solid var(--border-dark);
+            background-color: white;
+            color: var(--text-dark);
+            font-family: 'Cairo Mono', monospace;
+            font-size: 13px;
+            box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .address-input {
+            background-color: #1A1A1A;
+            color: var(--text-dark);
+        }
+
+        .explorer-content {
+            display: flex;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .explorer-sidebar {
+            width: 220px;
+            background-color: #F0F0F0;
+            border-right: 2px solid var(--border-dark);
+            overflow-y: auto;
+            padding: 8px 4px;
+        }
+
+        .dark .explorer-sidebar {
+            background-color: #1F1F1F;
+        }
+
+        .sidebar-tree {
+            font-family: 'Cairo Mono', monospace;
+            font-size: 12px;
+        }
+
+        .tree-item {
+            padding: 2px 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            border-radius: 2px;
+            transition: background-color 0.1s;
+            min-height: 20px;
+        }
+
+        .tree-item:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark .tree-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .tree-item.active {
+            background-color: #B0D4FF;
+            font-weight: bold;
+        }
+
+        .dark .tree-item.active {
+            background-color: #2A4A6A;
+        }
+
+        .tree-icon {
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .tree-label {
+            color: var(--text-dark);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tree-children {
+            margin-left: 20px;
+            margin-top: 0;
+            padding-left: 0;
+            border-left: 1px dotted rgba(0, 0, 0, 0.2);
+            padding-left: 4px;
+        }
+        
+        .dark .tree-children {
+            border-left-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tree-children .tree-item {
+            padding-left: 4px;
+            position: relative;
+        }
+        
+        .tree-children .tree-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 50%;
+            width: 8px;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark .tree-children .tree-item::before {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .explorer-main {
+            flex: 1;
+            background-color: var(--bg-color);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .explorer-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background-color: var(--window-blue);
+            animation: loading 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .explorer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .explorer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .explorer-item:hover {
+            background-color: rgba(0, 162, 232, 0.1);
+            border-color: var(--window-blue);
+            transform: translateY(-2px);
+        }
+
+        .explorer-item-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2));
+        }
+
+        .explorer-item-label {
+            text-align: center;
+            font-family: 'Cairo Mono', monospace;
+            font-size: 12px;
+            color: var(--text-dark);
+            word-break: break-word;
+            max-width: 100px;
+        }
+
+        /* Project Viewer Modal */
+        .viewer-window {
+            background-color: var(--bg-color);
+            border: 4px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 8px 8px 0px var(--border-dark);
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 800px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .viewer-title-bar {
+            background-color: var(--window-blue);
+            border-bottom: 4px solid var(--border-dark);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .viewer-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .viewer-control-btn {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--border-dark);
+            transition: all 0.1s ease;
+        }
+
+        .viewer-control-btn:hover {
+            background-color: #E0E0E0;
+        }
+
+        .dark .viewer-control-btn:hover {
+            background-color: #3A3A3A;
+        }
+
+        .viewer-control-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        .viewer-content {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+            background-color: #F5F5F5;
+        }
+
+        .dark .viewer-content {
+            background-color: #1A1A1A;
+        }
+
+        .viewer-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            padding: 20px;
+        }
+
+        .viewer-image {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border: 2px solid var(--border-dark);
+            box-shadow: 4px 4px 0px var(--border-dark);
+        }
+
+        .viewer-properties {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background-color: var(--bg-color);
+            border-left: 4px solid var(--border-dark);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .properties-title {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        .properties-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .property-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .property-label {
+            font-family: 'Cairo Mono', monospace;
+            font-size: 12px;
+            color: var(--level-locked-text);
+            font-weight: bold;
+        }
+
+        .property-value {
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .property-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 16px;
+            background-color: var(--dialog-orange);
+            color: var(--text-dark);
+            text-decoration: none;
+            border: 2px solid var(--border-dark);
+            box-shadow: 3px 3px 0px var(--border-dark);
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            transition: all 0.1s ease;
+        }
+
+        .property-link:hover {
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
+
+        .viewer-toolbar {
+            background-color: #E8E8E8;
+            border-top: 2px solid var(--border-dark);
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .dark .viewer-toolbar {
+            background-color: #2A2A2A;
+        }
+
+        .viewer-tool-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: 'Cairo Mono', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--border-dark);
+            transition: all 0.1s ease;
+        }
+
+        .viewer-tool-btn:hover {
+            background-color: #D0D0D0;
+        }
+
+        .dark .viewer-tool-btn:hover {
+            background-color: #3A3A3A;
+        }
+
+        .viewer-tool-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
     </style>
 </head>
 
@@ -842,7 +1284,7 @@
                         </div>
 
                         <!-- Level 03: Locked -->
-                        <div class="level-card locked">
+                        <div id="level-3-card" class="level-card locked">
                             <h2 class="font-title text-lg" data-translate-key="missions.level3.title">level 03: the
                                 Toolkit</h2>
                             <p class="mt-2" data-translate-key="missions.level3.desc">Discover my creative arsenal</p>
@@ -851,7 +1293,7 @@
                         </div>
 
                         <!-- Level 04: Locked -->
-                        <div class="level-card locked">
+                        <div id="level-4-card" class="level-card locked">
                             <h2 class="font-title text-lg" data-translate-key="missions.level4.title">level 04: the
                                 Final Portal</h2>
                             <p class="mt-2" data-translate-key="missions.level4.desc">Let's connect and create together
@@ -912,6 +1354,191 @@
 
                 </div>
             </section>
+
+            <!-- PAGE 4: Level 02 - The Playground (File Explorer) -->
+            <section id="page-playground" class="hidden">
+                <div class="flex flex-col gap-0 p-0 md:p-0">
+                    <!-- Header -->
+                    <header class="flex items-center gap-4 px-4 md:px-8 pt-4 md:pt-8 pb-2">
+                        <button id="home-btn-playground"
+                            class="p-2 border-2 border-transparent hover:border-textDark rounded-lg transition-all"
+                            title="Back to Mission Control">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="flex-grow">
+                            <h2 class="font-title text-xl sm:text-2xl md:text-3xl font-bold"
+                                data-translate-key="playground.title">Level 02: The Playground</h2>
+                            <p class="text-sm sm:text-base font-light mt-1" data-translate-key="playground.subtitle">Where ideas turn into visuals</p>
+                        </div>
+                    </header>
+
+                    <!-- File Explorer Window -->
+                    <div class="explorer-window px-4 md:px-8 pb-4 md:pb-8">
+                        <!-- Explorer Toolbar -->
+                        <div class="explorer-toolbar">
+                            <div class="toolbar-buttons">
+                                <button id="explorer-back" class="toolbar-btn" title="Back">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                                <button id="explorer-forward" class="toolbar-btn" title="Forward">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                                <button id="explorer-up" class="toolbar-btn" title="Up">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="address-bar">
+                                <input type="text" id="explorer-address" class="address-input" readonly value="C:\Roumaissa\Portfolio">
+                            </div>
+                        </div>
+
+                        <!-- Explorer Content -->
+                        <div class="explorer-content">
+                            <!-- Sidebar -->
+                            <div class="explorer-sidebar">
+                                <div class="sidebar-tree">
+                                    <div class="tree-item" data-path="C:\Roumaissa">
+                                        <span class="tree-icon">📁</span>
+                                        <span class="tree-label">Roumaissa</span>
+                                    </div>
+                                    <div class="tree-item tree-expanded" data-path="C:\Roumaissa\Portfolio">
+                                        <span class="tree-icon">📁</span>
+                                        <span class="tree-label">Portfolio</span>
+                                    </div>
+                                    <div class="tree-children">
+                                        <div class="tree-item" data-path="C:\Roumaissa\Portfolio\Branding">
+                                            <span class="tree-icon">📁</span>
+                                            <span class="tree-label">Branding</span>
+                                        </div>
+                                        <div class="tree-item" data-path="C:\Roumaissa\Portfolio\Social Media">
+                                            <span class="tree-icon">📁</span>
+                                            <span class="tree-label">Social Media</span>
+                                        </div>
+                                        <div class="tree-item" data-path="C:\Roumaissa\Portfolio\Web Design">
+                                            <span class="tree-icon">📁</span>
+                                            <span class="tree-label">Web Design</span>
+                                        </div>
+                                        <div class="tree-item" data-path="C:\Roumaissa\Portfolio\Illustration">
+                                            <span class="tree-icon">📁</span>
+                                            <span class="tree-label">Illustration</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Main Content Area -->
+                            <div class="explorer-main">
+                                <!-- Loading Bar -->
+                                <div id="explorer-loading" class="explorer-loading hidden">
+                                    <div class="loading-bar">
+                                        <div class="loading-progress"></div>
+                                    </div>
+                                </div>
+
+                                <!-- File Grid -->
+                                <div id="explorer-grid" class="explorer-grid">
+                                    <!-- Content will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Viewer Modal (Windows Picture and Fax Viewer style) -->
+            <div id="project-viewer-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="viewer-window">
+                    <header class="viewer-title-bar">
+                        <span id="viewer-title" class="font-title text-sm">project.brand</span>
+                        <div class="viewer-controls flex">
+                            <button id="viewer-properties-btn" class="viewer-control-btn" title="Properties">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.432 2.753 1 1 0 01-1.415-1.415c.955-.744 1.799-1.587 2.514-2.511a19.047 19.047 0 01-1.415-1.415 1 1 0 011.415-1.415c.218.218.434.44.646.662a18.98 18.98 0 01-1.723-4.78H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L12 11.236 11.618 14z"/>
+                                </svg>
+                            </button>
+                            <button id="viewer-close-btn" class="viewer-control-btn" title="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="viewer-content">
+                        <div id="viewer-image-container" class="viewer-image-container">
+                            <img id="viewer-image" src="" alt="Project Preview" class="viewer-image">
+                        </div>
+                        <div id="viewer-properties" class="viewer-properties hidden">
+                            <div class="properties-content">
+                                <h3 class="properties-title">Properties</h3>
+                                <div class="properties-list">
+                                    <div class="property-item">
+                                        <span class="property-label">Project Name:</span>
+                                        <span id="property-name" class="property-value"></span>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="property-label">Date:</span>
+                                        <span id="property-date" class="property-value"></span>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="property-label">Client:</span>
+                                        <span id="property-client" class="property-value"></span>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="property-label">Category:</span>
+                                        <span id="property-category" class="property-value"></span>
+                                    </div>
+                                    <a id="property-link" href="#" target="_blank" class="property-link">Launch Project →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="viewer-toolbar">
+                        <button id="viewer-zoom-in" class="viewer-tool-btn" title="Zoom In">+</button>
+                        <button id="viewer-zoom-out" class="viewer-tool-btn" title="Zoom Out">-</button>
+                        <button id="viewer-rotate" class="viewer-tool-btn" title="Rotate">↻</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 02 Locked Modal -->
+            <div id="level2-locked-modal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="coming-soon-dialog">
+                    <header class="dialog-title-bar">
+                        <span class="font-title text-sm" data-translate-key="level2.locked.title">level_02_locked.exe</span>
+                        <div class="dialog-controls flex">
+                            <button id="close-level2-locked-btn" aria-label="Close" title="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="dialog-content space-y-4">
+                        <p class="text-lg font-title" data-translate-key="level2.locked.message">Complete Level 01 first to unlock the full experience!</p>
+                        <p class="text-sm" data-translate-key="level2.locked.submessage">Explore The Origin to discover my story and unlock The Playground.</p>
+                        <div class="flex gap-4 mt-6">
+                            <button id="go-to-level1-btn" class="btn-retro btn-primary flex-1"
+                                data-translate-key="level2.locked.btn.level1">Go to Level 01</button>
+                            <button id="emergency-access-btn" class="btn-retro flex-1"
+                                data-translate-key="level2.locked.btn.emergency">Emergency Access</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Coming Soon Modal -->
             <div id="coming-soon-modal"
@@ -995,8 +1622,9 @@
                 'origin.help.skills': '[4] skills      → What powers my design process',
                 'origin.help.toolkit': '[5] toolkit     → My creative weapons of choice',
                 'origin.help.contact': '[6] contact     → Connect with me',
-                'origin.help.exit': '[7] exit        → Return to Mission Control',
-                'origin.help.clear': '[8] clear       → Clear the terminal screen',
+                'origin.help.lang': '[7] lang        → Change system language',
+                'origin.help.exit': '[8] exit        → Return to Mission Control',
+                'origin.help.clear': '[9] clear       → Clear the terminal screen',
                 'origin.whoami': "I'm Roumaisa — a designer who translates ideas into emotions,\nand emotions into visuals.\nPowered by curiosity, color, and a hint of organized chaos ✨",
                 'origin.origin': "Every story starts somewhere… mine began in Sétif, Algeria 🇩🇿\nFrom doodling on notebooks to designing full brand identities —\nmy journey was never planned, just passionately crafted.",
                 'origin.spark': "The spark?\nProbably the first time I realized design could make people *feel*.\nSince then, I\'ve been chasing that feeling — one pixel at a time.",
@@ -1008,6 +1636,21 @@
                 'origin.exit': 'Returning to Mission Control...\nSystem Sync: 25% completed.',
                 'origin.error': 'Command not found.\nEven my creativity module couldn\'t process that.\nTry \'help\' before I start guessing 🤔',
                 'origin.easter.coffee': '☕ Brewing creativity... Done. +15% inspiration.',
+                'origin.lang.title': 'Language Selection System',
+                'origin.lang.available': 'Available languages:',
+                'origin.lang.current': 'Current language: {lang}',
+                'origin.lang.set': 'Language changed to: {lang}',
+                'origin.lang.notavailable': 'Language \'{lang}\' is not available yet.\nAvailable languages: en, fr, ar, it',
+                'origin.lang.usage': 'Usage: lang [language_code]\nExample: lang fr (to switch to French)',
+                'origin.lang.prompt': 'Type the language name or code (or any command to cancel):',
+                'origin.lang.cancelled': 'Language selection cancelled.',
+                'playground.title': 'Level 02: The Playground',
+                'playground.subtitle': 'Where ideas turn into visuals',
+                'level2.locked.title': 'level_02_locked.exe',
+                'level2.locked.message': 'Complete Level 01 first to unlock the full experience!',
+                'level2.locked.submessage': 'Explore The Origin to discover my story and unlock The Playground.',
+                'level2.locked.btn.level1': 'Go to Level 01',
+                'level2.locked.btn.emergency': 'Emergency Access',
                 'coming.soon': 'This level is coming soon! Stay tuned...',
                 'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – story mode edition'
@@ -1056,8 +1699,9 @@
                 'origin.help.skills': '[4] skills      → Ce qui alimente mon processus de conception',
                 'origin.help.toolkit': '[5] toolkit     → Mes armes créatives préférées',
                 'origin.help.contact': '[6] contact     → Connectez-vous avec moi',
-                'origin.help.exit': '[7] exit        → Retour au Centre de Contrôle',
-                'origin.help.clear': '[8] clear       → Effacer l\'écran du terminal',
+                'origin.help.lang': '[7] lang        → Changer la langue du système',
+                'origin.help.exit': '[8] exit        → Retour au Centre de Contrôle',
+                'origin.help.clear': '[9] clear       → Effacer l\'écran du terminal',
                 'origin.whoami': "Je suis Roumaisa — une designer qui traduit les idées en émotions,\net les émotions en visuels.\nAlimentée par la curiosité, la couleur et un brin de chaos organisé ✨",
                 'origin.origin': "Chaque histoire commence quelque part… la mienne a commencé à Sétif, Algérie 🇩🇿\nDu griffonnage sur des cahiers à la conception d\'identités de marque complètes —\nmon voyage n\'a jamais été planifié, juste passionnément créé.",
                 'origin.spark': "L\'étincelle?\nProbablement le moment où j\'ai réalisé que le design pouvait faire *ressentir* aux gens.\nDepuis, je chasse ce sentiment — un pixel à la fois.",
@@ -1069,6 +1713,21 @@
                 'origin.exit': 'Retour au Centre de Contrôle...\nSynchronisation du système : 25% terminée.',
                 'origin.error': 'Commande non trouvée.\nMême mon module de créativité n\'a pas pu traiter cela.\nEssayez \'help\' avant que je commence à deviner 🤔',
                 'origin.easter.coffee': '☕ Infusion de créativité... Fait. +15% d\'inspiration.',
+                'origin.lang.title': 'Système de Sélection de Langue',
+                'origin.lang.available': 'Langues disponibles:',
+                'origin.lang.current': 'Langue actuelle: {lang}',
+                'origin.lang.set': 'Langue changée en: {lang}',
+                'origin.lang.notavailable': 'La langue \'{lang}\' n\'est pas encore disponible.\nLangues disponibles: en, fr, ar, it',
+                'origin.lang.usage': 'Utilisation: lang [code_langue]\nExemple: lang fr (pour passer au français)',
+                'origin.lang.prompt': 'Tapez le nom ou le code de la langue (ou toute commande pour annuler):',
+                'origin.lang.cancelled': 'Sélection de langue annulée.',
+                'playground.title': 'Niveau 02 : Le Terrain de jeu',
+                'playground.subtitle': 'Où les idées deviennent visuels',
+                'level2.locked.title': 'niveau_02_verrouille.exe',
+                'level2.locked.message': 'Complétez le Niveau 01 d\'abord pour débloquer l\'expérience complète!',
+                'level2.locked.submessage': 'Explorez L\'Origine pour découvrir mon histoire et débloquer Le Terrain de jeu.',
+                'level2.locked.btn.level1': 'Aller au Niveau 01',
+                'level2.locked.btn.emergency': 'Accès d\'urgence',
                 'coming.soon': 'Ce niveau arrive bientôt! Restez à l\'écoute...',
                 'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – édition mode histoire'
@@ -1116,8 +1775,9 @@
                 'origin.help.skills': '[4] skills      → ما يشغل عملية تصميمي',
                 'origin.help.toolkit': '[5] toolkit     → أدواتي الإبداعية المفضلة',
                 'origin.help.contact': '[6] contact     → تواصل معي',
-                'origin.help.exit': '[7] exit        → العودة إلى غرفة التحكم',
-                'origin.help.clear': '[8] clear       → امسح شاشة الطرفية',
+                'origin.help.lang': '[7] lang        → تغيير لغة النظام',
+                'origin.help.exit': '[8] exit        → العودة إلى غرفة التحكم',
+                'origin.help.clear': '[9] clear       → امسح شاشة الطرفية',
                 'origin.whoami': "أنا رميسة — مصممة أترجم الأفكار إلى مشاعر،\nوالمشاعر إلى رسوميات.\nمدفوعة بالفضول والألوان وبعض الفوضى المنظمة ✨",
                 'origin.origin': "كل قصة تبدأ من مكان ما... قصتي بدأت من سطيف، الجزائر 🇩🇿\nمن الرسم على دفاتري إلى تصميم هويات ماركات كاملة —\nرحلتي لم تكن مخططة أبداً، فقط مبدعة بشغف.",
                 'origin.spark': "الشرارة؟\nربما أول مرة أدركت أن التصميم يمكنه أن يجعل الناس *يشعرون*.\nمنذ ذلك الحين، أنا أطارد هذا الشعور — بكسل واحد في كل مرة.",
@@ -1129,6 +1789,21 @@
                 'origin.exit': 'العودة إلى غرفة التحكم...\nمزامنة النظام: 25% مكتملة.',
                 'origin.error': 'الأمر غير موجود.\nحتى وحدة الإبداع الخاصة بي لم تستطع معالجة ذلك.\nجرب \'help\' قبل أن أبدأ في التخمين 🤔',
                 'origin.easter.coffee': '☕ تخمير الإبداع... تمّ. +15% إلهام.',
+                'origin.lang.title': 'نظام اختيار اللغة',
+                'origin.lang.available': 'اللغات المتاحة:',
+                'origin.lang.current': 'اللغة الحالية: {lang}',
+                'origin.lang.set': 'تم تغيير اللغة إلى: {lang}',
+                'origin.lang.notavailable': 'اللغة \'{lang}\' غير متاحة بعد.\nاللغات المتاحة: en, fr, ar, it',
+                'origin.lang.usage': 'الاستخدام: lang [رمز_اللغة]\nمثال: lang ar (للتبديل إلى العربية)',
+                'origin.lang.prompt': 'اكتب اسم اللغة أو الرمز (أو أي أمر لإلغاء):',
+                'origin.lang.cancelled': 'تم إلغاء اختيار اللغة.',
+                'playground.title': 'المستوى 02: الملعب',
+                'playground.subtitle': 'أين تتحول الأفكار إلى مرئيات',
+                'level2.locked.title': 'المستوى_02_مقفل.exe',
+                'level2.locked.message': 'أكمل المستوى 01 أولاً لفتح التجربة الكاملة!',
+                'level2.locked.submessage': 'استكشف الأصل لاكتشاف قصتي وفتح الملعب.',
+                'level2.locked.btn.level1': 'اذهب إلى المستوى 01',
+                'level2.locked.btn.emergency': 'وصول طوارئ',
                 'coming.soon': 'هذا المستوى قادم قريباً! ابق متابعاً...',
                 'coming.soon.btn': 'حسناً',
                 'footer.text': '© 2025 رميسة كوسة – إصدار طور القصة'
@@ -1177,6 +1852,7 @@
                 'origin.help.skills': 'skills      → Cosa alimenta il mio processo di progettazione',
                 'origin.help.toolkit': 'toolkit     → Le mie armi creative preferite',
                 'origin.help.contact': 'contact     → Contattami',
+                'origin.help.lang': 'lang        → Cambia la lingua del sistema',
                 'origin.help.exit': 'exit        → Ritorno al Centro di Controllo Missioni',
                 'origin.help.clear': 'clear       → Cancella lo schermo del terminale',
                 'origin.whoami': "Sono Roumaisa — una designer che traduce le idee in emozioni,\ne le emozioni in grafica.\nAlimentata da curiosità, colore e un pizzico di caos organizzato ✨",
@@ -1190,6 +1866,21 @@
                 'origin.exit': 'Ritorno al Centro di Controllo Missioni...\nSincronizzazione del sistema: 25% completata.',
                 'origin.error': 'Comando non trovato.\nNeanche il mio modulo di creatività ha potuto elaborarlo.\nProva \'help\' prima che cominci a indovinare 🤔',
                 'origin.easter.coffee': '☕ Preparazione della creatività... Fatto. +15% ispirazione.',
+                'origin.lang.title': 'Sistema di Selezione Lingua',
+                'origin.lang.available': 'Lingue disponibili:',
+                'origin.lang.current': 'Lingua corrente: {lang}',
+                'origin.lang.set': 'Lingua cambiata in: {lang}',
+                'origin.lang.notavailable': 'La lingua \'{lang}\' non è ancora disponibile.\nLingue disponibili: en, fr, ar, it',
+                'origin.lang.usage': 'Utilizzo: lang [codice_lingua]\nEsempio: lang it (per passare all\'italiano)',
+                'origin.lang.prompt': 'Digita il nome o il codice della lingua (o qualsiasi comando per annullare):',
+                'origin.lang.cancelled': 'Selezione lingua annullata.',
+                'playground.title': 'Livello 02: Il Parco Giochi',
+                'playground.subtitle': 'Dove le idee si trasformano in immagini',
+                'level2.locked.title': 'livello_02_bloccato.exe',
+                'level2.locked.message': 'Completa il Livello 01 prima per sbloccare l\'esperienza completa!',
+                'level2.locked.submessage': 'Esplora L\'Origine per scoprire la mia storia e sbloccare Il Parco Giochi.',
+                'level2.locked.btn.level1': 'Vai al Livello 01',
+                'level2.locked.btn.emergency': 'Accesso di Emergenza',
                 'coming.soon': 'Questo livello arriva presto! Rimani sintonizzato...',
                 'coming.soon.btn': 'OK',
                 'footer.text': '© 2025 Roumaissa Koussa – edizione story mode'
@@ -1218,7 +1909,11 @@
 
             // --- Page Navigation ---
             function showWelcomePage() {
+                // Hide all pages first (one window at a time)
                 pageMissions.classList.add('hidden');
+                pageOrigin.classList.add('hidden');
+                if (pagePlayground) pagePlayground.classList.add('hidden');
+                // Show welcome page
                 pageWelcome.classList.remove('hidden');
                 windowTitleText.dataset.translateKey = 'window.title.welcome';
                 updateWindowTitle(); // Update title on page change
@@ -1245,7 +1940,11 @@
             }
 
             function showMissionsPage() {
+                // Hide all pages first (one window at a time)
                 pageWelcome.classList.add('hidden');
+                pageOrigin.classList.add('hidden');
+                if (pagePlayground) pagePlayground.classList.add('hidden');
+                // Show missions page
                 pageMissions.classList.remove('hidden');
                 windowTitleText.dataset.translateKey = 'window.title.missions';
                 updateWindowTitle(); // Update title on page change
@@ -1257,10 +1956,24 @@
             const terminalOutput = document.getElementById('terminal-output');
             const terminalInput = document.getElementById('terminal-input');
             const homeBtnOrigin = document.getElementById('home-btn-origin');
+            
+            // Language selection mode
+            let isLanguageSelectionMode = false;
+            
+            // Language mapping - all possible ways to write each language
+            const languageMap = {
+                'en': ['en', 'english', 'anglais', 'inglés', 'inglese', 'انجليزي', 'انجليزية', 'إنجليزي', 'إنجليزية', 'eng', 'ang', 'inglish', 'inglish', 'انجليزيه'],
+                'fr': ['fr', 'french', 'français', 'francais', 'frances', 'francese', 'فرنسي', 'فرنسية', 'franco', 'france', 'frensh', 'فرنسيه'],
+                'ar': ['ar', 'arabic', 'arabe', 'arabo', 'árabe', 'عربي', 'عربية', 'العربية', 'العربي', 'arab', 'ara', 'arabik', 'عربيه', 'عربى'],
+                'it': ['it', 'italian', 'italien', 'italiano', 'إيطالي', 'ايطالي', 'إيطالية', 'ايطالية', 'italia', 'italy', 'italien', 'ايطاليه']
+            };
 
             function showOriginPage() {
+                // Hide all pages first (one window at a time)
                 pageWelcome.classList.add('hidden');
                 pageMissions.classList.add('hidden');
+                if (pagePlayground) pagePlayground.classList.add('hidden');
+                // Show origin page
                 pageOrigin.classList.remove('hidden');
                 windowTitleText.dataset.translateKey = 'window.title.missions'; // Keep same title
                 updateWindowTitle();
@@ -1272,9 +1985,281 @@
             }
 
             function showMissionsPageFromOrigin() {
+                // Hide all pages first (one window at a time)
                 pageOrigin.classList.add('hidden');
-                pageMissions.classList.remove('hidden');
                 pageWelcome.classList.add('hidden');
+                if (pagePlayground) pagePlayground.classList.add('hidden');
+                // Show missions page
+                pageMissions.classList.remove('hidden');
+            }
+
+            // PAGE 4: Playground File Explorer
+            const pagePlayground = document.getElementById('page-playground');
+            const homeBtnPlayground = document.getElementById('home-btn-playground');
+            
+            // Portfolio Data Structure
+            const portfolioData = {
+                'C:\\Roumaissa\\Portfolio': {
+                    type: 'folder',
+                    items: [
+                        { name: 'Branding', type: 'folder', path: 'C:\\Roumaissa\\Portfolio\\Branding' },
+                        { name: 'Social Media', type: 'folder', path: 'C:\\Roumaissa\\Portfolio\\Social Media' },
+                        { name: 'Web Design', type: 'folder', path: 'C:\\Roumaissa\\Portfolio\\Web Design' },
+                        { name: 'Illustration', type: 'folder', path: 'C:\\Roumaissa\\Portfolio\\Illustration' }
+                    ]
+                },
+                'C:\\Roumaissa\\Portfolio\\Branding': {
+                    type: 'folder',
+                    items: [
+                        { name: 'brand_identity.brand', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Brand+Identity', date: '2024-01-15', client: 'Tech Startup', category: 'Branding', link: '#' },
+                        { name: 'logo_design.brand', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Logo+Design', date: '2024-02-20', client: 'Local Business', category: 'Branding', link: '#' },
+                        { name: 'corporate_identity.brand', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Corporate+Identity', date: '2024-03-10', client: 'Enterprise', category: 'Branding', link: '#' }
+                    ]
+                },
+                'C:\\Roumaissa\\Portfolio\\Social Media': {
+                    type: 'folder',
+                    items: [
+                        { name: 'instagram_campaign.insta', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Instagram+Campaign', date: '2024-04-05', client: 'Fashion Brand', category: 'Social Media', link: '#' },
+                        { name: 'facebook_ads.social', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Facebook+Ads', date: '2024-05-12', client: 'E-commerce', category: 'Social Media', link: '#' },
+                        { name: 'twitter_banner.social', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Twitter+Banner', date: '2024-06-18', client: 'Tech Company', category: 'Social Media', link: '#' }
+                    ]
+                },
+                'C:\\Roumaissa\\Portfolio\\Web Design': {
+                    type: 'folder',
+                    items: [
+                        { name: 'landing_page.web', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Landing+Page', date: '2024-07-22', client: 'SaaS Company', category: 'Web Design', link: '#' },
+                        { name: 'dashboard_ui.web', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Dashboard+UI', date: '2024-08-30', client: 'Startup', category: 'Web Design', link: '#' },
+                        { name: 'mobile_app.web', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Mobile+App', date: '2024-09-15', client: 'Mobile App', category: 'Web Design', link: '#' }
+                    ]
+                },
+                'C:\\Roumaissa\\Portfolio\\Illustration': {
+                    type: 'folder',
+                    items: [
+                        { name: 'character_design.ill', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Character+Design', date: '2024-10-01', client: 'Game Studio', category: 'Illustration', link: '#' },
+                        { name: 'icon_set.ill', type: 'file', image: 'https://via.placeholder.com/400x300/00A2E8/FFFFFF?text=Icon+Set', date: '2024-11-10', client: 'App Developer', category: 'Illustration', link: '#' },
+                        { name: 'vector_art.ill', type: 'file', image: 'https://via.placeholder.com/400x300/F99D1C/FFFFFF?text=Vector+Art', date: '2024-12-05', client: 'Design Agency', category: 'Illustration', link: '#' }
+                    ]
+                }
+            };
+
+            let currentPath = 'C:\\Roumaissa\\Portfolio';
+            let pathHistory = ['C:\\Roumaissa\\Portfolio'];
+            let historyIndex = 0;
+            let currentZoom = 100;
+
+            function showPlaygroundPage() {
+                // Hide all pages first (one window at a time)
+                pageWelcome.classList.add('hidden');
+                pageMissions.classList.add('hidden');
+                pageOrigin.classList.add('hidden');
+                // Show playground page
+                if (pagePlayground) {
+                    pagePlayground.classList.remove('hidden');
+                    windowTitleText.dataset.translateKey = 'window.title.missions';
+                    updateWindowTitle();
+                    loadFolder(currentPath);
+                }
+            }
+
+            function loadFolder(path) {
+                // Show loading
+                const loadingEl = document.getElementById('explorer-loading');
+                loadingEl.classList.remove('hidden');
+                
+                // Reset loading animation
+                const progressEl = loadingEl.querySelector('.loading-progress');
+                progressEl.style.width = '0%';
+                setTimeout(() => {
+                    progressEl.style.width = '100%';
+                }, 10);
+
+                setTimeout(() => {
+                    loadingEl.classList.add('hidden');
+                    
+                    // Update address bar
+                    const addressInput = document.getElementById('explorer-address');
+                    addressInput.value = path;
+                    
+                    // Update active tree item
+                    document.querySelectorAll('.tree-item').forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.path === path) {
+                            item.classList.add('active');
+                        }
+                    });
+                    
+                    // Load folder content
+                    const folder = portfolioData[path];
+                    const grid = document.getElementById('explorer-grid');
+                    grid.innerHTML = '';
+                    
+                    if (folder && folder.items) {
+                        folder.items.forEach(item => {
+                            const itemEl = document.createElement('div');
+                            itemEl.className = 'explorer-item';
+                            itemEl.dataset.path = item.path || path;
+                            itemEl.dataset.type = item.type;
+                            
+                            if (item.type === 'folder') {
+                                itemEl.innerHTML = `
+                                    <div class="explorer-item-icon">📁</div>
+                                    <div class="explorer-item-label">${item.name}</div>
+                                `;
+                                itemEl.addEventListener('click', () => {
+                                    navigateToFolder(item.path);
+                                });
+                            } else {
+                                const iconMap = {
+                                    'brand': '🎨',
+                                    'insta': '📱',
+                                    'social': '📲',
+                                    'web': '🌐',
+                                    'ill': '✏️'
+                                };
+                                const ext = item.name.split('.').pop();
+                                const icon = iconMap[ext] || '📄';
+                                
+                                itemEl.innerHTML = `
+                                    <div class="explorer-item-icon">${icon}</div>
+                                    <div class="explorer-item-label">${item.name}</div>
+                                `;
+                                itemEl.addEventListener('click', () => {
+                                    openProject(item);
+                                });
+                            }
+                            
+                            grid.appendChild(itemEl);
+                        });
+                    }
+                    
+                    // Update navigation buttons
+                    updateNavigationButtons();
+                }, 500);
+            }
+
+            function navigateToFolder(path) {
+                if (portfolioData[path]) {
+                    // Add to history if not going back/forward
+                    if (path !== pathHistory[historyIndex]) {
+                        pathHistory = pathHistory.slice(0, historyIndex + 1);
+                        pathHistory.push(path);
+                        historyIndex = pathHistory.length - 1;
+                    }
+                    currentPath = path;
+                    loadFolder(path);
+                }
+            }
+
+            function updateNavigationButtons() {
+                const backBtn = document.getElementById('explorer-back');
+                const forwardBtn = document.getElementById('explorer-forward');
+                const upBtn = document.getElementById('explorer-up');
+                
+                backBtn.disabled = historyIndex <= 0;
+                forwardBtn.disabled = historyIndex >= pathHistory.length - 1;
+                
+                const parentPath = currentPath.split('\\').slice(0, -1).join('\\');
+                upBtn.disabled = !portfolioData[parentPath] || parentPath === 'C:\\Roumaissa';
+            }
+
+            function openProject(project) {
+                const modal = document.getElementById('project-viewer-modal');
+                const viewerImage = document.getElementById('viewer-image');
+                const viewerTitle = document.getElementById('viewer-title');
+                const propertyName = document.getElementById('property-name');
+                const propertyDate = document.getElementById('property-date');
+                const propertyClient = document.getElementById('property-client');
+                const propertyCategory = document.getElementById('property-category');
+                const propertyLink = document.getElementById('property-link');
+                
+                viewerImage.src = project.image;
+                viewerTitle.textContent = project.name;
+                propertyName.textContent = project.name.replace(/\.[^.]+$/, '');
+                propertyDate.textContent = project.date;
+                propertyClient.textContent = project.client;
+                propertyCategory.textContent = project.category;
+                propertyLink.href = project.link;
+                
+                currentZoom = 100;
+                viewerImage.style.transform = `scale(${currentZoom / 100})`;
+                
+                modal.classList.remove('hidden');
+            }
+
+            function closeProjectViewer() {
+                const modal = document.getElementById('project-viewer-modal');
+                modal.classList.add('hidden');
+            }
+
+            // File Explorer Event Handlers
+            if (pagePlayground) {
+                document.getElementById('explorer-back')?.addEventListener('click', () => {
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        currentPath = pathHistory[historyIndex];
+                        loadFolder(currentPath);
+                    }
+                });
+
+                document.getElementById('explorer-forward')?.addEventListener('click', () => {
+                    if (historyIndex < pathHistory.length - 1) {
+                        historyIndex++;
+                        currentPath = pathHistory[historyIndex];
+                        loadFolder(currentPath);
+                    }
+                });
+
+                document.getElementById('explorer-up')?.addEventListener('click', () => {
+                    const parentPath = currentPath.split('\\').slice(0, -1).join('\\');
+                    if (portfolioData[parentPath] && parentPath !== 'C:\\Roumaissa') {
+                        navigateToFolder(parentPath);
+                    }
+                });
+
+                document.querySelectorAll('.tree-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const path = item.dataset.path;
+                        if (path && portfolioData[path]) {
+                            navigateToFolder(path);
+                        }
+                    });
+                });
+
+                document.getElementById('viewer-close-btn')?.addEventListener('click', closeProjectViewer);
+                document.getElementById('viewer-properties-btn')?.addEventListener('click', () => {
+                    const properties = document.getElementById('viewer-properties');
+                    properties.classList.toggle('hidden');
+                });
+
+                document.getElementById('viewer-zoom-in')?.addEventListener('click', () => {
+                    currentZoom = Math.min(currentZoom + 25, 200);
+                    document.getElementById('viewer-image').style.transform = `scale(${currentZoom / 100})`;
+                });
+
+                document.getElementById('viewer-zoom-out')?.addEventListener('click', () => {
+                    currentZoom = Math.max(currentZoom - 25, 50);
+                    document.getElementById('viewer-image').style.transform = `scale(${currentZoom / 100})`;
+                });
+
+                document.getElementById('viewer-rotate')?.addEventListener('click', () => {
+                    const img = document.getElementById('viewer-image');
+                    const currentRotate = img.style.transform.match(/rotate\((\d+)deg\)/) ? 
+                        parseInt(img.style.transform.match(/rotate\((\d+)deg\)/)[1]) : 0;
+                    const newRotate = (currentRotate + 90) % 360;
+                    img.style.transform = `${img.style.transform.replace(/rotate\(\d+deg\)/, '')} rotate(${newRotate}deg)`.trim();
+                });
+
+                homeBtnPlayground?.addEventListener('click', () => {
+                    showMissionsPage();
+                });
+
+                // Close modal on outside click
+                document.getElementById('project-viewer-modal')?.addEventListener('click', (e) => {
+                    if (e.target.id === 'project-viewer-modal') {
+                        closeProjectViewer();
+                    }
+                });
             }
 
             // Terminal Boot Sequence
@@ -1324,10 +2309,75 @@
                 return text.replace(/[&<>"']/g, m => map[m]);
             }
 
+            // Function to detect language from any input
+            function detectLanguage(input) {
+                const normalizedInput = input.trim().toLowerCase();
+                for (const [langCode, variants] of Object.entries(languageMap)) {
+                    if (variants.includes(normalizedInput)) {
+                        return langCode;
+                    }
+                }
+                return null;
+            }
+
             // Terminal Command Handler
             function processCommand(input) {
                 const cmd = input.trim().toLowerCase();
-                addTerminalLine(input, true);
+                
+                // If in language selection mode, check if input is a language or another command
+                if (isLanguageSelectionMode) {
+                    // Check if it's another command (not a language selection)
+                    const isOtherCommand = ['help', 'whoami', 'origin', 'spark', 'skills', 'toolkit', 'contact', 'exit', 'clear', 'coffee'].includes(cmd);
+                    
+                    if (isOtherCommand) {
+                        // Cancel language selection mode and process the command normally
+                        isLanguageSelectionMode = false;
+                        addTerminalLine(input, true);
+                        addTerminalLine('');
+                        addTerminalLine(translations[currentLang]['origin.lang.cancelled'] || 'Language selection cancelled.');
+                        addTerminalLine('');
+                        // Process the command (will be handled below)
+                    } else {
+                        // Try to detect language
+                        const detectedLang = detectLanguage(input);
+                        if (detectedLang) {
+                            addTerminalLine(input, true);
+                            addTerminalLine('');
+                            setLanguage(detectedLang);
+                            const langNames = { 'en': 'English', 'fr': 'Français', 'ar': 'العربية', 'it': 'Italiano' };
+                            const langName = langNames[detectedLang] || detectedLang;
+                            addTerminalLine((translations[detectedLang]['origin.lang.set'] || '').replace('{lang}', langName));
+                            isLanguageSelectionMode = false;
+                            addTerminalLine('');
+                            return;
+                        } else {
+                            // Invalid language input - try to suggest similar
+                            addTerminalLine(input, true);
+                            addTerminalLine('');
+                            const inputLower = input.toLowerCase();
+                            let suggestion = '';
+                            
+                            // Simple suggestion logic
+                            if (inputLower.includes('eng') || inputLower.includes('angl')) {
+                                suggestion = '\nDid you mean: english, en?';
+                            } else if (inputLower.includes('fren') || inputLower.includes('fran')) {
+                                suggestion = '\nDid you mean: french, fr, français?';
+                            } else if (inputLower.includes('arab') || inputLower.includes('عرب')) {
+                                suggestion = '\nDid you mean: arabic, ar, عربية?';
+                            } else if (inputLower.includes('ital') || inputLower.includes('ايطال')) {
+                                suggestion = '\nDid you mean: italian, it, italiano?';
+                            }
+                            
+                            addTerminalLine((translations[currentLang]['origin.lang.notavailable'] || '').replace('{lang}', input) + suggestion);
+                            addTerminalLine('');
+                            addTerminalLine(translations[currentLang]['origin.lang.usage'] || '');
+                            addTerminalLine('');
+                            return;
+                        }
+                    }
+                } else {
+                    addTerminalLine(input, true);
+                }
 
                 if (cmd === 'help') {
                     const helpTitle = translations[currentLang]['origin.help.title'] || '';
@@ -1340,6 +2390,7 @@
                     addTerminalLine(translations[currentLang]['origin.help.skills'] || '');
                     addTerminalLine(translations[currentLang]['origin.help.toolkit'] || '');
                     addTerminalLine(translations[currentLang]['origin.help.contact'] || '');
+                    addTerminalLine(translations[currentLang]['origin.help.lang'] || '');
                     addTerminalLine(translations[currentLang]['origin.help.exit'] || '');
                     addTerminalLine(translations[currentLang]['origin.help.clear'] || '');
                     addTerminalLine('----------------------------------------------');
@@ -1363,6 +2414,48 @@
                 } else if (cmd === 'contact') {
                     addTerminalLine('');
                     addTerminalLine(translations[currentLang]['origin.contact'] || '');
+                } else if (cmd.startsWith('lang')) {
+                    addTerminalLine('');
+                    const parts = input.trim().split(/\s+/);
+                    if (parts.length === 1) {
+                        // Enter interactive language selection mode
+                        addTerminalLine(translations[currentLang]['origin.lang.title'] || '');
+                        addTerminalLine('==============================================');
+                        addTerminalLine(translations[currentLang]['origin.lang.available'] || '');
+                        addTerminalLine('');
+                        addTerminalLine('  [1] English (en)');
+                        addTerminalLine('      Examples: english, anglais, انجليزي');
+                        addTerminalLine('');
+                        addTerminalLine('  [2] Français (fr)');
+                        addTerminalLine('      Examples: french, francais, فرنسي');
+                        addTerminalLine('');
+                        addTerminalLine('  [3] العربية (ar)');
+                        addTerminalLine('      Examples: arabic, arabe, عربية');
+                        addTerminalLine('');
+                        addTerminalLine('  [4] Italiano (it)');
+                        addTerminalLine('      Examples: italian, italien, إيطالي');
+                        addTerminalLine('');
+                        addTerminalLine('==============================================');
+                        const langNames = { 'en': 'English', 'fr': 'Français', 'ar': 'العربية', 'it': 'Italiano' };
+                        const currentLangName = langNames[currentLang] || currentLang;
+                        addTerminalLine((translations[currentLang]['origin.lang.current'] || '').replace('{lang}', currentLangName));
+                        addTerminalLine('');
+                        addTerminalLine(translations[currentLang]['origin.lang.prompt'] || 'Type the language name or code (or any command to cancel):');
+                        isLanguageSelectionMode = true;
+                    } else if (parts.length === 2) {
+                        // Direct language change (backward compatibility)
+                        const detectedLang = detectLanguage(parts[1]);
+                        const langNames = { 'en': 'English', 'fr': 'Français', 'ar': 'العربية', 'it': 'Italiano' };
+                        if (detectedLang) {
+                            setLanguage(detectedLang);
+                            const langName = langNames[detectedLang] || detectedLang;
+                            addTerminalLine((translations[detectedLang]['origin.lang.set'] || '').replace('{lang}', langName));
+                        } else {
+                            addTerminalLine((translations[currentLang]['origin.lang.notavailable'] || '').replace('{lang}', parts[1]));
+                        }
+                    } else {
+                        addTerminalLine(translations[currentLang]['origin.lang.usage'] || '');
+                    }
                 } else if (cmd === 'clear') {
                     terminalOutput.innerHTML = '';
                     addTerminalLine(translations[currentLang]['origin.welcome'] || '');
@@ -1389,10 +2482,7 @@
                         if (levelCard2 && levelCard2.classList.contains('locked')) {
                             // Add a custom attribute to mark it as unlocked internally
                             levelCard2.setAttribute('data-unlocked', 'true');
-                            // Add click handler to Level 02
-                            levelCard2.addEventListener('click', () => {
-                                showComingSoonModal();
-                            });
+                            // Click handler is already added on page load
                         }
                         // Update progress (25% for Level 01 completed)
                         updateProgress();
@@ -1419,6 +2509,47 @@
             startMissionBtn.addEventListener('click', showMissionsPage);
             homeBtn.addEventListener('click', showWelcomePage);
             homeBtnOrigin.addEventListener('click', showMissionsPageFromOrigin);
+
+            // Level 02 Locked Modal Handler
+            const level2LockedModal = document.getElementById('level2-locked-modal');
+            const closeLevel2LockedBtn = document.getElementById('close-level2-locked-btn');
+            const goToLevel1Btn = document.getElementById('go-to-level1-btn');
+            const emergencyAccessBtn = document.getElementById('emergency-access-btn');
+
+            function showLevel2LockedModal() {
+                level2LockedModal.classList.remove('hidden');
+            }
+
+            function hideLevel2LockedModal() {
+                level2LockedModal.classList.add('hidden');
+            }
+
+            if (closeLevel2LockedBtn) {
+                closeLevel2LockedBtn.addEventListener('click', hideLevel2LockedModal);
+            }
+
+            if (goToLevel1Btn) {
+                goToLevel1Btn.addEventListener('click', () => {
+                    hideLevel2LockedModal();
+                    showOriginPage();
+                });
+            }
+
+            if (emergencyAccessBtn) {
+                emergencyAccessBtn.addEventListener('click', () => {
+                    hideLevel2LockedModal();
+                    showPlaygroundPage();
+                });
+            }
+
+            // Close modal when clicking outside
+            if (level2LockedModal) {
+                level2LockedModal.addEventListener('click', (e) => {
+                    if (e.target === level2LockedModal) {
+                        hideLevel2LockedModal();
+                    }
+                });
+            }
 
             // Coming Soon Modal Handler
             const comingSoonModal = document.getElementById('coming-soon-modal');
@@ -1462,6 +2593,35 @@
                         level1Card.querySelector('.level-status').classList.add('unlocked');
                     }
                     showOriginPage();
+                });
+            }
+
+            // Level 02 Card Click Handler
+            const level2Card = document.getElementById('level-2-card');
+            if (level2Card) {
+                level2Card.addEventListener('click', () => {
+                    // Check if level is unlocked
+                    if (level2Card.getAttribute('data-unlocked') === 'true' || !level2Card.classList.contains('locked')) {
+                        showPlaygroundPage();
+                    } else {
+                        showLevel2LockedModal();
+                    }
+                });
+            }
+
+            // Level 03 Card Click Handler
+            const level3Card = document.getElementById('level-3-card');
+            if (level3Card) {
+                level3Card.addEventListener('click', () => {
+                    showComingSoonModal();
+                });
+            }
+
+            // Level 04 Card Click Handler
+            const level4Card = document.getElementById('level-4-card');
+            if (level4Card) {
+                level4Card.addEventListener('click', () => {
+                    showComingSoonModal();
                 });
             }
 
