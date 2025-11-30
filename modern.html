@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roumaissa Koussa - Designer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --bg-light: #ffffff;
+            --bg-dark: #050A14;
+            --text-light: #1a1a1a;
+            --text-dark: #FFEFD5;
+            --primary-blue: #00A2E8;
+            --primary-orange: #F99D1C;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--bg-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode nav {
+            background-color: var(--bg-dark);
+            box-shadow: 0 2px 10px rgba(0, 162, 232, 0.1);
+        }
+
+        nav a {
+            color: var(--text-light);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode nav a {
+            color: var(--text-dark);
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--text-dark);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Theme Toggle Button - SVG Icons */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-dark);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Language Select */
+        .lang-select {
+            padding: 8px 14px;
+            border: 1px solid #d0d0d0;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            border-radius: 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        body.dark-mode .lang-select {
+            background-color: var(--bg-dark);
+            border-color: rgba(255, 239, 213, 0.2);
+            color: var(--text-dark);
+        }
+
+        .lang-select:hover,
+        .lang-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        /* Back to Mission Button */
+        .back-to-mission {
+            padding: 10px 20px;
+            border: none;
+            background-color: var(--primary-blue);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .back-to-mission:hover {
+            background-color: #0088CC;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 162, 232, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 40px 20px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode .hero {
+            background: linear-gradient(135deg, #050A14 0%, #0D1520 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 162, 232, 0.15);
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        body.dark-mode .hero-text h1 {
+            color: var(--text-dark);
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 35px;
+            font-weight: 700;
+        }
+
+        body.dark-mode .hero-text .subtitle {
+            color: var(--primary-orange);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 36px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0088CC;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 162, 232, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+
+        body.dark-mode .btn-secondary {
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-light);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            background-color: var(--text-dark);
+            color: var(--text-light);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        body.dark-mode section h2 {
+            color: var(--text-dark);
+        }
+
+        /* About Section */
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        body.dark-mode .about-content {
+            color: #ddd;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .project-card {
+            background: #0D1520;
+            box-shadow: 0 5px 20px rgba(0, 162, 232, 0.15);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 162, 232, 0.2);
+        }
+
+        .project-thumbnail {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #00A2E8, #0088CC);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .project-info h3 {
+            color: var(--text-dark);
+        }
+
+        .project-info p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .project-info p {
+            color: #aaa;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--primary-blue);
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #0088CC;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            transition: border-color 0.3s ease;
+        }
+
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background-color: #0D1520;
+            color: var(--text-dark);
+            border-color: #333;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 162, 232, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        body.dark-mode .social-icon {
+            background-color: #0D1520;
+            color: var(--text-dark);
+            border: 2px solid #333;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        /* Success Message Modal */
+        .success-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            max-width: 500px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        body.dark-mode .success-modal {
+            background-color: #0D1520;
+            color: var(--text-dark);
+        }
+
+        .success-modal.show {
+            display: block;
+        }
+
+        .success-modal h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .success-modal p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .success-modal button {
+            padding: 12px 30px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .success-modal button:hover {
+            background-color: #0088CC;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 50px 20px 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        body.dark-mode footer {
+            background-color: #000;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            text-align: center;
+            color: #bbb;
+        }
+
+        /* Hide sections initially */
+        .page {
+            display: block !important;
+        }
+
+        .page.active {
+            display: block !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-controls {
+                flex-direction: row;
+                gap: 8px;
+            }
+
+            .nav-top {
+                flex-direction: column;
+                gap: 12px;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                order: 3;
+                width: 100%;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modal Overlay -->
+    <div class="modal-overlay"></div>
+
+    <!-- Success Modal -->
+    <div class="success-modal">
+        <h3>🎉 Thank You!</h3>
+        <p>Thank you for your message! I will get back to you as soon as possible. I appreciate you taking the time to
+            reach out!</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-top">
+            <div class="logo-text">
+                <a href="#hero" onclick="smoothScroll('#hero'); return false;">Roumaissa</a>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#hero" onclick="smoothScroll('#hero'); return false;" class="nav-link">Home</a>
+                <a href="#about" onclick="smoothScroll('#about'); return false;" class="nav-link">About</a>
+                <a href="#projects" onclick="smoothScroll('#projects'); return false;" class="nav-link">Projects</a>
+                <a href="#contact" onclick="smoothScroll('#contact'); return false;" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-controls">
+                <!-- Theme Toggle with SVG -->
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+                    <svg id="sunIcon" viewBox="0 0 24 24" style="display: none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg id="moonIcon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Language Select -->
+                <select class="lang-select" id="langSelect" onchange="changeLang(this.value)">
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="ar">العربية</option>
+                    <option value="it">Italiano</option>
+                </select>
+
+                <!-- Back to Mission Button -->
+                <a href="index.html" class="back-to-mission">Back to Mission</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home/Landing Page -->
+    <div id="hero" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="logo.png" alt="Roumaissa Koussa">
+                </div>
+                <div class="hero-text">
+                    <h1>Roumaissa Koussa</h1>
+                    <p class="subtitle">Social Media & Branding Designer</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="smoothScroll('#projects')">View My Projects</button>
+                        <button class="btn btn-secondary" onclick="smoothScroll('#contact')">Hire Me</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section>
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>I'm a passionate designer with expertise in creating compelling visual identities and engaging social
+                    media content. With a focus on branding and social media design, I help businesses tell their
+                    stories through thoughtfully crafted visuals.</p>
+                <p style="margin-top: 20px;">My approach combines strategic thinking with creative execution, ensuring
+                    every design not only looks beautiful but also serves its purpose. Whether you need a complete brand
+                    overhaul or fresh social media content, I'm here to bring your vision to life.</p>
+                <p style="margin-top: 20px;">Let's create something amazing together.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Projects Page -->
+    <div id="projects" class="page">
+        <section>
+            <h2>My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #F99D1C, #FF8C00);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Brand Identity Design</h3>
+                        <p>Complete branding package including logo, color palette, and brand guidelines for a tech
+                            startup.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #00A2E8, #0088CC);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Social Media Campaign</h3>
+                        <p>Instagram content series with 30+ posts for an e-commerce brand's seasonal campaign.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #7C3AED, #6D28D9);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Logo Redesign</h3>
+                        <p>Modern logo redesign for a fashion boutique, maintaining brand heritage while adding
+                            contemporary appeal.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #EC4899, #DB2777);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Visual Storytelling</h3>
+                        <p>Illustrated series for a lifestyle brand's blog, combining custom graphics with compelling
+                            narratives.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #10B981, #059669);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Marketing Materials</h3>
+                        <p>Comprehensive design system for print and digital marketing materials for a corporate client.
+                        </p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div style="background: linear-gradient(135deg, #F59E0B, #D97706);" class="project-thumbnail"></div>
+                    <div class="project-info">
+                        <h3>Packaging Design</h3>
+                        <p>Custom packaging design for an artisan coffee brand that stands out on shelves.</p>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section>
+            <h2>Get In Touch</h2>
+            <div class="contact-wrapper">
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <div>
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="Your first name" required>
+                        </div>
+                        <div>
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Your last name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="What is this about?" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell me more about your project..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="Behance">
+                        <i class="fab fa-behance"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#hero" onclick="smoothScroll('#hero')">Home</a></li>
+                    <li><a href="#about" onclick="smoothScroll('#about')">About Me</a></li>
+                    <li><a href="#projects" onclick="smoothScroll('#projects')">Projects</a></li>
+                    <li><a href="#contact" onclick="smoothScroll('#contact')">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Branding</a></li>
+                    <li><a href="#">Social Media Design</a></li>
+                    <li><a href="#">Logo Design</a></li>
+                    <li><a href="#">Packaging</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Behance</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Roumaissa Koussa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize theme based on system preference
+        function initTheme() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            }
+        }
+
+        // Update theme icon visibility
+        function updateThemeIcon(isDark) {
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            if (isDark) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        // Toggle theme
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            updateThemeIcon(isDark);
+        });
+
+        // Translations data - Complete translations for all content
+        const translations = {
+            en: {
+                // Navigation
+                navHome: 'Home',
+                navAbout: 'About',
+                navProjects: 'Projects',
+                navContact: 'Contact',
+                backToMission: 'Back to Mission',
+
+                // Hero Section
+                heroName: 'Roumaissa Koussa',
+                heroSubtitle: 'Social Media & Branding Designer',
+                viewProjects: 'View My Projects',
+                hirMe: 'Hire Me',
+
+                // About Section
+                aboutTitle: 'About Me',
+                aboutText1: "I turn ideas into visual magic ✨ Branding, social media design, and everything that makes your brand shine!",
+                aboutText2: "Think of me as your creative partner—I speak fluent design and love bringing bold, fun concepts to life.",
+                aboutText3: "Ready to create something awesome? Let's go! 🚀",
+
+                // Projects Section
+                projectsTitle: 'My Projects',
+                project1Title: 'Brand Identity Design',
+                project1Desc: 'Complete branding package including logo, color palette, and brand guidelines for a tech startup.',
+                project2Title: 'Social Media Campaign',
+                project2Desc: "Instagram content series with 30+ posts for an e-commerce brand's seasonal campaign.",
+                project3Title: 'Logo Redesign',
+                project3Desc: 'Modern logo redesign for a fashion boutique, maintaining brand heritage while adding contemporary appeal.',
+                project4Title: 'Visual Storytelling',
+                project4Desc: 'Illustrated series for a lifestyle brand\'s blog, combining custom graphics with compelling narratives.',
+                project5Title: 'Marketing Materials',
+                project5Desc: 'Comprehensive design system for print and digital marketing materials for a corporate client.',
+                project6Title: 'Packaging Design',
+                project6Desc: 'Custom packaging design for an artisan coffee brand that stands out on shelves.',
+                viewProject: 'View Project →',
+
+                // Contact Section
+                contactTitle: 'Get In Touch',
+                firstName: 'First Name',
+                firstNamePlaceholder: 'Your first name',
+                lastName: 'Last Name',
+                lastNamePlaceholder: 'Your last name',
+                email: 'Email',
+                emailPlaceholder: 'your.email@example.com',
+                subject: 'Subject',
+                subjectPlaceholder: 'What is this about?',
+                message: 'Message',
+                messagePlaceholder: 'Tell me more about your project...',
+                sendMessage: 'Send Message',
+
+                // Footer
+                quickLinks: 'Quick Links',
+                services: 'Services',
+                connect: 'Connect',
+                branding: 'Branding',
+                socialMediaDesign: 'Social Media Design',
+                logoDesign: 'Logo Design',
+                packaging: 'Packaging',
+                instagram: 'Instagram',
+                linkedin: 'LinkedIn',
+                twitter: 'Twitter',
+                behance: 'Behance',
+                copyright: '© 2025 Roumaissa Koussa. All rights reserved.',
+
+                // Modal
+                thankYou: 'Thank You!',
+                thankYouMessage: 'Thank you for your message! I will get back to you as soon as possible. I appreciate you taking the time to reach out!'
+            },
+            fr: {
+                // Navigation
+                navHome: 'Accueil',
+                navAbout: 'À propos',
+                navProjects: 'Projets',
+                navContact: 'Contact',
+                backToMission: 'Retour à la Mission',
+
+                // Hero Section
+                heroName: 'Roumaissa Koussa',
+                heroSubtitle: 'Créatrice en Médias Sociaux & Identité Visuelle',
+                viewProjects: 'Voir Mes Projets',
+                hirMe: 'Engagez-moi',
+
+                // About Section
+                aboutTitle: 'À Propos de Moi',
+                aboutText1: "Je transforme les idées en magie visuelle ✨ Branding, design de médias sociaux, et tout ce qui fait briller votre marque!",
+                aboutText2: "Pensez à moi comme votre partenaire créatif—je parle couramment le design et j'adore donner vie à des concepts audacieux et amusants.",
+                aboutText3: "Prêt à créer quelque chose d'incroyable? Allons-y! 🚀",
+
+                // Projects Section
+                projectsTitle: 'Mes Projets',
+                project1Title: 'Conception d\'Identité de Marque',
+                project1Desc: 'Paquet de branding complet incluant logo, palette de couleurs et directives de marque pour une startup technologique.',
+                project2Title: 'Campagne de Médias Sociaux',
+                project2Desc: 'Série de contenu Instagram avec 30+ posts pour une campagne saisonnière de marque e-commerce.',
+                project3Title: 'Refonte de Logo',
+                project3Desc: 'Refonte de logo moderne pour une boutique de mode, maintenant l\'héritage de la marque tout en ajoutant un attrait contemporain.',
+                project4Title: 'Narration Visuelle',
+                project4Desc: 'Série illustrée pour le blog d\'une marque de style de vie, combinant des graphiques personnalisés avec des narratifs convaincants.',
+                project5Title: 'Matériaux de Marketing',
+                project5Desc: 'Système de design complet pour les matériaux de marketing imprimés et numériques d\'un client corporate.',
+                project6Title: 'Conception d\'Emballage',
+                project6Desc: 'Conception d\'emballage personnalisée pour une marque de café artisanal qui se démarque sur les étagères.',
+                viewProject: 'Voir le Projet →',
+
+                // Contact Section
+                contactTitle: 'Contactez-moi',
+                firstName: 'Prénom',
+                firstNamePlaceholder: 'Votre prénom',
+                lastName: 'Nom',
+                lastNamePlaceholder: 'Votre nom',
+                email: 'Email',
+                emailPlaceholder: 'votre.email@example.com',
+                subject: 'Sujet',
+                subjectPlaceholder: 'De quoi s\'agit-il?',
+                message: 'Message',
+                messagePlaceholder: 'Parlez-moi plus de votre projet...',
+                sendMessage: 'Envoyer le Message',
+
+                // Footer
+                quickLinks: 'Liens Rapides',
+                services: 'Services',
+                connect: 'Connectez-vous',
+                branding: 'Branding',
+                socialMediaDesign: 'Conception de Médias Sociaux',
+                logoDesign: 'Conception de Logo',
+                packaging: 'Emballage',
+                instagram: 'Instagram',
+                linkedin: 'LinkedIn',
+                twitter: 'Twitter',
+                behance: 'Behance',
+                copyright: '© 2025 Roumaissa Koussa. Tous droits réservés.',
+
+                // Modal
+                thankYou: 'Merci !',
+                thankYouMessage: 'Merci pour votre message! Je vous recontacterai dans les plus brefs délais. J\'apprécie que vous ayez pris le temps de me contacter!'
+            },
+            ar: {
+                // Navigation
+                navHome: 'الرئيسية',
+                navAbout: 'عن',
+                navProjects: 'المشاريع',
+                navContact: 'تواصل',
+                backToMission: 'العودة إلى المهمة',
+
+                // Hero Section
+                heroName: 'رميسة كوسة',
+                heroSubtitle: 'مصممة وسائط اجتماعية والعلامة التجارية',
+                viewProjects: 'عرض مشاريعي',
+                hirMe: 'اتصل بي',
+
+                // About Section
+                aboutTitle: 'عني',
+                aboutText1: "أحول الأفكار إلى سحر بصري ✨ التصميم والعلامات التجارية، وسائط اجتماعية، وكل شيء يجعل علامتك التجارية تتألق!",
+                aboutText2: "فكر فيّ كشريك إبداعي لك—أتحدث لغة التصميم بطلاقة وأحب تحويل الأفكار الجريئة والممتعة إلى واقع.",
+                aboutText3: "هل أنت جاهز لإنشاء شيء رائع؟ يا هلا! 🚀",
+
+                // Projects Section
+                projectsTitle: 'مشاريعي',
+                project1Title: 'تصميم هوية العلامة التجارية',
+                project1Desc: 'حزمة branding كاملة تتضمن شعار وألوان وإرشادات العلامة التجارية لشركة ناشئة تقنية.',
+                project2Title: 'حملة وسائط اجتماعية',
+                project2Desc: 'سلسلة محتوى Instagram مع 30+ منشور لحملة موسمية لعلامة تجارية للتجارة الإلكترونية.',
+                project3Title: 'إعادة تصميم الشعار',
+                project3Desc: 'إعادة تصميم شعار حديثة لمحل أزياء، مع الحفاظ على التراث والإضافة المعاصرة.',
+                project4Title: 'السرد البصري',
+                project4Desc: 'سلسلة مرسومة لمدونة علامة تجارية لأسلوب الحياة، تجمع بين الرسومات المخصصة والسرد المقنع.',
+                project5Title: 'مواد التسويق',
+                project5Desc: 'نظام تصميم شامل لمواد التسويق المطبوعة والرقمية لعميل شركة.',
+                project6Title: 'تصميم العبوة',
+                project6Desc: 'تصميم عبوة مخصصة لعلامة تجارية لقهوة حرفية تتميز على الرفوف.',
+                viewProject: 'عرض المشروع ←',
+
+                // Contact Section
+                contactTitle: 'تواصل معي',
+                firstName: 'الاسم الأول',
+                firstNamePlaceholder: 'اسمك الأول',
+                lastName: 'الاسم الأخير',
+                lastNamePlaceholder: 'اسمك الأخير',
+                email: 'البريد الإلكتروني',
+                emailPlaceholder: 'your.email@example.com',
+                subject: 'الموضوع',
+                subjectPlaceholder: 'ما الذي يتعلق به؟',
+                message: 'الرسالة',
+                messagePlaceholder: 'أخبرني المزيد عن مشروعك...',
+                sendMessage: 'إرسال الرسالة',
+
+                // Footer
+                quickLinks: 'روابط سريعة',
+                services: 'الخدمات',
+                connect: 'تواصل معي',
+                branding: 'العلامات التجارية',
+                socialMediaDesign: 'تصميم وسائط اجتماعية',
+                logoDesign: 'تصميم الشعار',
+                packaging: 'التغليف',
+                instagram: 'Instagram',
+                linkedin: 'LinkedIn',
+                twitter: 'Twitter',
+                behance: 'Behance',
+                copyright: '© 2025 رميسة كوسة. جميع الحقوق محفوظة.',
+
+                // Modal
+                thankYou: 'شكراً لك!',
+                thankYouMessage: 'شكراً لرسالتك! سأعود إليك في أقرب وقت ممكن. أقدر أنك أخذت الوقت للتواصل معي!'
+            },
+            it: {
+                // Navigation
+                navHome: 'Home',
+                navAbout: 'Chi Sono',
+                navProjects: 'Progetti',
+                navContact: 'Contatti',
+                backToMission: 'Ritorna alla Missione',
+
+                // Hero Section
+                heroName: 'Roumaissa Koussa',
+                heroSubtitle: 'Progettista di Social Media e Identità Visiva',
+                viewProjects: 'Visualizza I Miei Progetti',
+                hirMe: 'Assumimi',
+
+                // About Section
+                aboutTitle: 'Chi Sono',
+                aboutText1: 'Trasformo le idee in magia visiva ✨ Branding, social media design, e tutto quello che fa brillare il tuo marchio!',
+                aboutText2: "Pensami come il tuo partner creativo—parlo il linguaggio del design e amo portare in vita concetti audaci e divertenti.",
+                aboutText3: "Pronto a creare qualcosa di fantastico? Andiamo! 🚀",
+
+                // Projects Section
+                projectsTitle: 'I Miei Progetti',
+                project1Title: 'Progettazione dell\'Identità del Marchio',
+                project1Desc: 'Pacchetto di branding completo che include logo, tavolozza di colori e linee guida del marchio per una startup tecnologica.',
+                project2Title: 'Campagna sui Social Media',
+                project2Desc: 'Serie di contenuti Instagram con 30+ post per una campagna stagionale di un marchio di e-commerce.',
+                project3Title: 'Ridisegno del Logo',
+                project3Desc: 'Ridisegno moderno del logo per una boutique di moda, mantenendo l\'eredità del marchio aggiungendo fascino contemporaneo.',
+                project4Title: 'Narrazione Visiva',
+                project4Desc: 'Serie illustrata per il blog di un marchio lifestyle, combinando elementi grafici personalizzati con racconti convincenti.',
+                project5Title: 'Materiali di Marketing',
+                project5Desc: 'Sistema di design completo per materiali di marketing stampati e digitali per un cliente aziendale.',
+                project6Title: 'Progettazione dell\'Imballaggio',
+                project6Desc: 'Progettazione personalizzata dell\'imballaggio per un marchio di caffè artigianale che si distingue sugli scaffali.',
+                viewProject: 'Visualizza Progetto →',
+
+                // Contact Section
+                contactTitle: 'Contattami',
+                firstName: 'Nome',
+                firstNamePlaceholder: 'Il tuo nome',
+                lastName: 'Cognome',
+                lastNamePlaceholder: 'Il tuo cognome',
+                email: 'Email',
+                emailPlaceholder: 'tua.email@example.com',
+                subject: 'Oggetto',
+                subjectPlaceholder: 'Di cosa si tratta?',
+                message: 'Messaggio',
+                messagePlaceholder: 'Raccontami di più sul tuo progetto...',
+                sendMessage: 'Invia Messaggio',
+
+                // Footer
+                quickLinks: 'Link Rapidi',
+                services: 'Servizi',
+                connect: 'Contattami',
+                branding: 'Branding',
+                socialMediaDesign: 'Progettazione Social Media',
+                logoDesign: 'Progettazione Logo',
+                packaging: 'Imballaggio',
+                instagram: 'Instagram',
+                linkedin: 'LinkedIn',
+                twitter: 'Twitter',
+                behance: 'Behance',
+                copyright: '© 2025 Roumaissa Koussa. Tutti i diritti riservati.',
+
+                // Modal
+                thankYou: 'Grazie!',
+                thankYouMessage: 'Grazie per il tuo messaggio! Ti contatterò al più presto. Apprezzo che tu abbia dedicato il tempo per contattarmi!'
+            }
+        };
+
+        let currentLang = 'en';
+
+        // Change language
+        function changeLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            updateAllTranslations(lang);
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        function updateAllTranslations(lang) {
+            const trans = translations[lang];
+
+            // Update all text content in the page
+            // Navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks[0].textContent = trans.navHome;
+            navLinks[1].textContent = trans.navAbout;
+            navLinks[2].textContent = trans.navProjects;
+            navLinks[3].textContent = trans.navContact;
+
+            // Back to Mission button
+            document.querySelector('.back-to-mission').textContent = trans.backToMission;
+
+            // Hero Section
+            document.querySelector('.hero-text h1').textContent = lang === 'ar' ? trans.heroName : trans.heroName;
+            document.querySelector('.hero-text .subtitle').textContent = trans.heroSubtitle;
+
+            // CTA Buttons
+            const ctaButtons = document.querySelectorAll('.cta-buttons .btn');
+            ctaButtons[0].textContent = trans.viewProjects;
+            ctaButtons[1].textContent = trans.hirMe;
+
+            // About Section
+            const aboutSection = document.querySelector('#about section h2');
+            if (aboutSection) aboutSection.textContent = trans.aboutTitle;
+            const aboutTexts = document.querySelectorAll('.about-content p');
+            if (aboutTexts[0]) aboutTexts[0].textContent = trans.aboutText1;
+            if (aboutTexts[1]) aboutTexts[1].textContent = trans.aboutText2;
+            if (aboutTexts[2]) aboutTexts[2].textContent = trans.aboutText3;
+
+            // Projects Section
+            const projectsSection = document.querySelector('#projects section h2');
+            if (projectsSection) projectsSection.textContent = trans.projectsTitle;
+
+            const projectCards = document.querySelectorAll('.project-card');
+            const projects = [
+                { title: trans.project1Title, desc: trans.project1Desc },
+                { title: trans.project2Title, desc: trans.project2Desc },
+                { title: trans.project3Title, desc: trans.project3Desc },
+                { title: trans.project4Title, desc: trans.project4Desc },
+                { title: trans.project5Title, desc: trans.project5Desc },
+                { title: trans.project6Title, desc: trans.project6Desc }
+            ];
+
+            projectCards.forEach((card, index) => {
+                if (projects[index]) {
+                    card.querySelector('.project-info h3').textContent = projects[index].title;
+                    card.querySelector('.project-info p').textContent = projects[index].desc;
+                    card.querySelector('.project-link').textContent = trans.viewProject;
+                }
+            });
+
+            // Contact Section
+            const contactSection = document.querySelector('#contact section h2');
+            if (contactSection) contactSection.textContent = trans.contactTitle;
+
+            // Contact Form Labels and Placeholders
+            document.getElementById('firstName').previousElementSibling.textContent = trans.firstName;
+            document.getElementById('firstName').placeholder = trans.firstNamePlaceholder;
+            document.getElementById('lastName').previousElementSibling.textContent = trans.lastName;
+            document.getElementById('lastName').placeholder = trans.lastNamePlaceholder;
+            document.getElementById('email').previousElementSibling.textContent = trans.email;
+            document.getElementById('email').placeholder = trans.emailPlaceholder;
+            document.getElementById('subject').previousElementSibling.textContent = trans.subject;
+            document.getElementById('subject').placeholder = trans.subjectPlaceholder;
+            document.getElementById('message').previousElementSibling.textContent = trans.message;
+            document.getElementById('message').placeholder = trans.messagePlaceholder;
+
+            // Send Message Button
+            document.querySelector('.contact-wrapper form button[type="submit"]').textContent = trans.sendMessage;
+
+            // Modal
+            document.querySelector('.success-modal h3').textContent = trans.thankYou;
+            document.querySelector('.success-modal p').textContent = trans.thankYouMessage;
+
+            // Footer
+            const footerSections = document.querySelectorAll('.footer-section h3');
+            const footerTitles = [trans.quickLinks, trans.services, trans.connect];
+            footerSections.forEach((section, index) => {
+                if (footerTitles[index]) section.textContent = footerTitles[index];
+            });
+
+            // Footer links
+            const footerLinks = document.querySelectorAll('.footer-section ul li a');
+            const linkTexts = [
+                trans.navHome, trans.navAbout, trans.navProjects, trans.navContact,
+                trans.branding, trans.socialMediaDesign, trans.logoDesign, trans.packaging,
+                trans.instagram, trans.linkedin, trans.twitter, trans.behance
+            ];
+            footerLinks.forEach((link, index) => {
+                if (linkTexts[index]) link.textContent = linkTexts[index];
+            });
+
+            // Copyright
+            document.querySelector('.footer-bottom p').textContent = trans.copyright;
+        }
+
+        // Load saved language on page load
+        function loadSavedLanguage() {
+            const saved = localStorage.getItem('selectedLanguage') || 'en';
+            document.getElementById('langSelect').value = saved;
+            changeLang(saved);
+        }        // Smooth scroll function
+        function smoothScroll(target) {
+            const element = document.querySelector(target);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Scroll to sections (keep for nav links)
+        function scrollToHome() {
+            smoothScroll('#hero');
+        }
+
+        function scrollToAbout() {
+            smoothScroll('#about');
+        }
+
+        function scrollToProjects() {
+            smoothScroll('#projects');
+        }
+
+        function scrollToContact() {
+            smoothScroll('#contact');
+        }
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Show success modal
+            document.querySelector('.modal-overlay').classList.add('show');
+            document.querySelector('.success-modal').classList.add('show');
+
+            // Reset form
+            document.getElementById('contactForm').reset();
+
+            // Hide modal after 4 seconds
+            setTimeout(closeModal, 4000);
+        }
+
+        function closeModal() {
+            document.querySelector('.modal-overlay').classList.remove('show');
+            document.querySelector('.success-modal').classList.remove('show');
+        }
+
+        // Close modal when clicking overlay
+        document.querySelector('.modal-overlay').addEventListener('click', closeModal);
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            loadSavedLanguage();
+        });
+    </script>
+</body>
+
+</html>

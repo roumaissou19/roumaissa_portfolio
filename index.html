@@ -229,6 +229,32 @@
             color: var(--text-dark);
         }
 
+        /* Reset System Button */
+        .reset-btn {
+            width: auto;
+            min-width: auto;
+            padding: 4px 12px;
+            background-color: #FFA500;
+            color: #000000;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .reset-btn:hover {
+            background-color: #FF8C00;
+            color: #000000;
+        }
+
+        .dark .reset-btn {
+            background-color: #FFA500;
+            color: #000000;
+        }
+
+        .dark .reset-btn:hover {
+            background-color: #FF8C00;
+            color: #000000;
+        }
+
         .window-content {
             background-color: var(--bg-color);
             padding: 24px;
@@ -297,6 +323,96 @@
 
         .coming-soon-dialog .dialog-content {
             padding: 25px;
+        }
+
+        /* Setup Wizard Styling */
+        .setup-wizard-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 600px;
+        }
+
+        .setup-wizard {
+            display: flex;
+            gap: 0;
+            background-color: var(--bg-color);
+            border: 3px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 10px 10px 0px var(--border-dark);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .setup-wizard-banner {
+            background: linear-gradient(135deg, #0066CC 0%, #003399 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            min-width: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            border-right: 3px solid var(--border-dark);
+        }
+
+        .setup-wizard-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .setup-banner-text {
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .setup-wizard-content {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .skills-checklist {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .skill-checkbox-item {
+            padding: 10px;
+            border: 2px solid var(--border-dark);
+            border-radius: 4px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .skill-checkbox-item:hover:not(.cursor-not-allowed) {
+            background-color: rgba(249, 157, 28, 0.1);
+            transform: translateX(3px);
+        }
+
+        .skill-checkbox {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: #F99D1C;
+            cursor: pointer;
+        }
+
+        .space-requirements {
+            background-color: rgba(249, 157, 28, 0.05);
+            padding: 12px;
+            border-radius: 4px;
         }
 
         /* Retro button styling */
@@ -416,6 +532,155 @@
 
         .progress-bar-segment.filled {
             background-color: var(--progress-bar-fill);
+        }
+
+        /* Read-Only Mode (Disabled Progress Bar) */
+        .progress-bar.read-only .progress-bar-segment {
+            background-color: #CCCCCC;
+            border-color: #999999;
+            opacity: 0.6;
+        }
+
+        .dark .progress-bar.read-only .progress-bar-segment {
+            background-color: #4A2A2A;
+            border-color: #8B3A3A;
+        }
+
+        .progress-bar.read-only .progress-bar-segment.filled {
+            background-color: #FF6B6B;
+            border-color: #CC0000;
+        }
+
+        .dark .progress-bar.read-only .progress-bar-segment.filled {
+            background-color: #8B3A3A;
+            border-color: #CC0000;
+        }
+
+        /* Re-Initialize Button */
+        .btn-reinitialize {
+            font-family: 'Cairo Mono', monospace;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--border-dark);
+            transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-reinitialize:hover {
+            background-color: #D0D0D0;
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--border-dark);
+        }
+
+        .dark .btn-reinitialize:hover {
+            background-color: #3A3A3A;
+        }
+
+        .btn-reinitialize:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Complete Level Button */
+        .btn-complete-level {
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid rgba(0, 162, 232, 0.8);
+            background: linear-gradient(135deg, #00A2E8 0%, #0088CC 100%);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0, 162, 232, 0.35);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border-radius: 8px;
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+
+        .btn-complete-level:hover {
+            background: linear-gradient(135deg, #0088CC 0%, #0077BB 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 162, 232, 0.4);
+            animation: none;
+        }
+
+        .dark .btn-complete-level {
+            background: linear-gradient(135deg, #00A2E8 0%, #0088CC 100%);
+        }
+
+        .dark .btn-complete-level:hover {
+            background: linear-gradient(135deg, #0088CC 0%, #0077BB 100%);
+        }
+
+        .btn-complete-level:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 162, 232, 0.25);
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 6px 12px rgba(0, 162, 232, 0.35), 0 0 0px rgba(0, 162, 232, 0);
+            }
+
+            50% {
+                box-shadow: 0 6px 12px rgba(0, 162, 232, 0.35), 0 0 15px rgba(0, 162, 232, 0.5);
+            }
+        }
+
+        /* Success Popup */
+        .success-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--bg-color);
+            border: 3px solid var(--border-dark);
+            box-shadow: 4px 4px 0px var(--border-dark);
+            padding: 24px 32px;
+            z-index: 1000;
+            text-align: center;
+            font-family: 'Cairo Mono', monospace;
+            animation: popup-appear 0.3s ease-out;
+        }
+
+        .dark .success-popup {
+            background-color: var(--bg-color);
+        }
+
+        @keyframes popup-appear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .success-popup h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .success-popup p {
+            font-size: 14px;
+            color: var(--text-dark);
         }
 
         /* Tip */
@@ -673,23 +938,24 @@
         /* File Explorer Styling */
         .explorer-window {
             background-color: var(--bg-color);
-            border: 3px solid var(--border-dark);
-            border-radius: 8px;
-            box-shadow: 6px 6px 0px var(--border-dark);
+            border: 3px solid rgba(0, 162, 232, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 162, 232, 0.2);
             overflow: hidden;
         }
 
         .explorer-toolbar {
-            background-color: #E8E8E8;
-            border-bottom: 2px solid var(--border-dark);
-            padding: 8px;
+            background: linear-gradient(90deg, rgba(255, 250, 240, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+            border-bottom: 3px solid rgba(0, 162, 232, 0.3);
+            padding: 12px 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .dark .explorer-toolbar {
-            background-color: #2A2A2A;
+            background: linear-gradient(90deg, rgba(42, 42, 42, 0.95) 0%, rgba(30, 40, 50, 0.95) 100%);
         }
 
         .toolbar-buttons {
@@ -698,9 +964,9 @@
         }
 
         .toolbar-btn {
-            width: 28px;
-            height: 28px;
-            border: 2px solid var(--border-dark);
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border-dark);
             background-color: var(--bg-color);
             color: var(--text-dark);
             display: flex;
@@ -708,11 +974,14 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.1s ease;
-            box-shadow: 2px 2px 0px var(--border-dark);
+            box-shadow: 3px 3px 0px var(--border-dark);
+            border-radius: 2px;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .toolbar-btn:hover {
-            background-color: #D0D0D0;
+            background-color: #E8E8E8;
         }
 
         .dark .toolbar-btn:hover {
@@ -720,7 +989,7 @@
         }
 
         .toolbar-btn:active {
-            transform: translate(2px, 2px);
+            transform: translate(3px, 3px);
             box-shadow: none;
         }
 
@@ -737,17 +1006,24 @@
 
         .address-input {
             width: 100%;
-            padding: 6px 12px;
-            border: 2px solid var(--border-dark);
-            background-color: white;
+            padding: 8px 12px;
+            border: 2px solid rgba(0, 162, 232, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.95));
             color: var(--text-dark);
             font-family: 'Cairo Mono', monospace;
             font-size: 13px;
-            box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .address-input:focus {
+            border-color: #00A2E8;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(0, 162, 232, 0.1);
         }
 
         .dark .address-input {
-            background-color: #1A1A1A;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(20, 30, 40, 0.95));
             color: var(--text-dark);
         }
 
@@ -755,18 +1031,32 @@
             display: flex;
             height: 600px;
             overflow: hidden;
+            background: linear-gradient(135deg, #FFF8F0 0%, #F0F8FF 50%, #FFE4E1 100%);
         }
 
         .explorer-sidebar {
             width: 220px;
-            background-color: #F0F0F0;
-            border-right: 2px solid var(--border-dark);
+            background: linear-gradient(180deg, #FFFFFF 0%, #F5FBFF 100%);
+            border-right: 2px solid rgba(0, 162, 232, 0.3);
             overflow-y: auto;
-            padding: 8px 4px;
+            padding: 12px 8px;
+            box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.03);
         }
 
         .dark .explorer-sidebar {
-            background-color: #1F1F1F;
+            background: linear-gradient(180deg, #252535 0%, #1a2530 100%);
+        }
+
+        /* Hide sidebar on mobile devices */
+        @media (max-width: 768px) {
+            .explorer-sidebar {
+                display: none;
+            }
+
+            .explorer-content {
+                height: auto;
+                min-height: 400px;
+            }
         }
 
         .sidebar-tree {
@@ -821,16 +1111,16 @@
             border-left: 1px dotted rgba(0, 0, 0, 0.2);
             padding-left: 4px;
         }
-        
+
         .dark .tree-children {
             border-left-color: rgba(255, 255, 255, 0.2);
         }
-        
+
         .tree-children .tree-item {
             padding-left: 4px;
             position: relative;
         }
-        
+
         .tree-children .tree-item::before {
             content: '';
             position: absolute;
@@ -840,7 +1130,7 @@
             height: 1px;
             background-color: rgba(0, 0, 0, 0.2);
         }
-        
+
         .dark .tree-children .tree-item::before {
             background-color: rgba(255, 255, 255, 0.2);
         }
@@ -877,52 +1167,113 @@
         }
 
         @keyframes loading {
-            0% { width: 0%; }
-            100% { width: 100%; }
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
         }
 
+        /* Enhanced Playground Grid with Cute Design */
         .explorer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 24px;
+            padding: 30px;
+            background: linear-gradient(135deg, #FFF8F0 0%, #F0F8FF 50%, #FFE4E1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative stars scattered in background */
+        .explorer-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(2px 2px at 10% 20%, #FFD700, rgba(255, 215, 0, 0)),
+                radial-gradient(2px 2px at 60% 70%, #FFD700, rgba(255, 215, 0, 0)),
+                radial-gradient(1px 1px at 50% 50%, #FFD700, rgba(255, 215, 0, 0)),
+                radial-gradient(1px 1px at 80% 10%, #FFD700, rgba(255, 215, 0, 0)),
+                radial-gradient(2px 2px at 90% 60%, #FFD700, rgba(255, 215, 0, 0)),
+                radial-gradient(1px 1px at 30% 80%, #FFD700, rgba(255, 215, 0, 0));
+            background-size: 200% 200%;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .explorer-main {
+            flex: 1;
+            background-color: transparent;
+            overflow-y: auto;
+            position: relative;
         }
 
         .explorer-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
-            padding: 12px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-            border: 2px solid transparent;
+            padding: 20px 16px;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            background: linear-gradient(145deg, #FFFFFF 0%, #F5FBFF 100%);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(100, 150, 200, 0.15);
+            position: relative;
+            z-index: 2;
         }
 
         .explorer-item:hover {
-            background-color: rgba(0, 162, 232, 0.1);
-            border-color: var(--window-blue);
-            transform: translateY(-2px);
+            transform: translateY(-8px) scale(1.05);
+            background: linear-gradient(145deg, #FFFFFF 0%, #E8F4FF 100%);
+            border-color: rgba(0, 162, 232, 0.6);
+            box-shadow: 0 12px 24px rgba(0, 162, 232, 0.25), 0 6px 12px rgba(100, 150, 200, 0.2);
+        }
+
+        .explorer-item:active {
+            transform: translateY(-4px) scale(1.02);
         }
 
         .explorer-item-icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 8px;
+            width: 72px;
+            height: 72px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2));
+            font-size: 52px;
+            filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.1)) drop-shadow(0px 0px 8px rgba(255, 180, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .explorer-item:hover .explorer-item-icon {
+            transform: scale(1.15) rotate(-5deg);
+            filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.15)) drop-shadow(0px 0px 12px rgba(255, 180, 0, 0.5));
         }
 
         .explorer-item-label {
             text-align: center;
-            font-family: 'Cairo Mono', monospace;
-            font-size: 12px;
-            color: var(--text-dark);
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #231F20;
             word-break: break-word;
-            max-width: 100px;
+            max-width: 120px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .explorer-item:hover .explorer-item-label {
+            color: #00A2E8;
+            font-weight: 700;
         }
 
         /* Project Viewer Modal */
@@ -997,6 +1348,7 @@
             justify-content: center;
             min-height: 400px;
             padding: 20px;
+            position: relative;
         }
 
         .viewer-image {
@@ -1008,68 +1360,143 @@
         }
 
         .viewer-properties {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 300px;
-            height: 100%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 480px;
             background-color: var(--bg-color);
-            border-left: 4px solid var(--border-dark);
-            padding: 20px;
-            overflow-y: auto;
-            box-shadow: -4px 0 8px rgba(0, 0, 0, 0.2);
+            border: 4px solid var(--border-dark);
+            border-radius: 8px;
+            box-shadow: 8px 8px 0px var(--border-dark);
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: none;
+        }
+
+        .viewer-properties.show {
+            display: flex;
+        }
+
+        .dark .viewer-properties {
+            background-color: var(--bg-color);
         }
 
         .properties-title {
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
             font-size: 18px;
-            margin-bottom: 16px;
             color: var(--text-dark);
+            text-align: center;
+            letter-spacing: 0.5px;
+            background-color: var(--window-blue);
+            color: var(--text-dark);
+            border-bottom: 4px solid var(--border-dark);
+            padding: 8px 12px;
+            margin: 0;
         }
 
         .properties-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            padding: 16px;
         }
 
         .property-item {
             display: flex;
             flex-direction: column;
             gap: 4px;
+            padding: 8px 12px;
+            background-color: transparent;
+            border: none;
         }
 
         .property-label {
             font-family: 'Cairo Mono', monospace;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--level-locked-text);
-            font-weight: bold;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .property-value {
             font-family: 'Cairo', sans-serif;
             font-size: 14px;
             color: var(--text-dark);
+            font-weight: 600;
         }
 
         .property-link {
-            display: inline-block;
+            display: block;
             margin-top: 12px;
-            padding: 8px 16px;
+            padding: 10px 20px;
             background-color: var(--dialog-orange);
             color: var(--text-dark);
             text-decoration: none;
-            border: 2px solid var(--border-dark);
-            box-shadow: 3px 3px 0px var(--border-dark);
+            border: 3px solid var(--border-dark);
+            border-radius: 4px;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
+            font-size: 14px;
             transition: all 0.1s ease;
+            text-align: center;
+            box-shadow: 5px 5px 0px var(--border-dark);
+            cursor: pointer;
         }
 
         .property-link:hover {
-            transform: translate(3px, 3px);
+            background-color: #e08e1a;
+        }
+
+        .property-link:active {
+            transform: translate(5px, 5px);
             box-shadow: none;
+        }
+
+        /* Close Details Button */
+        .close-details-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-dark);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.1s ease;
+            box-shadow: 2px 2px 0px var(--border-dark);
+        }
+
+        .close-details-btn:hover {
+            background-color: #E0E0E0;
+        }
+
+        .dark .close-details-btn:hover {
+            background-color: #3A3A3A;
+        }
+
+        .close-details-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        .properties-content {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
         }
 
         .viewer-toolbar {
@@ -1086,17 +1513,21 @@
         }
 
         .viewer-tool-btn {
-            width: 32px;
-            height: 32px;
-            border: 2px solid var(--border-dark);
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-dark);
             background-color: var(--bg-color);
             color: var(--text-dark);
             font-family: 'Cairo Mono', monospace;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 2px 2px 0px var(--border-dark);
+            box-shadow: 3px 3px 0px var(--border-dark);
             transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
         }
 
         .viewer-tool-btn:hover {
@@ -1108,7 +1539,39 @@
         }
 
         .viewer-tool-btn:active {
-            transform: translate(2px, 2px);
+            transform: translate(3px, 3px);
+            box-shadow: none;
+        }
+
+        .show-details-btn {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px;
+            background-color: var(--dialog-orange);
+            color: var(--text-dark);
+            border: 3px solid var(--border-dark);
+            border-radius: 4px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px var(--border-dark);
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .show-details-btn:hover {
+            background-color: #e08e1a;
+        }
+
+        .show-details-btn:active {
+            transform: translateX(-50%) translate(5px, 5px);
             box-shadow: none;
         }
     </style>
@@ -1145,6 +1608,10 @@
                             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
                         </path>
                     </svg>
+                </button>
+                <button id="reset-system-btn" class="title-bar-btn reset-btn" title="Reset System"
+                    data-translate-key="system.reset.tooltip" data-translate-key-attr="title">
+                    <span data-translate-key="system.reset.btn">Reset</span>
                 </button>
             </div>
             <span id="window-title-text" class="title-bar-text font-title"></span>
@@ -1373,9 +1840,29 @@
                         <div class="flex-grow">
                             <h2 class="font-title text-xl sm:text-2xl md:text-3xl font-bold"
                                 data-translate-key="playground.title">Level 02: The Playground</h2>
-                            <p class="text-sm sm:text-base font-light mt-1" data-translate-key="playground.subtitle">Where ideas turn into visuals</p>
+                            <p class="text-sm sm:text-base font-light mt-1" data-translate-key="playground.subtitle">
+                                Where ideas turn into visuals</p>
                         </div>
                     </header>
+
+                    <!-- Read-Only Mode Warning (shown only in Emergency Access) -->
+                    <div id="read-only-warning" class="hidden px-4 md:px-8 pb-4">
+                        <div
+                            class="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border-2 border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                            <div class="flex-grow">
+                                <p class="font-title text-sm sm:text-base text-yellow-800 dark:text-yellow-200"
+                                    data-translate-key="playground.readonly.warning">⚠ SYNC DISABLED: Sequence Bypassed
+                                </p>
+                                <p class="text-xs sm:text-sm text-yellow-700 dark:text-yellow-300 mt-1"
+                                    data-translate-key="playground.readonly.message">Your progress will NOT be saved
+                                    because you skipped Level 01.</p>
+                            </div>
+                            <button id="reinitialize-btn" class="btn-reinitialize flex-shrink-0"
+                                data-translate-key="playground.readonly.reinitialize">
+                                ↻ Re-Initialize Sequence
+                            </button>
+                        </div>
+                    </div>
 
                     <!-- File Explorer Window -->
                     <div class="explorer-window px-4 md:px-8 pb-4 md:pb-8">
@@ -1383,24 +1870,23 @@
                         <div class="explorer-toolbar">
                             <div class="toolbar-buttons">
                                 <button id="explorer-back" class="toolbar-btn" title="Back">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
-                                    </svg>
+                                    ←
                                 </button>
                                 <button id="explorer-forward" class="toolbar-btn" title="Forward">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
+                                    →
                                 </button>
                                 <button id="explorer-up" class="toolbar-btn" title="Up">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
-                                    </svg>
+                                    ↑
                                 </button>
                             </div>
                             <div class="address-bar">
-                                <input type="text" id="explorer-address" class="address-input" readonly value="C:\Roumaissa\Portfolio">
+                                <input type="text" id="explorer-address" class="address-input" readonly
+                                    value="C:\Roumaissa\Portfolio">
                             </div>
+                            <button id="complete-level-btn" class="btn-complete-level hidden"
+                                data-translate-key="playground.complete.btn">
+                                📡 Sync Mission Data
+                            </button>
                         </div>
 
                         <!-- Explorer Content -->
@@ -1457,19 +1943,22 @@
             </section>
 
             <!-- Project Viewer Modal (Windows Picture and Fax Viewer style) -->
-            <div id="project-viewer-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div id="project-viewer-modal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div class="viewer-window">
                     <header class="viewer-title-bar">
                         <span id="viewer-title" class="font-title text-sm">project.brand</span>
                         <div class="viewer-controls flex">
                             <button id="viewer-properties-btn" class="viewer-control-btn" title="Properties">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.432 2.753 1 1 0 01-1.415-1.415c.955-.744 1.799-1.587 2.514-2.511a19.047 19.047 0 01-1.415-1.415 1 1 0 011.415-1.415c.218.218.434.44.646.662a18.98 18.98 0 01-1.723-4.78H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L12 11.236 11.618 14z"/>
+                                    <path
+                                        d="M7 2a1 1 0 011 1v1h3a1 1 0 110 2H9.578a18.87 18.87 0 01-1.724 4.78c.29.354.596.696.914 1.026a1 1 0 11-1.44 1.389c-.188-.196-.373-.396-.554-.6a19.098 19.098 0 01-3.432 2.753 1 1 0 01-1.415-1.415c.955-.744 1.799-1.587 2.514-2.511a19.047 19.047 0 01-1.415-1.415 1 1 0 011.415-1.415c.218.218.434.44.646.662a18.98 18.98 0 01-1.723-4.78H3a1 1 0 110-2h3V3a1 1 0 011-1zm6 6a1 1 0 01.894.553l2.991 5.982a.869.869 0 01.02.037l.99 1.98a1 1 0 11-1.79.895L15.383 16h-4.764l-.724 1.447a1 1 0 11-1.788-.894l.99-1.98.019-.038 2.99-5.982A1 1 0 0113 8zm-1.382 6h2.764L12 11.236 11.618 14z" />
                                 </svg>
                             </button>
                             <button id="viewer-close-btn" class="viewer-control-btn" title="Close">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 18L18 6M6 6l12 12"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             </button>
                         </div>
@@ -1477,46 +1966,219 @@
                     <div class="viewer-content">
                         <div id="viewer-image-container" class="viewer-image-container">
                             <img id="viewer-image" src="" alt="Project Preview" class="viewer-image">
+                            <button id="show-details-trigger-btn" class="show-details-btn"
+                                data-translate-key="project.explore">
+                                <span>Explore Details</span>
+                            </button>
                         </div>
-                        <div id="viewer-properties" class="viewer-properties hidden">
+                        <div id="viewer-properties" class="viewer-properties">
                             <div class="properties-content">
-                                <h3 class="properties-title">Properties</h3>
+                                <button id="close-details-btn" class="close-details-btn" title="Close">
+                                    ✕
+                                </button>
+                                <h3 class="properties-title" data-translate-key="project.details.title">Project Details
+                                </h3>
                                 <div class="properties-list">
                                     <div class="property-item">
-                                        <span class="property-label">Project Name:</span>
+                                        <span class="property-label" data-translate-key="project.name">Project
+                                            Name</span>
                                         <span id="property-name" class="property-value"></span>
                                     </div>
                                     <div class="property-item">
-                                        <span class="property-label">Date:</span>
+                                        <span class="property-label" data-translate-key="project.date">Date</span>
                                         <span id="property-date" class="property-value"></span>
                                     </div>
                                     <div class="property-item">
-                                        <span class="property-label">Client:</span>
+                                        <span class="property-label" data-translate-key="project.client">Client</span>
                                         <span id="property-client" class="property-value"></span>
                                     </div>
                                     <div class="property-item">
-                                        <span class="property-label">Category:</span>
+                                        <span class="property-label"
+                                            data-translate-key="project.category">Category</span>
                                         <span id="property-category" class="property-value"></span>
                                     </div>
-                                    <a id="property-link" href="#" target="_blank" class="property-link">Launch Project →</a>
+                                    <a id="property-link" href="#" target="_blank" class="property-link"
+                                        data-translate-key="project.launch">Launch Project</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="viewer-toolbar">
-                        <button id="viewer-zoom-in" class="viewer-tool-btn" title="Zoom In">+</button>
-                        <button id="viewer-zoom-out" class="viewer-tool-btn" title="Zoom Out">-</button>
+                        <button id="viewer-zoom-in" class="viewer-tool-btn" title="Zoom In">🔍+</button>
+                        <button id="viewer-zoom-out" class="viewer-tool-btn" title="Zoom Out">🔍-</button>
                         <button id="viewer-rotate" class="viewer-tool-btn" title="Rotate">↻</button>
                     </div>
                 </div>
             </div>
+            </section>
+
+            <!-- PAGE 5: Level 03 - The Toolkit (Setup Wizard) -->
+            <section id="page-toolkit" class="hidden">
+                <div class="flex flex-col gap-0 p-0 md:p-0">
+                    <!-- Header -->
+                    <header class="flex items-center gap-4 px-4 md:px-8 pt-4 md:pt-8 pb-2">
+                        <button id="home-btn-toolkit"
+                            class="p-2 border-2 border-transparent hover:border-textDark rounded-lg transition-all"
+                            title="Back to Mission Control">
+                            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="flex-grow">
+                            <h2 class="font-title text-xl sm:text-2xl md:text-3xl font-bold"
+                                data-translate-key="toolkit.title">Level 03: The Toolkit</h2>
+                            <p class="text-sm sm:text-base font-light mt-1" data-translate-key="toolkit.subtitle">
+                                Discover my creative arsenal</p>
+                        </div>
+                    </header>
+
+                    <!-- Setup Wizard Window -->
+                    <div class="setup-wizard-container px-4 md:px-8 pb-4 md:pb-8">
+                        <div class="setup-wizard">
+                            <!-- Left Banner with Avatar -->
+                            <div class="setup-wizard-banner">
+                                <div class="setup-wizard-avatar">
+                                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                                        <!-- Avatar: Girl with hijab and glasses -->
+                                        <circle cx="50" cy="35" r="15" fill="#F4C2A0" />
+                                        <!-- Hijab -->
+                                        <path d="M35 35 Q35 20 50 20 Q65 20 65 35 Q65 40 60 42 L40 42 Q35 40 35 35"
+                                            fill="#8B4513" stroke="black" stroke-width="2" />
+                                        <!-- Face -->
+                                        <circle cx="45" cy="37" r="2" fill="black" />
+                                        <circle cx="55" cy="37" r="2" fill="black" />
+                                        <!-- Glasses -->
+                                        <circle cx="45" cy="36" r="3.5" fill="none" stroke="black" stroke-width="1.5" />
+                                        <circle cx="55" cy="36" r="3.5" fill="none" stroke="black" stroke-width="1.5" />
+                                        <line x1="48.5" y1="36" x2="51.5" y2="36" stroke="black" stroke-width="1.5" />
+                                        <!-- Smile -->
+                                        <path d="M45 42 Q50 44 55 42" fill="none" stroke="black" stroke-width="1.5"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                                <p class="setup-banner-text font-title text-center" data-translate-key="toolkit.banner">
+                                    Roumaissa's Creative Arsenal</p>
+                            </div>
+
+                            <!-- Right Content -->
+                            <div class="setup-wizard-content">
+                                <!-- Title -->
+                                <h3 class="font-title text-lg mb-2" data-translate-key="toolkit.header">Select
+                                    Components to Install</h3>
+                                <p class="text-sm mb-4" data-translate-key="toolkit.subheader">Which creative solutions
+                                    does your brand need right now?</p>
+
+                                <!-- Skills Checklist -->
+                                <div class="skills-checklist space-y-3 mb-6">
+                                    <!-- Skill 1: Visual Identity -->
+                                    <label
+                                        class="skill-checkbox-item flex items-start gap-3 cursor-pointer hover:bg-opacity-50">
+                                        <input type="checkbox" class="skill-checkbox" checked disabled>
+                                        <div class="flex-grow">
+                                            <div class="font-title text-sm" data-translate-key="toolkit.skill1.name">
+                                                Visual Identity System</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400"
+                                                data-translate-key="toolkit.skill1.desc">(Space required: 500MB of pure
+                                                creativity)</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Skill 2: Social Media -->
+                                    <label
+                                        class="skill-checkbox-item flex items-start gap-3 cursor-pointer hover:bg-opacity-50">
+                                        <input type="checkbox" class="skill-checkbox" checked disabled>
+                                        <div class="flex-grow">
+                                            <div class="font-title text-sm" data-translate-key="toolkit.skill2.name">
+                                                Social Media Domination</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400"
+                                                data-translate-key="toolkit.skill2.desc">(Includes: Viral hooks &amp;
+                                                Eye-catching visuals)</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Skill 3: Web Design -->
+                                    <label
+                                        class="skill-checkbox-item flex items-start gap-3 cursor-pointer hover:bg-opacity-50">
+                                        <input type="checkbox" class="skill-checkbox" checked disabled>
+                                        <div class="flex-grow">
+                                            <div class="font-title text-sm" data-translate-key="toolkit.skill3.name">Web
+                                                Design (UI/UX)</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400"
+                                                data-translate-key="toolkit.skill3.desc">(Status: User-friendly
+                                                guaranteed)</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- Skill 4: Boring Designs (disabled) -->
+                                    <label
+                                        class="skill-checkbox-item flex items-start gap-3 cursor-not-allowed opacity-50">
+                                        <input type="checkbox" class="skill-checkbox" disabled>
+                                        <div class="flex-grow">
+                                            <div class="font-title text-sm line-through"
+                                                data-translate-key="toolkit.skill4.name">Boring Designs</div>
+                                            <div class="text-xs text-red-500" data-translate-key="toolkit.skill4.desc">
+                                                (Error: File corrupted, cannot select)</div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Space Requirements -->
+                                <div class="space-requirements border-t pt-3 mb-6 text-xs">
+                                    <div class="flex justify-between mb-2">
+                                        <span data-translate-key="toolkit.space.available">Space Available:</span>
+                                        <span class="font-title"
+                                            data-translate-key="toolkit.space.available.value">Unlimited
+                                            Imagination</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span data-translate-key="toolkit.space.required">Space Required:</span>
+                                        <span class="font-title" data-translate-key="toolkit.space.required.value">Just
+                                            a coffee ☕</span>
+                                    </div>
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div class="mb-6">
+                                    <div class="w-full bg-gray-300 dark:bg-gray-700 border-2 border-textDark rounded"
+                                        style="height: 20px;">
+                                        <div class="bg-orange-500 h-full rounded"
+                                            style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                                            <span class="text-xs font-title text-white">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="flex gap-3 justify-end">
+                                    <button id="toolkit-back-btn" class="btn-retro"
+                                        data-translate-key="toolkit.btn.back">
+                                        &lt; Back
+                                    </button>
+                                    <button id="toolkit-complete-btn" class="btn-retro btn-primary"
+                                        data-translate-key="toolkit.btn.install">
+                                        Install Now
+                                    </button>
+                                    <button id="toolkit-cancel-btn" class="btn-retro opacity-50 cursor-not-allowed"
+                                        disabled data-translate-key="toolkit.btn.cancel">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- Level 02 Locked Modal -->
             <div id="level2-locked-modal"
                 class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div class="coming-soon-dialog">
                     <header class="dialog-title-bar">
-                        <span class="font-title text-sm" data-translate-key="level2.locked.title">level_02_locked.exe</span>
+                        <span class="font-title text-sm"
+                            data-translate-key="level2.locked.title">level_02_locked.exe</span>
                         <div class="dialog-controls flex">
                             <button id="close-level2-locked-btn" aria-label="Close" title="Close">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1528,13 +2190,50 @@
                         </div>
                     </header>
                     <div class="dialog-content space-y-4">
-                        <p class="text-lg font-title" data-translate-key="level2.locked.message">Complete Level 01 first to unlock the full experience!</p>
-                        <p class="text-sm" data-translate-key="level2.locked.submessage">Explore The Origin to discover my story and unlock The Playground.</p>
+                        <p class="text-lg font-title" data-translate-key="level2.locked.message">Complete Level 01 first
+                            to unlock the full experience!</p>
+                        <p class="text-sm" data-translate-key="level2.locked.submessage">Explore The Origin to discover
+                            my story and unlock The Playground.</p>
                         <div class="flex gap-4 mt-6">
                             <button id="go-to-level1-btn" class="btn-retro btn-primary flex-1"
                                 data-translate-key="level2.locked.btn.level1">Go to Level 01</button>
                             <button id="emergency-access-btn" class="btn-retro flex-1"
                                 data-translate-key="level2.locked.btn.emergency">Emergency Access</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level 03 Locked Modal -->
+            <div id="level3-locked-modal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="coming-soon-dialog">
+                    <header class="dialog-title-bar">
+                        <span class="font-title text-sm"
+                            data-translate-key="level3.locked.title">level_03_locked.exe</span>
+                        <div class="dialog-controls flex">
+                            <button id="close-level3-locked-btn" aria-label="Close" title="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="dialog-content space-y-4">
+                        <p id="level3-modal-message" class="text-lg font-title"
+                            data-translate-key="level3.locked.message">Complete Level 02 first
+                            to unlock the full experience!</p>
+                        <p id="level3-modal-submessage" class="text-sm" data-translate-key="level3.locked.submessage">
+                            Explore The Playground to see
+                            my
+                            design projects and unlock The Toolkit.</p>
+                        <div id="level3-modal-buttons" class="flex gap-4 mt-6">
+                            <button id="go-to-level2-btn" class="btn-retro btn-primary flex-1"
+                                data-translate-key="level3.locked.btn.level2">Go to Level 02</button>
+                            <button id="emergency-access-btn-3" class="btn-retro flex-1"
+                                data-translate-key="level3.locked.btn.emergency">Emergency Access</button>
                         </div>
                     </div>
                 </div>
@@ -1562,6 +2261,38 @@
                         <div class="flex gap-4 mt-6">
                             <button id="ok-coming-soon-btn" class="btn-retro btn-primary flex-1"
                                 data-translate-key="coming.soon.btn">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reset System Confirmation Modal -->
+            <div id="reset-confirm-modal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="coming-soon-dialog">
+                    <header class="dialog-title-bar">
+                        <span class="font-title text-sm"
+                            data-translate-key="system.reset.modal.title">reset_system.exe</span>
+                        <div class="dialog-controls flex">
+                            <button id="close-reset-confirm-btn" aria-label="Close" title="Close">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </header>
+                    <div class="dialog-content space-y-4">
+                        <p class="text-lg font-title" data-translate-key="system.reset.modal.message">Are you sure you
+                            want to reset all progress?</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400"
+                            data-translate-key="system.reset.modal.warning">This action cannot be undone.</p>
+                        <div class="flex gap-4 mt-6">
+                            <button id="cancel-reset-btn" class="btn-retro flex-1"
+                                data-translate-key="system.reset.modal.cancel">Cancel</button>
+                            <button id="confirm-reset-btn" class="btn-retro btn-primary flex-1"
+                                data-translate-key="system.reset.modal.confirm">Reset</button>
                         </div>
                     </div>
                 </div>
@@ -1596,6 +2327,13 @@
                 'welcome.dialog.btn.classic': 'Classic view',
                 'missions.title': 'Mission Control — Ready for Deployment ...',
                 'missions.sync.text': 'System Sync: {percent}% completed',
+                'missions.sync.disabled': '⚠ SYNC DISABLED: Sequence Bypassed',
+                'playground.readonly.warning': '⚠ SYNC DISABLED: Sequence Bypassed',
+                'playground.readonly.message': 'Your progress will NOT be saved because you skipped Level 01.',
+                'playground.readonly.reinitialize': '↻ Re-Initialize Sequence',
+                'playground.complete.btn': '📡 Sync Mission Data',
+                'playground.complete.success.title': '✓ Data Uploaded Successfully',
+                'playground.complete.success.message': 'Level 02 completed! Returning to Mission Control...',
                 'missions.level1.title': 'level 01: the origin',
                 'missions.level1.desc': 'Every story starts somewhere.',
                 'missions.level2.title': 'level 02: the Playground',
@@ -1651,9 +2389,58 @@
                 'level2.locked.submessage': 'Explore The Origin to discover my story and unlock The Playground.',
                 'level2.locked.btn.level1': 'Go to Level 01',
                 'level2.locked.btn.emergency': 'Emergency Access',
+                'level3.locked.title': 'level_03_locked.exe',
+                'level3.locked.message': 'Complete Level 02 first to unlock the full experience!',
+                'level3.locked.submessage': 'Explore The Playground to see my design projects and unlock The Toolkit.',
+                'level3.locked.btn.level2': 'Go to Level 02',
+                'level3.locked.btn.emergency': 'Emergency Access',
+                'level3.locked.message.level1': 'You need to complete Level 01 first!',
+                'level3.locked.submessage.level1': 'Start your journey from The Origin to unlock all levels.',
+                'level3.locked.btn.level1': 'Go to Level 01',
+                'level3.locked.message.level2': 'Complete Level 02 to unlock The Toolkit!',
+                'level3.locked.submessage.level2': 'Explore The Playground to see my design projects and unlock The Toolkit.',
+                'level3.locked.message.ready': 'The Toolkit is being prepared...',
+                'level3.locked.submessage.ready': 'This level is coming soon! You\'ve completed all the prerequisite levels.',
                 'coming.soon': 'This level is coming soon! Stay tuned...',
                 'coming.soon.btn': 'OK',
-                'footer.text': '© 2025 Roumaissa Koussa – story mode edition'
+                'footer.text': '© 2025 Roumaissa Koussa – story mode edition',
+                'system.reset.tooltip': '⚠ Reset System',
+                'system.reset.confirm': 'Are you sure you want to reset all progress?',
+                'system.reset.btn': 'Reset',
+                'system.reset.modal.title': 'reset_system.exe',
+                'system.reset.modal.message': 'Are you sure you want to reset all progress?',
+                'system.reset.modal.warning': 'This action cannot be undone.',
+                'system.reset.modal.cancel': 'Cancel',
+                'system.reset.modal.confirm': 'Reset',
+                'project.details.title': 'Project Details',
+                'project.name': 'Project Name',
+                'project.date': 'Date',
+                'project.client': 'Client',
+                'project.category': 'Category',
+                'project.launch': 'Launch Project',
+                'project.explore': 'Explore Details',
+                'toolkit.title': 'Level 03: The Toolkit',
+                'toolkit.subtitle': 'Discover my creative arsenal',
+                'toolkit.banner': 'Roumaissa\'s Creative Arsenal',
+                'toolkit.header': 'Select Components to Install',
+                'toolkit.subheader': 'Which creative solutions does your brand need right now?',
+                'toolkit.skill1.name': 'Visual Identity System',
+                'toolkit.skill1.desc': '(Space required: 500MB of pure creativity)',
+                'toolkit.skill2.name': 'Social Media Domination',
+                'toolkit.skill2.desc': '(Includes: Viral hooks & Eye-catching visuals)',
+                'toolkit.skill3.name': 'Web Design (UI/UX)',
+                'toolkit.skill3.desc': '(Status: User-friendly guaranteed)',
+                'toolkit.skill4.name': 'Boring Designs',
+                'toolkit.skill4.desc': '(Error: File corrupted, cannot select)',
+                'toolkit.space.available': 'Space Available:',
+                'toolkit.space.available.value': 'Unlimited Imagination',
+                'toolkit.space.required': 'Space Required:',
+                'toolkit.space.required.value': 'Just a coffee ☕',
+                'toolkit.btn.back': '< Back',
+                'toolkit.btn.install': 'Install Now',
+                'toolkit.btn.cancel': 'Cancel',
+                'toolkit.complete.success.title': '✓ Installation Complete!',
+                'toolkit.complete.success.message': 'Level 03 completed! Returning to Mission Control...'
             },
             'fr': {
                 'lang.toggle.text': 'FR',
@@ -1673,6 +2460,13 @@
                 'welcome.dialog.btn.classic': 'Vue classique',
                 'missions.title': 'Contrôle de mission — Prêt pour le déploiement ...',
                 'missions.sync.text': 'Synchro système : {percent}% terminée',
+                'missions.sync.disabled': '⚠ SYNCHRO DÉSACTIVÉE : Séquence Contournée',
+                'playground.readonly.warning': '⚠ SYNCHRO DÉSACTIVÉE : Séquence Contournée',
+                'playground.readonly.message': 'Votre progression ne sera PAS sauvegardée car vous avez ignoré le Niveau 01.',
+                'playground.readonly.reinitialize': '↻ Réinitialiser la Séquence',
+                'playground.complete.btn': '📡 Synchroniser les Données de Mission',
+                'playground.complete.success.title': '✓ Données Téléchargées avec Succès',
+                'playground.complete.success.message': 'Niveau 02 terminé ! Retour au Centre de Contrôle...',
                 'missions.level1.title': 'niveau 01 : l\'origine',
                 'missions.level1.desc': 'Chaque histoire commence quelque part.',
                 'missions.level2.title': 'niveau 02 : le Terrain de jeu',
@@ -1728,9 +2522,36 @@
                 'level2.locked.submessage': 'Explorez L\'Origine pour découvrir mon histoire et débloquer Le Terrain de jeu.',
                 'level2.locked.btn.level1': 'Aller au Niveau 01',
                 'level2.locked.btn.emergency': 'Accès d\'urgence',
+                'level3.locked.title': 'niveau_03_verrouille.exe',
+                'level3.locked.message': 'Complétez le Niveau 02 d\'abord pour débloquer l\'expérience complète!',
+                'level3.locked.submessage': 'Explorez Le Terrain de jeu pour voir mes projets de conception et débloquer La Boîte à outils.',
+                'level3.locked.btn.level2': 'Aller au Niveau 02',
+                'level3.locked.btn.emergency': 'Accès d\'urgence',
+                'level3.locked.message.level1': 'Vous devez d\'abord compléter le Niveau 01!',
+                'level3.locked.submessage.level1': 'Commencez votre voyage depuis L\'Origine pour débloquer tous les niveaux.',
+                'level3.locked.btn.level1': 'Aller au Niveau 01',
+                'level3.locked.message.level2': 'Complétez le Niveau 02 pour débloquer La Boîte à outils!',
+                'level3.locked.submessage.level2': 'Explorez Le Terrain de jeu pour voir mes projets de conception et débloquer La Boîte à outils.',
+                'level3.locked.message.ready': 'La Boîte à outils est en préparation...',
+                'level3.locked.submessage.ready': 'Ce niveau arrive bientôt! Vous avez complété tous les niveaux préalables.',
                 'coming.soon': 'Ce niveau arrive bientôt! Restez à l\'écoute...',
                 'coming.soon.btn': 'OK',
-                'footer.text': '© 2025 Roumaissa Koussa – édition mode histoire'
+                'footer.text': '© 2025 Roumaissa Koussa – édition mode histoire',
+                'system.reset.tooltip': '⚠ Réinitialiser le Système',
+                'system.reset.confirm': 'Êtes-vous sûr de vouloir réinitialiser toute la progression ?',
+                'system.reset.btn': 'Reset',
+                'system.reset.modal.title': 'reinitialiser_systeme.exe',
+                'system.reset.modal.message': 'Êtes-vous sûr de vouloir réinitialiser toute la progression ?',
+                'system.reset.modal.warning': 'Cette action ne peut pas être annulée.',
+                'system.reset.modal.cancel': 'Annuler',
+                'system.reset.modal.confirm': 'Réinitialiser',
+                'project.details.title': 'Détails du projet',
+                'project.name': 'Nom du projet',
+                'project.date': 'Date',
+                'project.client': 'Client',
+                'project.category': 'Catégorie',
+                'project.launch': 'Lancer le projet',
+                'project.explore': 'Explorez les détails'
             },
             'ar': {
                 'lang.toggle.text': 'ع',
@@ -1749,6 +2570,13 @@
                 'welcome.dialog.btn.classic': 'العرض الكلاسيكي',
                 'missions.title': 'مركز التحكم — جاهز لللانطلاق ...',
                 'missions.sync.text': 'مزامنة النظام: {percent}% مكتمل',
+                'missions.sync.disabled': '⚠ المزامنة معطلة: تم تجاوز التسلسل',
+                'playground.readonly.warning': '⚠ المزامنة معطلة: تم تجاوز التسلسل',
+                'playground.readonly.message': 'لن يتم حفظ تقدمك لأنك تجاوزت المستوى 01.',
+                'playground.readonly.reinitialize': '↻ إعادة تهيئة التسلسل',
+                'playground.complete.btn': '📡 مزامنة بيانات المهمة',
+                'playground.complete.success.title': '✓ تم رفع البيانات بنجاح',
+                'playground.complete.success.message': 'تم إكمال المستوى 02! العودة إلى غرفة التحكم...',
                 'missions.level1.title': 'المستوى 01: الأصل',
                 'missions.level1.desc': 'كل قصة تبدأ من مكان ما.',
                 'missions.level2.title': 'المستوى 02: الملعب',
@@ -1804,9 +2632,36 @@
                 'level2.locked.submessage': 'استكشف الأصل لاكتشاف قصتي وفتح الملعب.',
                 'level2.locked.btn.level1': 'اذهب إلى المستوى 01',
                 'level2.locked.btn.emergency': 'وصول طوارئ',
+                'level3.locked.title': 'المستوى_03_مقفل.exe',
+                'level3.locked.message': 'أكمل المستوى 02 أولاً لفتح التجربة الكاملة!',
+                'level3.locked.submessage': 'استكشف الملعب لرؤية مشاريعي التصميمية وفتح صندوق الأدوات.',
+                'level3.locked.btn.level2': 'اذهب إلى المستوى 02',
+                'level3.locked.btn.emergency': 'وصول طوارئ',
+                'level3.locked.message.level1': 'يجب عليك إكمال المستوى 01 أولاً!',
+                'level3.locked.submessage.level1': 'ابدأ رحلتك من الأصل لفتح جميع المستويات.',
+                'level3.locked.btn.level1': 'اذهب إلى المستوى 01',
+                'level3.locked.message.level2': 'أكمل المستوى 02 لفتح صندوق الأدوات!',
+                'level3.locked.submessage.level2': 'استكشف الملعب لرؤية مشاريعي التصميمية وفتح صندوق الأدوات.',
+                'level3.locked.message.ready': 'يتم تحضير صندوق الأدوات...',
+                'level3.locked.submessage.ready': 'هذا المستوى قادم قريباً! لقد أكملت جميع المستويات المطلوبة.',
                 'coming.soon': 'هذا المستوى قادم قريباً! ابق متابعاً...',
                 'coming.soon.btn': 'حسناً',
-                'footer.text': '© 2025 رميسة كوسة – إصدار طور القصة'
+                'footer.text': '© 2025 رميسة كوسة – إصدار طور القصة',
+                'system.reset.tooltip': '⚠ إعادة تعيين النظام',
+                'system.reset.confirm': 'هل أنت متأكد أنك تريد إعادة تعيين كل التقدم؟',
+                'system.reset.btn': 'إعادة تعيين',
+                'system.reset.modal.title': 'إعادة_تعيين_النظام.exe',
+                'system.reset.modal.message': 'هل أنت متأكد أنك تريد إعادة تعيين كل التقدم؟',
+                'system.reset.modal.warning': 'لا يمكن التراجع عن هذا الإجراء.',
+                'system.reset.modal.cancel': 'إلغاء',
+                'system.reset.modal.confirm': 'إعادة تعيين',
+                'project.details.title': 'تفاصيل المشروع',
+                'project.name': 'اسم المشروع',
+                'project.date': 'التاريخ',
+                'project.client': 'العميل',
+                'project.category': 'الفئة',
+                'project.launch': 'تشغيل المشروع',
+                'project.explore': 'استكشف التفاصيل'
             },
             'it': {
                 'lang.toggle.text': 'IT',
@@ -1826,6 +2681,13 @@
                 'welcome.dialog.btn.classic': 'Vista classica',
                 'missions.title': 'Centro di Controllo Missione — Pronto per il Lancio ...',
                 'missions.sync.text': 'Sincronizzazione Sistema: {percent}% completata',
+                'missions.sync.disabled': '⚠ SINCRONIZZAZIONE DISATTIVATA: Sequenza Bypassata',
+                'playground.readonly.warning': '⚠ SINCRONIZZAZIONE DISATTIVATA: Sequenza Bypassata',
+                'playground.readonly.message': 'Il tuo progresso NON verrà salvato perché hai saltato il Livello 01.',
+                'playground.readonly.reinitialize': '↻ Reinizializza Sequenza',
+                'playground.complete.btn': '📡 Sincronizza Dati Missione',
+                'playground.complete.success.title': '✓ Dati Caricati con Successo',
+                'playground.complete.success.message': 'Livello 02 completato! Ritorno al Centro di Controllo...',
                 'missions.level1.title': 'livello 01: l\'origine',
                 'missions.level1.desc': 'Ogni storia inizia da qualche parte.',
                 'missions.level2.title': 'livello 02: il Parco Giochi',
@@ -1881,14 +2743,43 @@
                 'level2.locked.submessage': 'Esplora L\'Origine per scoprire la mia storia e sbloccare Il Parco Giochi.',
                 'level2.locked.btn.level1': 'Vai al Livello 01',
                 'level2.locked.btn.emergency': 'Accesso di Emergenza',
+                'level3.locked.title': 'livello_03_bloccato.exe',
+                'level3.locked.message': 'Completa il Livello 02 prima per sbloccare l\'esperienza completa!',
+                'level3.locked.submessage': 'Esplora Il Parco Giochi per vedere i miei progetti di design e sbloccare La Cassetta degli Attrezzi.',
+                'level3.locked.btn.level2': 'Vai al Livello 02',
+                'level3.locked.btn.emergency': 'Accesso di Emergenza',
+                'level3.locked.message.level1': 'Devi prima completare il Livello 01!',
+                'level3.locked.submessage.level1': 'Inizia il tuo viaggio da L\'Origine per sbloccare tutti i livelli.',
+                'level3.locked.btn.level1': 'Vai al Livello 01',
+                'level3.locked.message.level2': 'Completa il Livello 02 per sbloccare La Cassetta degli Attrezzi!',
+                'level3.locked.submessage.level2': 'Esplora Il Parco Giochi per vedere i miei progetti di design e sbloccare La Cassetta degli Attrezzi.',
+                'level3.locked.message.ready': 'La Cassetta degli Attrezzi è in preparazione...',
+                'level3.locked.submessage.ready': 'Questo livello arriva presto! Hai completato tutti i livelli prerequisiti.',
                 'coming.soon': 'Questo livello arriva presto! Rimani sintonizzato...',
                 'coming.soon.btn': 'OK',
-                'footer.text': '© 2025 Roumaissa Koussa – edizione story mode'
+                'footer.text': '© 2025 Roumaissa Koussa – edizione story mode',
+                'system.reset.tooltip': '⚠ Reimposta Sistema',
+                'system.reset.confirm': 'Sei sicuro di voler reimpostare tutto il progresso?',
+                'system.reset.btn': 'Reset',
+                'system.reset.modal.title': 'reimposta_sistema.exe',
+                'system.reset.modal.message': 'Sei sicuro di voler reimpostare tutto il progresso?',
+                'system.reset.modal.warning': 'Questa azione non può essere annullata.',
+                'system.reset.modal.cancel': 'Annulla',
+                'system.reset.modal.confirm': 'Reimposta',
+                'project.details.title': 'Dettagli del progetto',
+                'project.name': 'Nome del progetto',
+                'project.date': 'Data',
+                'project.client': 'Cliente',
+                'project.category': 'Categoria',
+                'project.launch': 'Avvia il progetto',
+                'project.explore': 'Esplora i dettagli'
             }
         };
 
         const languages = ['en', 'fr', 'ar', 'it'];
         let currentLang = 'en';
+        // Global state: track if user entered via Emergency Access (Read-Only Mode)
+        let isReadOnlyMode = false;
 
         document.addEventListener('DOMContentLoaded', () => {
             // Page Elements
@@ -1921,21 +2812,43 @@
 
             // Update progress bar and sync text based on unlocked levels
             function updateProgress() {
+                const progressBar = document.querySelector('.progress-bar');
                 const segments = Array.from(document.querySelectorAll('.progress-bar-segment'));
                 const completedCount = document.querySelectorAll('.level-card.completed').length;
                 const percent = completedCount * 25; // 4 levels -> 25% each
 
-                // Update segments fill
-                segments.forEach((seg, idx) => {
-                    if (idx < completedCount) seg.classList.add('filled');
-                    else seg.classList.remove('filled');
-                });
-
-                // Update the sync text using translation template {percent}
-                const el = document.querySelector('[data-translate-key="missions.sync.text"]');
-                if (el) {
-                    const template = (translations[currentLang] && translations[currentLang]['missions.sync.text']) || '';
-                    el.textContent = template.replace('{percent}', percent);
+                // Check if we're in Read-Only Mode (Emergency Access)
+                if (isReadOnlyMode) {
+                    // Apply read-only styling
+                    if (progressBar) {
+                        progressBar.classList.add('read-only');
+                    }
+                    // Update segments to show disabled state
+                    segments.forEach((seg) => {
+                        seg.classList.remove('filled');
+                    });
+                    // Update the sync text to show disabled message
+                    const el = document.querySelector('[data-translate-key="missions.sync.text"]');
+                    if (el) {
+                        const disabledText = (translations[currentLang] && translations[currentLang]['missions.sync.disabled']) || '⚠ SYNC DISABLED: Sequence Bypassed';
+                        el.textContent = disabledText;
+                    }
+                } else {
+                    // Normal mode - remove read-only styling
+                    if (progressBar) {
+                        progressBar.classList.remove('read-only');
+                    }
+                    // Update segments fill
+                    segments.forEach((seg, idx) => {
+                        if (idx < completedCount) seg.classList.add('filled');
+                        else seg.classList.remove('filled');
+                    });
+                    // Update the sync text using translation template {percent}
+                    const el = document.querySelector('[data-translate-key="missions.sync.text"]');
+                    if (el) {
+                        const template = (translations[currentLang] && translations[currentLang]['missions.sync.text']) || '';
+                        el.textContent = template.replace('{percent}', percent);
+                    }
                 }
             }
 
@@ -1948,7 +2861,132 @@
                 pageMissions.classList.remove('hidden');
                 windowTitleText.dataset.translateKey = 'window.title.missions';
                 updateWindowTitle(); // Update title on page change
+                // Reset read-only mode when returning to missions (normal flow)
+                isReadOnlyMode = false;
+                // Load saved progress from localStorage
+                loadProgressFromStorage();
                 updateProgress();
+            }
+
+            // Load progress from localStorage on page load
+            function loadProgressFromStorage() {
+                // Load Level 01 completion
+                if (localStorage.getItem('level1Completed') === 'true') {
+                    const level1Card = document.getElementById('level-1-card');
+                    if (level1Card) {
+                        level1Card.classList.add('completed');
+                        if (level1Card.classList.contains('locked')) {
+                            level1Card.classList.remove('locked');
+                            level1Card.classList.add('unlocked');
+                            const statusEl = level1Card.querySelector('.level-status');
+                            if (statusEl) {
+                                statusEl.textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                                statusEl.classList.remove('locked');
+                                statusEl.classList.add('unlocked');
+                            }
+                        }
+                    }
+                    // Unlock Level 02
+                    const level2Card = document.getElementById('level-2-card');
+                    if (level2Card) {
+                        level2Card.setAttribute('data-unlocked', 'true');
+                    }
+                }
+                // Load Level 02 completion
+                if (localStorage.getItem('level2Completed') === 'true') {
+                    const level2Card = document.getElementById('level-2-card');
+                    if (level2Card) {
+                        level2Card.classList.add('completed');
+                        if (level2Card.classList.contains('locked')) {
+                            level2Card.classList.remove('locked');
+                            level2Card.classList.add('unlocked');
+                            const statusEl = level2Card.querySelector('.level-status');
+                            if (statusEl) {
+                                statusEl.textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                                statusEl.classList.remove('locked');
+                                statusEl.classList.add('unlocked');
+                            }
+                        }
+                    }
+                    // Level 03 remains locked until Level 03 is completed
+                    // No auto-unlock here - user must complete Level 03 first
+                }
+                // Load Level 03 completion
+                if (localStorage.getItem('level3Completed') === 'true') {
+                    const level3Card = document.getElementById('level-3-card');
+                    if (level3Card) {
+                        level3Card.classList.add('completed');
+                        if (level3Card.classList.contains('locked')) {
+                            level3Card.classList.remove('locked');
+                            level3Card.classList.add('unlocked');
+                            const statusEl = level3Card.querySelector('.level-status');
+                            if (statusEl) {
+                                statusEl.textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                                statusEl.classList.remove('locked');
+                                statusEl.classList.add('unlocked');
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Complete Level 02 function
+            function completeLevel02() {
+                // Show success popup
+                const successPopup = document.createElement('div');
+                successPopup.className = 'success-popup';
+                successPopup.innerHTML = `
+                    <h3 data-translate-key="playground.complete.success.title">✓ Data Uploaded Successfully</h3>
+                    <p data-translate-key="playground.complete.success.message">Level 02 completed! Returning to Mission Control...</p>
+                `;
+                document.body.appendChild(successPopup);
+
+                // Translate popup text
+                const titleEl = successPopup.querySelector('[data-translate-key="playground.complete.success.title"]');
+                const messageEl = successPopup.querySelector('[data-translate-key="playground.complete.success.message"]');
+                if (titleEl && translations[currentLang] && translations[currentLang]['playground.complete.success.title']) {
+                    titleEl.textContent = translations[currentLang]['playground.complete.success.title'];
+                }
+                if (messageEl && translations[currentLang] && translations[currentLang]['playground.complete.success.message']) {
+                    messageEl.textContent = translations[currentLang]['playground.complete.success.message'];
+                }
+
+                // Mark Level 02 as completed
+                const level2Card = document.getElementById('level-2-card');
+                if (level2Card) {
+                    level2Card.classList.add('completed');
+                    if (level2Card.classList.contains('locked')) {
+                        level2Card.classList.remove('locked');
+                        level2Card.classList.add('unlocked');
+                        const statusEl = level2Card.querySelector('.level-status');
+                        if (statusEl) {
+                            statusEl.textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                            statusEl.classList.remove('locked');
+                            statusEl.classList.add('unlocked');
+                        }
+                    }
+                }
+
+                // Level 03 remains locked until Level 03 is completed
+                // Do NOT auto-unlock Level 03 here
+
+                // Save to localStorage
+                localStorage.setItem('level2Completed', 'true');
+
+                // Update progress
+                updateProgress();
+
+                // Hide complete button
+                const completeBtn = document.getElementById('complete-level-btn');
+                if (completeBtn) {
+                    completeBtn.classList.add('hidden');
+                }
+
+                // Redirect to Mission Control after 2 seconds
+                setTimeout(() => {
+                    successPopup.remove();
+                    showMissionsPage();
+                }, 2000);
             }
 
             // PAGE 3: Origin Terminal
@@ -1956,10 +2994,10 @@
             const terminalOutput = document.getElementById('terminal-output');
             const terminalInput = document.getElementById('terminal-input');
             const homeBtnOrigin = document.getElementById('home-btn-origin');
-            
+
             // Language selection mode
             let isLanguageSelectionMode = false;
-            
+
             // Language mapping - all possible ways to write each language
             const languageMap = {
                 'en': ['en', 'english', 'anglais', 'inglés', 'inglese', 'انجليزي', 'انجليزية', 'إنجليزي', 'إنجليزية', 'eng', 'ang', 'inglish', 'inglish', 'انجليزيه'],
@@ -1996,7 +3034,7 @@
             // PAGE 4: Playground File Explorer
             const pagePlayground = document.getElementById('page-playground');
             const homeBtnPlayground = document.getElementById('home-btn-playground');
-            
+
             // Portfolio Data Structure
             const portfolioData = {
                 'C:\\Roumaissa\\Portfolio': {
@@ -2047,7 +3085,10 @@
             let historyIndex = 0;
             let currentZoom = 100;
 
-            function showPlaygroundPage() {
+            function showPlaygroundPage(emergencyAccess = false) {
+                // Set read-only mode if accessed via Emergency Access
+                isReadOnlyMode = emergencyAccess;
+
                 // Hide all pages first (one window at a time)
                 pageWelcome.classList.add('hidden');
                 pageMissions.classList.add('hidden');
@@ -2058,14 +3099,105 @@
                     windowTitleText.dataset.translateKey = 'window.title.missions';
                     updateWindowTitle();
                     loadFolder(currentPath);
+                    // Update progress bar to reflect read-only state
+                    updateProgress();
+                    // Show/hide read-only warning
+                    const readOnlyWarning = document.getElementById('read-only-warning');
+                    if (readOnlyWarning) {
+                        if (isReadOnlyMode) {
+                            readOnlyWarning.classList.remove('hidden');
+                        } else {
+                            readOnlyWarning.classList.add('hidden');
+                        }
+                    }
+                    // Show/hide complete level button (only in normal mode)
+                    const completeBtn = document.getElementById('complete-level-btn');
+                    if (completeBtn) {
+                        if (isReadOnlyMode) {
+                            completeBtn.classList.add('hidden');
+                        } else {
+                            // Check if Level 02 is already completed
+                            const isCompleted = localStorage.getItem('level2Completed') === 'true';
+                            if (!isCompleted) {
+                                completeBtn.classList.remove('hidden');
+                            } else {
+                                completeBtn.classList.add('hidden');
+                            }
+                        }
+                    }
                 }
+            }
+
+            function showToolkitPage() {
+                // Hide all pages
+                pageWelcome.classList.add('hidden');
+                pageMissions.classList.add('hidden');
+                pageOrigin.classList.add('hidden');
+                if (pagePlayground) pagePlayground.classList.add('hidden');
+
+                // Show toolkit page
+                const pageToolkit = document.getElementById('page-toolkit');
+                if (pageToolkit) {
+                    pageToolkit.classList.remove('hidden');
+                    windowTitleText.dataset.translateKey = 'window.title.missions';
+                    updateWindowTitle();
+                }
+            }
+
+            function completeLevel03() {
+                // Show success popup
+                const successPopup = document.createElement('div');
+                successPopup.className = 'success-popup';
+                successPopup.innerHTML = `
+                    <h3 data-translate-key="toolkit.complete.success.title">✓ Installation Complete!</h3>
+                    <p data-translate-key="toolkit.complete.success.message">Level 03 completed! Returning to Mission Control...</p>
+                `;
+                document.body.appendChild(successPopup);
+
+                // Translate popup text
+                const titleEl = successPopup.querySelector('[data-translate-key="toolkit.complete.success.title"]');
+                const messageEl = successPopup.querySelector('[data-translate-key="toolkit.complete.success.message"]');
+                if (titleEl && translations[currentLang] && translations[currentLang]['toolkit.complete.success.title']) {
+                    titleEl.textContent = translations[currentLang]['toolkit.complete.success.title'];
+                }
+                if (messageEl && translations[currentLang] && translations[currentLang]['toolkit.complete.success.message']) {
+                    messageEl.textContent = translations[currentLang]['toolkit.complete.success.message'];
+                }
+
+                // Mark Level 03 as completed
+                const level3Card = document.getElementById('level-3-card');
+                if (level3Card) {
+                    level3Card.classList.add('completed');
+                    if (level3Card.classList.contains('locked')) {
+                        level3Card.classList.remove('locked');
+                        level3Card.classList.add('unlocked');
+                        const statusEl = level3Card.querySelector('.level-status');
+                        if (statusEl) {
+                            statusEl.textContent = translations[currentLang]['missions.level.status.unlocked'] || 'Status: unlocked';
+                            statusEl.classList.remove('locked');
+                            statusEl.classList.add('unlocked');
+                        }
+                    }
+                }
+
+                // Save to localStorage
+                localStorage.setItem('level3Completed', 'true');
+
+                // Update progress
+                updateProgress();
+
+                // Redirect to Mission Control after 2 seconds
+                setTimeout(() => {
+                    successPopup.remove();
+                    showMissionsPage();
+                }, 2000);
             }
 
             function loadFolder(path) {
                 // Show loading
                 const loadingEl = document.getElementById('explorer-loading');
                 loadingEl.classList.remove('hidden');
-                
+
                 // Reset loading animation
                 const progressEl = loadingEl.querySelector('.loading-progress');
                 progressEl.style.width = '0%';
@@ -2075,11 +3207,11 @@
 
                 setTimeout(() => {
                     loadingEl.classList.add('hidden');
-                    
+
                     // Update address bar
                     const addressInput = document.getElementById('explorer-address');
                     addressInput.value = path;
-                    
+
                     // Update active tree item
                     document.querySelectorAll('.tree-item').forEach(item => {
                         item.classList.remove('active');
@@ -2087,19 +3219,19 @@
                             item.classList.add('active');
                         }
                     });
-                    
+
                     // Load folder content
                     const folder = portfolioData[path];
                     const grid = document.getElementById('explorer-grid');
                     grid.innerHTML = '';
-                    
+
                     if (folder && folder.items) {
                         folder.items.forEach(item => {
                             const itemEl = document.createElement('div');
                             itemEl.className = 'explorer-item';
                             itemEl.dataset.path = item.path || path;
                             itemEl.dataset.type = item.type;
-                            
+
                             if (item.type === 'folder') {
                                 itemEl.innerHTML = `
                                     <div class="explorer-item-icon">📁</div>
@@ -2118,7 +3250,7 @@
                                 };
                                 const ext = item.name.split('.').pop();
                                 const icon = iconMap[ext] || '📄';
-                                
+
                                 itemEl.innerHTML = `
                                     <div class="explorer-item-icon">${icon}</div>
                                     <div class="explorer-item-label">${item.name}</div>
@@ -2127,11 +3259,11 @@
                                     openProject(item);
                                 });
                             }
-                            
+
                             grid.appendChild(itemEl);
                         });
                     }
-                    
+
                     // Update navigation buttons
                     updateNavigationButtons();
                 }, 500);
@@ -2154,10 +3286,10 @@
                 const backBtn = document.getElementById('explorer-back');
                 const forwardBtn = document.getElementById('explorer-forward');
                 const upBtn = document.getElementById('explorer-up');
-                
+
                 backBtn.disabled = historyIndex <= 0;
                 forwardBtn.disabled = historyIndex >= pathHistory.length - 1;
-                
+
                 const parentPath = currentPath.split('\\').slice(0, -1).join('\\');
                 upBtn.disabled = !portfolioData[parentPath] || parentPath === 'C:\\Roumaissa';
             }
@@ -2171,7 +3303,7 @@
                 const propertyClient = document.getElementById('property-client');
                 const propertyCategory = document.getElementById('property-category');
                 const propertyLink = document.getElementById('property-link');
-                
+
                 viewerImage.src = project.image;
                 viewerTitle.textContent = project.name;
                 propertyName.textContent = project.name.replace(/\.[^.]+$/, '');
@@ -2179,10 +3311,10 @@
                 propertyClient.textContent = project.client;
                 propertyCategory.textContent = project.category;
                 propertyLink.href = project.link;
-                
+
                 currentZoom = 100;
                 viewerImage.style.transform = `scale(${currentZoom / 100})`;
-                
+
                 modal.classList.remove('hidden');
             }
 
@@ -2227,9 +3359,23 @@
                 });
 
                 document.getElementById('viewer-close-btn')?.addEventListener('click', closeProjectViewer);
+
+                // Show Details Button - New Prominent Button
+                document.getElementById('show-details-trigger-btn')?.addEventListener('click', () => {
+                    const properties = document.getElementById('viewer-properties');
+                    properties.classList.toggle('show');
+                });
+
+                // Properties Button (alternative way to show details)
                 document.getElementById('viewer-properties-btn')?.addEventListener('click', () => {
                     const properties = document.getElementById('viewer-properties');
-                    properties.classList.toggle('hidden');
+                    properties.classList.toggle('show');
+                });
+
+                // Close Details Button
+                document.getElementById('close-details-btn')?.addEventListener('click', () => {
+                    const properties = document.getElementById('viewer-properties');
+                    properties.classList.remove('show');
                 });
 
                 document.getElementById('viewer-zoom-in')?.addEventListener('click', () => {
@@ -2244,11 +3390,32 @@
 
                 document.getElementById('viewer-rotate')?.addEventListener('click', () => {
                     const img = document.getElementById('viewer-image');
-                    const currentRotate = img.style.transform.match(/rotate\((\d+)deg\)/) ? 
+                    const currentRotate = img.style.transform.match(/rotate\((\d+)deg\)/) ?
                         parseInt(img.style.transform.match(/rotate\((\d+)deg\)/)[1]) : 0;
                     const newRotate = (currentRotate + 90) % 360;
                     img.style.transform = `${img.style.transform.replace(/rotate\(\d+deg\)/, '')} rotate(${newRotate}deg)`.trim();
                 });
+
+                // Re-Initialize Button Handler (for Read-Only Mode)
+                const reinitializeBtn = document.getElementById('reinitialize-btn');
+                if (reinitializeBtn) {
+                    reinitializeBtn.addEventListener('click', () => {
+                        // Reset read-only mode
+                        isReadOnlyMode = false;
+                        // Go back to Level 01 (The Origin)
+                        showOriginPage();
+                    });
+                }
+
+                // Complete Level 02 Button Handler
+                const completeLevelBtn = document.getElementById('complete-level-btn');
+                if (completeLevelBtn) {
+                    completeLevelBtn.addEventListener('click', () => {
+                        if (!isReadOnlyMode) {
+                            completeLevel02();
+                        }
+                    });
+                }
 
                 homeBtnPlayground?.addEventListener('click', () => {
                     showMissionsPage();
@@ -2323,12 +3490,12 @@
             // Terminal Command Handler
             function processCommand(input) {
                 const cmd = input.trim().toLowerCase();
-                
+
                 // If in language selection mode, check if input is a language or another command
                 if (isLanguageSelectionMode) {
                     // Check if it's another command (not a language selection)
                     const isOtherCommand = ['help', 'whoami', 'origin', 'spark', 'skills', 'toolkit', 'contact', 'exit', 'clear', 'coffee'].includes(cmd);
-                    
+
                     if (isOtherCommand) {
                         // Cancel language selection mode and process the command normally
                         isLanguageSelectionMode = false;
@@ -2356,7 +3523,7 @@
                             addTerminalLine('');
                             const inputLower = input.toLowerCase();
                             let suggestion = '';
-                            
+
                             // Simple suggestion logic
                             if (inputLower.includes('eng') || inputLower.includes('angl')) {
                                 suggestion = '\nDid you mean: english, en?';
@@ -2367,7 +3534,7 @@
                             } else if (inputLower.includes('ital') || inputLower.includes('ايطال')) {
                                 suggestion = '\nDid you mean: italian, it, italiano?';
                             }
-                            
+
                             addTerminalLine((translations[currentLang]['origin.lang.notavailable'] || '').replace('{lang}', input) + suggestion);
                             addTerminalLine('');
                             addTerminalLine(translations[currentLang]['origin.lang.usage'] || '');
@@ -2468,6 +3635,8 @@
                         // Mark Level 01 as completed (for progress) and change to unlocked visually
                         if (level1Card && !level1Card.classList.contains('completed')) {
                             level1Card.classList.add('completed');
+                            // Save to localStorage
+                            localStorage.setItem('level1Completed', 'true');
                         }
                         // Change Level 01 from locked to unlocked visually
                         if (level1Card && level1Card.classList.contains('locked')) {
@@ -2538,7 +3707,7 @@
             if (emergencyAccessBtn) {
                 emergencyAccessBtn.addEventListener('click', () => {
                     hideLevel2LockedModal();
-                    showPlaygroundPage();
+                    showPlaygroundPage(true); // Pass true to indicate Emergency Access
                 });
             }
 
@@ -2547,6 +3716,96 @@
                 level2LockedModal.addEventListener('click', (e) => {
                     if (e.target === level2LockedModal) {
                         hideLevel2LockedModal();
+                    }
+                });
+            }
+
+            // Level 03 Locked Modal Handler
+            const level3LockedModal = document.getElementById('level3-locked-modal');
+            const closeLevel3LockedBtn = document.getElementById('close-level3-locked-btn');
+            const goToLevel2Btn = document.getElementById('go-to-level2-btn');
+            const emergencyAccessBtn3 = document.getElementById('emergency-access-btn-3');
+            const level3ModalMessage = document.getElementById('level3-modal-message');
+            const level3ModalSubmessage = document.getElementById('level3-modal-submessage');
+            const level3ModalButtons = document.getElementById('level3-modal-buttons');
+
+            function showLevel3LockedModal() {
+                // Check completion status
+                const level1Completed = localStorage.getItem('level1Completed') === 'true';
+                const level2Completed = localStorage.getItem('level2Completed') === 'true';
+
+                // Clear previous buttons
+                level3ModalButtons.innerHTML = '';
+
+                if (!level1Completed && !level2Completed) {
+                    // User hasn't completed Level 01 or 02 - suggest starting from Level 01
+                    level3ModalMessage.textContent = translations[currentLang]['level3.locked.message.level1'] || 'You need to complete Level 01 first!';
+                    level3ModalSubmessage.textContent = translations[currentLang]['level3.locked.submessage.level1'] || 'Start your journey from The Origin to unlock all levels.';
+
+                    const goToLevel1Btn = document.createElement('button');
+                    goToLevel1Btn.className = 'btn-retro btn-primary flex-1';
+                    goToLevel1Btn.textContent = translations[currentLang]['level3.locked.btn.level1'] || 'Go to Level 01';
+                    goToLevel1Btn.addEventListener('click', () => {
+                        hideLevel3LockedModal();
+                        showOriginPage();
+                    });
+
+                    const emergencyBtn = document.createElement('button');
+                    emergencyBtn.className = 'btn-retro flex-1';
+                    emergencyBtn.textContent = translations[currentLang]['level3.locked.btn.emergency'] || 'Emergency Access';
+                    emergencyBtn.addEventListener('click', () => {
+                        hideLevel3LockedModal();
+                        showComingSoonModal();
+                    });
+
+                    level3ModalButtons.appendChild(goToLevel1Btn);
+                    level3ModalButtons.appendChild(emergencyBtn);
+                } else if (level1Completed && !level2Completed) {
+                    // User completed Level 01 but not 02 - suggest Level 02
+                    level3ModalMessage.textContent = translations[currentLang]['level3.locked.message.level2'] || 'Complete Level 02 to unlock The Toolkit!';
+                    level3ModalSubmessage.textContent = translations[currentLang]['level3.locked.submessage.level2'] || 'Explore The Playground to see my design projects and unlock The Toolkit.';
+
+                    const goToLevel2Btn2 = document.createElement('button');
+                    goToLevel2Btn2.className = 'btn-retro btn-primary flex-1';
+                    goToLevel2Btn2.textContent = translations[currentLang]['level3.locked.btn.level2'] || 'Go to Level 02';
+                    goToLevel2Btn2.addEventListener('click', () => {
+                        hideLevel3LockedModal();
+                        showPlaygroundPage(false);
+                    });
+
+                    const emergencyBtn = document.createElement('button');
+                    emergencyBtn.className = 'btn-retro flex-1';
+                    emergencyBtn.textContent = translations[currentLang]['level3.locked.btn.emergency'] || 'Emergency Access';
+                    emergencyBtn.addEventListener('click', () => {
+                        hideLevel3LockedModal();
+                        showComingSoonModal();
+                    });
+
+                    level3ModalButtons.appendChild(goToLevel2Btn2);
+                    level3ModalButtons.appendChild(emergencyBtn);
+                } else if (level1Completed && level2Completed) {
+                    // User completed both levels - show coming soon directly
+                    level3LockedModal.classList.add('hidden');
+                    showComingSoonModal();
+                    return;
+                }
+
+                level3LockedModal.classList.remove('hidden');
+            }
+
+            function hideLevel3LockedModal() {
+                level3LockedModal.classList.add('hidden');
+            }
+
+            if (closeLevel3LockedBtn) {
+                closeLevel3LockedBtn.addEventListener('click', hideLevel3LockedModal);
+            }
+
+            // Close modal when clicking outside
+            if (level3LockedModal) {
+                level3LockedModal.addEventListener('click', (e) => {
+                    if (e.target === level3LockedModal) {
+                        hideLevel3LockedModal();
                     }
                 });
             }
@@ -2602,7 +3861,8 @@
                 level2Card.addEventListener('click', () => {
                     // Check if level is unlocked
                     if (level2Card.getAttribute('data-unlocked') === 'true' || !level2Card.classList.contains('locked')) {
-                        showPlaygroundPage();
+                        isReadOnlyMode = false; // Normal access - not read-only
+                        showPlaygroundPage(false);
                     } else {
                         showLevel2LockedModal();
                     }
@@ -2613,8 +3873,32 @@
             const level3Card = document.getElementById('level-3-card');
             if (level3Card) {
                 level3Card.addEventListener('click', () => {
-                    showComingSoonModal();
+                    // Check if level is unlocked
+                    if (level3Card.classList.contains('unlocked') || !level3Card.classList.contains('locked')) {
+                        // Level 03 is unlocked - show toolkit page
+                        showToolkitPage();
+                    } else {
+                        // Level 03 is locked - show locked modal
+                        showLevel3LockedModal();
+                    }
                 });
+            }
+
+            // Level 03 Toolkit Page Buttons
+            const homeBtnToolkit = document.getElementById('home-btn-toolkit');
+            const toolkitBackBtn = document.getElementById('toolkit-back-btn');
+            const toolkitCompleteBtn = document.getElementById('toolkit-complete-btn');
+
+            if (homeBtnToolkit) {
+                homeBtnToolkit.addEventListener('click', showMissionsPage);
+            }
+
+            if (toolkitBackBtn) {
+                toolkitBackBtn.addEventListener('click', showMissionsPage);
+            }
+
+            if (toolkitCompleteBtn) {
+                toolkitCompleteBtn.addEventListener('click', completeLevel03);
             }
 
             // Level 04 Card Click Handler
@@ -2626,9 +3910,7 @@
             }
 
             classicViewBtn.addEventListener('click', () => {
-                // You can replace this with a link to another page or a modal
-                console.log('Classic View button clicked!');
-                // Example: window.location.href = '/classic-portfolio.html';
+                window.location.href = 'modern.html';
             });
 
             // --- Theme Toggler ---
@@ -2665,6 +3947,72 @@
 
             themeToggleBtn.addEventListener('click', toggleTheme);
 
+            // --- Reset System Button ---
+            const resetSystemBtn = document.getElementById('reset-system-btn');
+            const resetConfirmModal = document.getElementById('reset-confirm-modal');
+            const closeResetConfirmBtn = document.getElementById('close-reset-confirm-btn');
+            const cancelResetBtn = document.getElementById('cancel-reset-btn');
+            const confirmResetBtn = document.getElementById('confirm-reset-btn');
+
+            function showResetConfirmModal() {
+                if (resetConfirmModal) {
+                    resetConfirmModal.classList.remove('hidden');
+                }
+            }
+
+            function hideResetConfirmModal() {
+                if (resetConfirmModal) {
+                    resetConfirmModal.classList.add('hidden');
+                }
+            }
+
+            function performReset() {
+                // Clear all localStorage (including theme and language preferences)
+                // But we'll preserve theme and language for better UX
+                const savedTheme = localStorage.getItem('theme');
+                const savedLang = localStorage.getItem('lang');
+
+                localStorage.clear();
+
+                // Restore theme and language preferences
+                if (savedTheme) {
+                    localStorage.setItem('theme', savedTheme);
+                }
+                if (savedLang) {
+                    localStorage.setItem('lang', savedLang);
+                }
+
+                // Reload the page
+                window.location.reload();
+            }
+
+            if (resetSystemBtn) {
+                resetSystemBtn.addEventListener('click', () => {
+                    showResetConfirmModal();
+                });
+            }
+
+            if (closeResetConfirmBtn) {
+                closeResetConfirmBtn.addEventListener('click', hideResetConfirmModal);
+            }
+
+            if (cancelResetBtn) {
+                cancelResetBtn.addEventListener('click', hideResetConfirmModal);
+            }
+
+            if (confirmResetBtn) {
+                confirmResetBtn.addEventListener('click', performReset);
+            }
+
+            // Close modal when clicking outside
+            if (resetConfirmModal) {
+                resetConfirmModal.addEventListener('click', (e) => {
+                    if (e.target === resetConfirmModal) {
+                        hideResetConfirmModal();
+                    }
+                });
+            }
+
             // --- Language Toggler ---
 
             function updateWindowTitle() {
@@ -2700,6 +4048,13 @@
 
                 // Translate all elements with data-translate-key-attr (for titles/aria-labels)
                 document.querySelectorAll('[data-translate-key-attr]').forEach(el => {
+                    const attrName = el.dataset.translateKeyAttr;
+                    const key = el.dataset.translateKey;
+                    if (key && translations[lang][key] && attrName) {
+                        el.setAttribute(attrName, translations[lang][key]);
+                    }
+                });
+                document.querySelectorAll('[data-translate-key-attr]').forEach(el => {
                     const key = el.dataset.translateKey;
                     const attr = el.dataset.translateKeyAttr;
                     if (translations[lang][key]) {
@@ -2734,6 +4089,9 @@
             // --- Initial Load ---
             initLang(); // Initialize language first
             initTheme();
+            // Load saved progress on initial page load
+            loadProgressFromStorage();
+            updateProgress();
             // Show welcome page by default
             showWelcomePage();
 
